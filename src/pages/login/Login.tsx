@@ -6,7 +6,7 @@ import {Grid,Button,
 import useStyles from "./styles";
 // @ts-ignore
 import Wallet from '@project-serum/sol-wallet-adapter';
-import { Connection, SystemProgram, Transaction, clusterApiUrl } from '@solana/web3.js';
+import {  clusterApiUrl } from '@solana/web3.js';
 
 
 declare const window: any;
@@ -17,8 +17,8 @@ const Login = (props : RouteComponentProps) => {
   var [passwordValue] = useState("");
 
   const network = clusterApiUrl('devnet');
-  const [providerUrl, setProviderUrl] = useState('https://www.sollet.io');
-  const connection = useMemo(() => new Connection(network), [network]);
+  const [providerUrl] = useState('https://www.sollet.io');
+  //const connection = useMemo(() => new Connection(network), [network]);
 
   const urlWallet = useMemo(() => new Wallet(providerUrl, network), [
     providerUrl,
@@ -40,7 +40,7 @@ const Login = (props : RouteComponentProps) => {
   const [, setConnected] = useState(false);
 
   useEffect(() => {
-if(selectedWallet !=undefined){
+if(selectedWallet !== undefined){
     if (selectedWallet) {
       selectedWallet.on('connect', () => {
         setConnected(true);

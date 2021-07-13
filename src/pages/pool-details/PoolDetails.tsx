@@ -19,13 +19,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { Breadcrumbs,Link,FormControl,Select,MenuItem,FormHelperText } from "@material-ui/core";
+import { Breadcrumbs,Link,Select,MenuItem } from "@material-ui/core";
 import {columnsVault,columnsReturn,rowsVault,rowsReturn,dataLine,optionsLine} from '../../models/connected';
 import WalletModal from '../dashboard/walletModal';
 import SwapSubscribe from "../swap/subscribe";
 import Graphs from "../../components/Grid/graphs";
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 const PoolDetails = (props: RouteComponentProps) => {
 interface TabPanelProps {
   children?: React.ReactNode;

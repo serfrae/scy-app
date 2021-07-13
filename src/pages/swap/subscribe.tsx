@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import useStyles from "../dashboard/styles";
 import CloseIcon from '@material-ui/icons/Close';
-import swipeIcon from '../../assets/icon/swipe.svg';
 import ethIcon from '../../assets/icon/eth.svg';
 import swipeimgIcon from '../../assets/icon/swipeP.svg';
 import waxtIcon from '../../assets/icon/WAX.svg';

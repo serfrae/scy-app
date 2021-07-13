@@ -44,7 +44,7 @@ export default function WalletModal(props:any) {
      network,
    ]);
 
-
+   const object = props;
    useEffect(() => {
         if(selectedWallet !== undefined){
             if (selectedWallet) {
@@ -54,8 +54,8 @@ export default function WalletModal(props:any) {
                 let  blockhash = connection.getRecentBlockhash();
                 console.log(blockhash,"Toke connected")
                 localStorage.setItem('loggedInToken', selectedWallet.publicKey.toBase58());
-                props.setOpen(false)
-                props.setWalletConnected(true);
+                object.setOpen(false)
+                object.setWalletConnected(true);
                 // window.opener.postMessage({
                 //   jsonrpc: '2.0',
                 //    method: 'connected',

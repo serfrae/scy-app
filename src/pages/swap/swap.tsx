@@ -1,5 +1,5 @@
 import { Container, Grid, Paper,IconButton,Typography,InputLabel,TextField,Button,Select,MenuItem,
-         DialogActions,DialogContentText,DialogContent,DialogTitle,Dialog,FormControl,FormLabel,
+         DialogActions,DialogContentText,DialogTitle,Dialog,FormControl,FormLabel,
          RadioGroup,Radio,FormControlLabel} from "@material-ui/core";
 import React, { useState,useEffect } from "react";
 import Header from "../../components/Header/Header";
@@ -26,7 +26,7 @@ const SwapPool = (props: any) => {
   const [openSettings, setSettingsOpen] = React.useState(false);
   const [sendMoney,setMoney]= useState(0.0); 
   const [recMoney,setRecMoney]= useState(0.0); 
-  const [walletConnected,SetWalletConnected]= useState(true);
+  const [walletConnected]= useState(true);
   const [startSwapping,setStarSwapping]= useState(false);
   const [startInProgress,setStartInProgress]= useState(false);
   const [successTransaction,setSuccessTransaction]= useState(false);

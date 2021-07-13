@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { RouteComponentProps, useHistory } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Header from '../../components/Header/Header';
@@ -12,28 +12,33 @@ import comIcon from '../../assets/icon/Combined.svg';
 import chartIcon from '../../assets/icon/Chart.svg';
 import chartredIcon from '../../assets/icon/Vector.svg';
 import waxtIcon from '../../assets/icon/WAX.svg';
-import avtarIcon from '../../assets/icon/Avatars.svg';
 import learnIcon from '../../assets/icon/illustration_learn.svg';
 import Container from '@material-ui/core/Container';
 import WalletModal from '../dashboard/walletModal';
 import {radiumAPI} from '../../api/api';
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
-   const history = useHistory()
+   //const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
    const columns:any = [
       ['Name','name',{
          options:{
                order:true,
-               type:'link',
+              
                
       },  
        
       }],
-      ['Volume','liquidity'],
-      ['Top assets','topassets'],
-      ['All time','price',{
+      ['Liquidity','liquidity'],
+      ['Volume (24hrs)','volume_24h',{
+         options:{
+               order:true,
+               number:true,
+           } 
+       
+      }],
+      ['Volume (7d)','volume_7d',{
          options:{
                order:true,
                number:true,
@@ -41,14 +46,14 @@ const PoolList = (props: RouteComponentProps) => {
        
       }
       ],
-      ['24h','volume_24h',{
+      ['Fees (24hr)','fee_24h',{
          options:{
                order:true,
                number:true,
            } 
        
       }],
-      ['Last 7 days','volume_7d'],
+      ['1y Fees / Liquidity','liquidity'],
    ];
    useEffect(() => {
       fetch(radiumAPI+'pairs')
