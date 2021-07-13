@@ -1,0 +1,319 @@
+import { Container, Grid, Paper,IconButton,Typography,InputLabel,TextField,Button,Select,MenuItem,
+         DialogActions,DialogContentText,DialogContent,DialogTitle,Dialog,FormControl,FormLabel,
+         RadioGroup,Radio,FormControlLabel} from "@material-ui/core";
+import React, { useState,useEffect } from "react";
+import Header from "../../components/Header/Header";
+import Footer from '../../components/Footer/footer';
+import useStyles from "../dashboard/styles";
+import ethIcon from '../../assets/icon/eth.svg';
+import swipeimgIcon from '../../assets/icon/swipeP.svg';
+import digibyteIcon from '../../assets/icon/digibyte.svg';
+import GcheckIcon from '../../assets/icon/Gcheck.svg';
+import dropDIcon from '../../assets/icon/drop.svg';
+import rightIcon from '../../assets/icon/right.svg';
+import lineIcon from '../../assets/icon/line.svg';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import CloseIcon from '@material-ui/icons/Close';
+import InfoTooltip from "./InfoTooltip";
+import WalletModal from '../../pages/dashboard/walletModal';
+import {serumAPI} from '../../api/api';
+const SwapPool = (props: any) => {
+	const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [openWallet, setOpenWallet] = React.useState(false);
+  const [openSettings, setSettingsOpen] = React.useState(false);
+  const [sendMoney,setMoney]= useState(0.0); 
+  const [recMoney,setRecMoney]= useState(0.0); 
+  const [walletConnected,SetWalletConnected]= useState(true);
+  const [startSwapping,setStarSwapping]= useState(false);
+  const [startInProgress,setStartInProgress]= useState(false);
+  const [successTransaction,setSuccessTransaction]= useState(false);
+  const [sendCurrency,setSendCurrency]= useState('SOL');
+  const [recCurrency,setRecCurrency]= useState('0');
+  const [recCurrencyList,setRecCurrencyList]= useState([]);
+  const [currencyList,setCurrencyList]= useState({});
+  const handleClickOpen = (money:any) => {
+    setOpen(true);
+    setStarSwapping(false)
+    setStartInProgress(false)
+    setSuccessTransaction(false);
+  };
+  const setReceiveMoney =  (money:any)=>{
+    setRecMoney(money);
+    
+   
+   }
+  const setSendMoney = (money:any)=>{
+      setMoney(money);
+  }
+  const setRecCurrencyData = (currency:any)=>{
+   setRecCurrency(currency);
+
+}
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const setStarSwappingCurrency = (type:any)=>{
+   setStarSwapping(type);
+   setTimeout(() =>setStartInProgress(true), 2000);
+   setTimeout(() =>setSuccessTransaction(true), 6000);
+  }
+  const [value, setValue] = React.useState('0.1%');
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue((event.target as HTMLInputElement).value);
+  };
+  const setSendCurrencyData = (currency:any) =>{
+   setSendCurrency(currency);
+   setRecCurrencyList(currencyList[currency]);
+   //console.log("currencyList[currency]",currencyList[currency]);
+  }
+   useEffect(() => {
+      fetch(serumAPI+'pairs')
+      .then(response => response.json())
+      .then(data => {
+         if(data !== "undefined"){
+            let currency = {};
+            for(let i = 0; i<data.data.length;i++){
+               let splitCurr = data.data[i].split("/");
+               
+               if(currency[splitCurr[0]] === undefined){
+                  currency[splitCurr[0]] = [];
+               }
+               currency[splitCurr[0]].push(splitCurr[1])
+            }
+            setCurrencyList(currency);
+         }
+      });
+    }, []);
+	return (
+		<div className={classes.root} > 
+         <Header {...props}/>
+         {/* First Section*/}
+         <Container fixed>
+         <Paper className={classes.swapmainbox}>
+         <Grid className={classes.welcomeContent}>
+         <Grid item xs={6}>
+            <Paper className={classes.paper}>
+            <div>
+               <div className={classes.swaphead}>
+                  <Typography>Swap</Typography>
+                  <div className={classes.icongroup}>
+                     <IconButton className={"infoTooltip"}><InfoOutlinedIcon/></IconButton>
+                        <div className={"infotooltipbox"}> <InfoTooltip {...props}/></div>
+                     <IconButton onClick={()=>{setSettingsOpen(true)}}><SettingsOutlinedIcon/></IconButton>
+                  </div>
+               </div>
+               <div className={classes.swapboxed}>
+                   <div className={classes.fromGroup}>
+                     <InputLabel>
+                     Send 
+                     </InputLabel>
+                     <div className={classes.frominside}>
+                     <TextField
+                     type="number"
+                     onChange={(e)=>{setSendMoney(e.target.value)}}
+                     value={sendMoney}
+                     placeholder={"0.00"}
+                     />
+                  
+                     <Select
+                      value={sendCurrency}
+                      onChange={(e)=>{setSendCurrencyData(e.target.value)}}
+                     >
+                        {(currencyList) && Object.keys(currencyList).map((obj,index)=>(
+                           <MenuItem value={obj} key={index}><img src={ethIcon} alt="" /> {obj}</MenuItem>
+                        ))}
+                     </Select>
+                     </div>
+                     <small>Balance: - {sendMoney}</small>
+                  </div>
+                  <div className={classes.swipeBtn}><img src={swipeimgIcon} alt=""/></div>
+                  <div className={classes.fromGroup}>
+                     <InputLabel>
+                     Receive
+                     </InputLabel>
+                     <div className={classes.frominside}>
+                     <TextField
+                     type="number"
+                     placeholder={'0.00'}
+                     value={recMoney}
+                     onChange={(e)=>{setReceiveMoney(e.target.value)}}
+                     />
+                     <Select
+                     value={recCurrency}
+                     onChange={(e)=>{setRecCurrencyData(e.target.value)}}
+                     >
+                     <MenuItem value={'0'}>Select a Token</MenuItem>
+                     {recCurrencyList.length > 0 && recCurrencyList.map((obj,index)=>(
+                        <MenuItem value={obj} key={index}> <img src={digibyteIcon} alt=""/>{obj}</MenuItem>
+                     ))}
+                   
+                     </Select>
+                     </div>
+                     <small>Balance: {recMoney}</small>
+                  </div>
+                  <div className={classes.btnGroup}>
+                     { walletConnected === false && <> 
+                        <Button  onClick={()=>{setOpenWallet(true)}}>Connect Wallet</Button>
+                         <Typography>Unlock all the features by connecting your wallet.</Typography>
+                        </>
+                      } 
+                  { walletConnected === true &&   <> { (sendMoney !== 0 && recMoney !== 0) ?
+                            <>   <Button  onClick={handleClickOpen}>Swap</Button>
+                             <div className={classes.swapbalance}>
+                                 <div className={classes.swapbalanceChild}>
+                                 <Typography>Price</Typography>
+                                 <Typography>Maximum sold</Typography>
+                                 <Typography>Price Impact</Typography>
+                                 <Typography>Liquidity Provider Fee</Typography>
+                                 </div>
+                                 <div className={classes.swapbalanceChild2}>
+                                 <Typography>16.4409 DIGIBYTE / ETH</Typography>
+                                 <Typography>0.6112 ETH</Typography>
+                                 <Typography>0.01%</Typography>
+                                 <Typography>0.00018 ETH</Typography>
+
+                                 </div>
+                              </div>
+                             </>
+                           :
+                           <Button onClick={handleClickOpen}>Enter an amount to swap</Button>  
+                      } </> }
+                     
+                  </div>
+                 
+               </div>
+            </div>
+            </Paper>
+			</Grid>
+			</Grid>
+         </Paper>
+         </Container>
+         <Dialog
+           open={openSettings}
+           onClose={()=>{setSettingsOpen(false)}}
+           className={classes.modalDialog}>
+           <div className={classes.settingPop}>
+            <div className={classes.modelhead}>
+             <DialogTitle> Settings </DialogTitle>
+             <CloseIcon onClick={()=>{setSettingsOpen(false)}}/>
+            </div>
+           <MuiDialogContent className={classes.swapModel}>
+             <DialogContentText>
+                <FormControl>
+                <FormLabel>Slippage tolerance</FormLabel>
+                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                    <FormControlLabel value="0.1%" control={<Radio />} label="0.1%" />
+                    <FormControlLabel value="0.5%" control={<Radio />} label="0.5%" />
+                    <FormControlLabel value="1%" control={<Radio />} label="1%" />
+                    <div className={classes.customTol}>
+                    <TextField placeholder="1.00" />
+                    <span>%</span>
+                 </div>
+                 </RadioGroup>
+                </FormControl>
+             </DialogContentText>
+             <DialogActions>
+              <Button onClick={()=>{setSettingsOpen(false)}}  aria-label="outlined primary button group">
+                Cancel
+              </Button>
+              <Button onClick={()=>{setSettingsOpen(false)}}  color="primary">
+                Confirm
+              </Button>
+            </DialogActions>
+            </MuiDialogContent>
+            </div>
+         </Dialog>    
+         <Dialog
+           open={open}
+           onClose={handleClose}
+           className={classes.modalDialog}>
+            <div className={classes.modelhead}>
+             <DialogTitle > {startSwapping === false  && <>Confirm</> } Swap</DialogTitle>
+             <CloseIcon onClick={()=>{setOpen(false)}}/>
+            </div>
+           <MuiDialogContent className={classes.swapModel}>
+             <DialogContentText>
+            { successTransaction === false   ?
+            <>  <div className={classes.calcswap}>
+                <div className={classes.innercalc}>
+                  <img src={ethIcon} alt=""/>
+                  <Typography>0.608245</Typography>
+                </div>
+                <div className={classes.innerethcalc}><Typography>ETH</Typography></div>
+             </div>
+             <div className={classes.downcalc}>
+                <img src={dropDIcon} alt="" />
+             </div>
+             <div className={classes.calcswap}>
+                <div className={classes.innercalc}>
+                  <img width={24} src={digibyteIcon} alt=""/>
+                  <Typography>10.00</Typography>
+                </div>
+                <div className={classes.innerethcalc}><Typography>DIGIBYTE</Typography></div>
+             </div>
+             {(startSwapping === false ) ? <>
+             <Typography className={classes.notecalc}>Input is estimated. You will sell at most 0.608245 ETH or the transaction will revert.</Typography>
+             
+              <div className={classes.confirmSwap}>
+              <div className={classes.swapbalancemodel}>
+                     <div className={classes.swapbalanceChild}>
+                     <Typography>Price</Typography>
+                     <Typography>Maximum sold</Typography>
+                     <Typography>Price Impact</Typography>
+                     <Typography>Liquidity Provider Fee</Typography>
+                     </div>
+                     <div className={classes.swapbalanceChild2}>
+                     <Typography>16.4409 DIGIBYTE / ETH</Typography>
+                     <Typography>0.6112 ETH</Typography>
+                     <Typography>0.01%</Typography>
+                     <Typography>0.00018 ETH</Typography>
+                     </div>  
+                     <Button className={classes.fullPrimarybtn} onClick={()=>{setStarSwappingCurrency(true)}}>Confirm Swap</Button>
+                  </div>
+              </div> </>
+               :
+
+              <div className={classes.loadingSwap}>
+
+                <div className={classes.customloader}>
+                   <div className={classes.customloaderbox}></div>
+                   <img src={lineIcon} alt=''/>
+                </div>
+                {startInProgress === false ? 
+                   <Typography>Please confirm this transaction in your wallet</Typography>
+                  :
+                 <> 
+                <Typography>Transaction in progress</Typography>
+                <Typography className={classes.notecalc}>It might take a few seconds, please be patient.</Typography>
+                </>
+               }
+             </div>
+            }
+           </> 
+               :
+              <div className={classes.swapLaststeap}>
+                 <img src={GcheckIcon} alt="" />
+                 <Typography>Transaction Confirmed</Typography>
+                 <div className={classes.lastCalcswap}>
+                    <Typography><img src={ethIcon} alt=""/> 0.608245 ETH</Typography>
+                    <img src={rightIcon} alt=""/>
+                    <Typography><img width={24} src={digibyteIcon} alt=""/>10.00 DIGIBYTE</Typography>
+                 </div>
+              </div>
+               }
+             </DialogContentText>
+           </MuiDialogContent>
+         </Dialog>
+         <WalletModal 
+            open ={openWallet}
+            setOpen = {setOpenWallet}
+         />
+         <Footer {...props}/>
+      </div>
+	)
+}
+export default SwapPool;
