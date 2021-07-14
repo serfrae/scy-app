@@ -56,11 +56,15 @@ import useStyles from "./styles";
               
                   <InputLabel htmlFor="filled-age-native-simple">Assets</InputLabel>
                   <FormControl variant="filled" className={classes.formControl}> 
-                      <Select>
-                        <MenuItem  value={10}>Ten</MenuItem >
-                        <MenuItem  value={20}>Twenty</MenuItem >
-                        <MenuItem  value={30}>Thirty</MenuItem >
-                      </Select>
+                      <Select  
+                      value={props.filter}
+                      onChange={(e) => {
+                              props.setFilter( e.target.value,
+                              );
+                            }} >
+                        <MenuItem  value={'Radium'}>Radium</MenuItem >
+                        <MenuItem  value={'Orca'}>Orca</MenuItem >
+                       </Select>
                     </FormControl>
                       
                   </Grid>

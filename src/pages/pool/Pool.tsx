@@ -15,12 +15,13 @@ import waxtIcon from '../../assets/icon/WAX.svg';
 import learnIcon from '../../assets/icon/illustration_learn.svg';
 import Container from '@material-ui/core/Container';
 import WalletModal from '../dashboard/walletModal';
-import {radiumAPI} from '../../api/api';
+import {radiumAPI,orcaAPI} from '../../api/api';
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
    //const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
+   const [filter,setFilter] = useState('Radium');
    const columns:any = [
       ['Name','name',{
          options:{
@@ -56,14 +57,27 @@ const PoolList = (props: RouteComponentProps) => {
       ['1y Fees / Liquidity','liquidity'],
    ];
    useEffect(() => {
-      fetch(radiumAPI+'pairs')
-      .then(response => response.json())
-      .then(data => {
-         if(data !== "undefined"){
-             setRowList(data);
+      if(filter === 'Radium'){
+         fetch(radiumAPI+'pairs')
+         .then(response => response.json())
+         .then(data => {
+            if(data !== "undefined"){
+               setRowList(data);
+            }});
+         }else if(filter === 'Orca'){
+            fetch(orcaAPI+'allPools')
+            .then(response => response.json())
+            .then(data => {
+               if(data !== "undefined"){
+                let dataArray:any = [];
+                for(let obj in data){
+                  dataArray.push({name:data[obj].poolId,liquidity:data[obj].tokenAAmount,volume_24h:data[obj].apy.day,volume_7d:data[obj].apy.week,fee_24h:data[obj].apy.month});
+                }
+                setRowList(dataArray);
+             }});
          }
-      });
-    }, []);
+
+    }, [filter]);
 
    return (
       <div className={classes.root} > 
@@ -124,7 +138,7 @@ const PoolList = (props: RouteComponentProps) => {
          </Grid>
          {/* Pool Table data*/}
 
-         <SearchToolBar title={'Pools'}/>
+         <SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>
          <TableGrid 
           columns ={columns}
           rows = {rows}
