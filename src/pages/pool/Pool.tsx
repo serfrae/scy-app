@@ -36,6 +36,7 @@ const PoolList = (props: RouteComponentProps) => {
          options:{
                order:true,
                number:true,
+               hideZero:true,
            } 
        
       }],
@@ -43,6 +44,7 @@ const PoolList = (props: RouteComponentProps) => {
          options:{
                order:true,
                number:true,
+               hideZero:true,
            } 
        
       }
@@ -51,11 +53,13 @@ const PoolList = (props: RouteComponentProps) => {
          options:{
                order:true,
                number:true,
+               hideZero:true,
            } 
        
       }],
       ['1y Fees / Liquidity','liquidity'],
    ];
+   const [tableColumn,setTableColumn] = useState(columns);
    useEffect(() => {
       if(filter === 'Radium'){
          fetch(radiumAPI+'pairs')
@@ -63,6 +67,7 @@ const PoolList = (props: RouteComponentProps) => {
          .then(data => {
             if(data !== "undefined"){
                setRowList(data);
+               setTableColumn(columns);
             }});
          }else if(filter === 'Orca'){
             fetch(orcaAPI+'allPools')
@@ -71,9 +76,39 @@ const PoolList = (props: RouteComponentProps) => {
                if(data !== "undefined"){
                 let dataArray:any = [];
                 for(let obj in data){
-                  dataArray.push({name:data[obj].poolId,liquidity:data[obj].tokenAAmount,volume_24h:data[obj].apy.day,volume_7d:data[obj].apy.week,fee_24h:data[obj].apy.month});
+                   dataArray.push({name:data[obj].poolId,liquidity:data[obj].tokenAAmount,volume_24h:data[obj].apy.day,volume_7d:data[obj].apy.week,fee_24h:data[obj].apy.month});
                 }
+                const columnsOrca:any = [
+                  ['Name','name',{
+                     options:{
+                           order:true,
+                          
+                           
+                  },  
+                   
+                  }],
+                  ['Liquidity','liquidity'],
+                  ['Est. Fees','volume_24h',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }],
+                  ['Yearly ROI','volume_7d',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }
+                  ],
+                 
+               ];
                 setRowList(dataArray);
+                setTableColumn(columnsOrca);
              }});
          }
 
@@ -140,7 +175,7 @@ const PoolList = (props: RouteComponentProps) => {
 
          <SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>
          <TableGrid 
-          columns ={columns}
+          columns ={tableColumn}
           rows = {rows}
          />
          <WalletModal 

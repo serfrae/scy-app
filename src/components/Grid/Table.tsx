@@ -54,7 +54,7 @@ export function Row({row={},columns=[],index=0}){
           {
           cols.map((col,index) => (
               <TableCell className={`cellrow ${col.cellClassName}${(col.number !== 'undefined' && col.number === true) ? ((row[col.fieldName] <= 1)?' lessvalue ':' greatervalue') : '' }`} key={`cellrow.(${col.field}${index})`} >
-                {(col.type !== 'undefined' && col.type === 'link') ?   <Link to={row['link']}> {renderTableCell({value: row[col.fieldName]})}</Link> :  <>{renderTableCell({value: row[col.fieldName]})}</> }
+                {(col.type !== 'undefined' && col.type === 'link') ?   <Link to={row['link']}> {renderTableCell({value: row[col.fieldName]})}</Link> :  <>{(col.hideZero !== 'undefined' && col.hideZero === true && (row[col.fieldName] === '0' || row[col.fieldName] === 0)) ? '': renderTableCell({value: row[col.fieldName]})}</> }
               </TableCell>
           ))
           }
