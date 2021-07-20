@@ -34,11 +34,35 @@ const SwapPool = (props: any) => {
   const [recCurrency,setRecCurrency]= useState('0');
   const [recCurrencyList,setRecCurrencyList]= useState([]);
   const [currencyList,setCurrencyList]= useState({});
+
+const [price,setPrice] = useState("0")
+
+
+
   const handleClickOpen = (money:any) => {
     setOpen(true);
     setStarSwapping(false)
     setStartInProgress(false)
     setSuccessTransaction(false);
+console.log(sendMoney + " "+ recMoney + ""+ sendCurrency + ""+recCurrency )
+
+// https://serum-api.bonfida.com/trades/ETHUSDT
+
+console.log(serumAPI+'trades/'+sendCurrency+recCurrency)
+fetch(serumAPI+'trades/'+sendCurrency+recCurrency)
+      .then(response => response.json())
+      .then(data => {
+         if(data !== "undefined"){
+
+            console.log("All pairs data",data.data[0])
+var priceData= data.data[0].price+" "+data.data[0].market
+console.log(priceData)
+           setPrice(priceData)
+            }
+         }
+      )
+
+
   };
   const setReceiveMoney =  (money:any)=>{
     setRecMoney(money);
@@ -171,10 +195,10 @@ const SwapPool = (props: any) => {
                                  <Typography>Liquidity Provider Fee</Typography>
                                  </div>
                                  <div className={classes.swapbalanceChild2}>
-                                 <Typography>16.4409 DIGIBYTE / ETH</Typography>
-                                 <Typography>0.6112 ETH</Typography>
+                  <Typography>{price}</Typography>
+                  <Typography>{`${sendMoney} ${sendCurrency}`}</Typography>
                                  <Typography>0.01%</Typography>
-                                 <Typography>0.00018 ETH</Typography>
+                  <Typography>{`0.00018 ${sendCurrency}`}</Typography>
 
                                  </div>
                               </div>
@@ -241,9 +265,9 @@ const SwapPool = (props: any) => {
             <>  <div className={classes.calcswap}>
                 <div className={classes.innercalc}>
                   <img src={ethIcon} alt=""/>
-                  <Typography>0.608245</Typography>
+            <Typography>{sendMoney}</Typography>
                 </div>
-                <div className={classes.innerethcalc}><Typography>ETH</Typography></div>
+            <div className={classes.innerethcalc}><Typography>{sendCurrency}</Typography></div>
              </div>
              <div className={classes.downcalc}>
                 <img src={dropDIcon} alt="" />
@@ -251,12 +275,12 @@ const SwapPool = (props: any) => {
              <div className={classes.calcswap}>
                 <div className={classes.innercalc}>
                   <img width={24} src={digibyteIcon} alt=""/>
-                  <Typography>10.00</Typography>
+            <Typography>{recMoney}</Typography>
                 </div>
-                <div className={classes.innerethcalc}><Typography>DIGIBYTE</Typography></div>
+            <div className={classes.innerethcalc}><Typography>{recCurrency}</Typography></div>
              </div>
              {(startSwapping === false ) ? <>
-             <Typography className={classes.notecalc}>Input is estimated. You will sell at most 0.608245 ETH or the transaction will revert.</Typography>
+             <Typography className={classes.notecalc}>{`Input is estimated. You will sell at most ${sendMoney} ${sendCurrency} or the transaction will revert.`}</Typography>
              
               <div className={classes.confirmSwap}>
               <div className={classes.swapbalancemodel}>
@@ -267,10 +291,10 @@ const SwapPool = (props: any) => {
                      <Typography>Liquidity Provider Fee</Typography>
                      </div>
                      <div className={classes.swapbalanceChild2}>
-                     <Typography>16.4409 DIGIBYTE / ETH</Typography>
-                     <Typography>0.6112 ETH</Typography>
+             <Typography>{price}</Typography>
+             <Typography>{`${sendMoney} ${sendCurrency}`}</Typography>
                      <Typography>0.01%</Typography>
-                     <Typography>0.00018 ETH</Typography>
+                     <Typography>{`0.00018 ${sendCurrency}`}</Typography>
                      </div>  
                      <Button className={classes.fullPrimarybtn} onClick={()=>{setStarSwappingCurrency(true)}}>Confirm Swap</Button>
                   </div>
