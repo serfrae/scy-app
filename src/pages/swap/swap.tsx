@@ -47,7 +47,7 @@ const [price,setPrice] = useState("0")
 console.log(sendMoney + " "+ recMoney + ""+ sendCurrency + ""+recCurrency )
 
 // https://serum-api.bonfida.com/trades/ETHUSDT
-
+/*Serumget all pairs api integration*/
 console.log(serumAPI+'trades/'+sendCurrency+recCurrency)
 fetch(serumAPI+'trades/'+sendCurrency+recCurrency)
       .then(response => response.json())
@@ -61,9 +61,34 @@ console.log(priceData)
             }
          }
       )
+/*Serumget all pairs api integration*/
 
+
+/*Salona acount check api integration*/
+const data = localStorage.getItem('loggedInToken');
+console.log("called",data)
+      fetch('https://api.devnet.solana.com/', {
+         method: 'post',
+         headers: {'Content-Type':'application/json'},
+         body: JSON.stringify({
+          "jsonrpc":"2.0",
+          "id":1,
+           "method":"getBalance", 
+           "params":[data]}
+         )
+        }).then(response => response.json())
+        .then(data => {
+           console.log(data.result.value)
+           if(sendMoney > data.result.value){
+              alert("Insufficient Balance in your account")
+           }
+        })
+/*Salona acount check api integration*/
 
   };
+
+
+
   const setReceiveMoney =  (money:any)=>{
     setRecMoney(money);
     
