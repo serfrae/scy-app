@@ -18,7 +18,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import CloseIcon from '@material-ui/icons/Close';
 import InfoTooltip from "./InfoTooltip";
 import WalletModal from '../../pages/dashboard/walletModal';
-import {serumAPI} from '../../api/api';
+import {serumAPI,radiumAPI} from '../../api/api';
 const SwapPool = (props: any) => {
 	const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -34,7 +34,7 @@ const SwapPool = (props: any) => {
   const [recCurrency,setRecCurrency]= useState('USDT');
   const [recCurrencyList,setRecCurrencyList]= useState([]);
   const [currencyList,setCurrencyList]= useState({});
-
+  const[currencyConversion,setCurrencyConversion] = useState({}); 
 const [price,setPrice] = useState("0")
 const [balance , setBalance] = useState(0)
 const [CurrencyConversionSend,setCurrencyConversionSend]=useState(0);
@@ -65,7 +65,7 @@ console.log(priceData)
       )
 /*Serumget all pairs api integration*/
 
-
+//https://api.raydium.io/coin/price
 /*Salona acount check api integration*/
 const data = localStorage.getItem('loggedInToken');
 console.log("called",data)
@@ -102,6 +102,8 @@ console.log("called",data)
   }
   const setRecCurrencyData = (currency:any)=>{
    setRecCurrency(currency);
+   setRecMoney(0.00);
+   setMoney(0.00);
 
 }
   
@@ -120,6 +122,8 @@ console.log("called",data)
   const setSendCurrencyData = (currency:any) =>{
    setSendCurrency(currency);
    setRecCurrencyList(currencyList[currency]);
+   setRecMoney(0.00);
+   setMoney(0.00);
    //console.log("currencyList[currency]",currencyList[currency]);
   }
    useEffect(() => {
@@ -140,41 +144,25 @@ console.log("called",data)
             setRecCurrencyList(currency[sendCurrency]);
          }
       });
+      fetch(radiumAPI+'coin/price')
+      .then(response => response.json())
+      .then(data => {
+         if(data !== "undefined"){
+            setCurrencyConversion(data);
+         }
+      });
     }, []);
 
 
 const handleConversion =(money:any)=>{
+   console.log(currencyConversion);
 
    // if(e.target != undefined){
-      console.log(money+""+sendCurrency.toLowerCase()+""+recCurrency.toLowerCase())
-      setSendMoney(money)
-      
-
-      fetch(`https://api.coingecko.com/api/v3/simple/price?ids=serum,bonfida,bitcoin,solana,raydium&vs_currencies=${sendCurrency.toLowerCase()}`)
-      .then(response => response.json())
-      .then(data => {
-         console.log(data)
-         setCurrencyConversionSend(data.serum.btc)
-      }
-         )
-
-
-         fetch(`https://api.coingecko.com/api/v3/simple/price?ids=serum,bonfida,bitcoin,solana,raydium&vs_currencies=${recCurrency.toLowerCase()}`)
-         .then(response => response.json())
-         .then(data => {
-            console.log(data)
-            setCurrencyConversionRecieve(data.serum.btc)
-         }
-            )
-
-
-            if(CurrencyConversionSend != 0 && CurrencyConversionRecieve!= 0){
-               var dataConverted = (CurrencyConversionSend/CurrencyConversionRecieve)
-
-               setReceiveMoney(dataConverted)
-            }
-
-
+      console.log(sendCurrency+"-"+recCurrency)
+      setMoney(money);
+      var dataConverted = (currencyConversion[sendCurrency]/currencyConversion[recCurrency]);
+      setRecMoney((dataConverted * money))
+   
 }
 
 
