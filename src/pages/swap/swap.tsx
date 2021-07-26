@@ -31,7 +31,7 @@ const SwapPool = (props: any) => {
   const [startInProgress,setStartInProgress]= useState(false);
   const [successTransaction,setSuccessTransaction]= useState(false);
   const [sendCurrency,setSendCurrency]= useState('SOL');
-  const [recCurrency,setRecCurrency]= useState('0');
+  const [recCurrency,setRecCurrency]= useState('USDT');
   const [recCurrencyList,setRecCurrencyList]= useState([]);
   const [currencyList,setCurrencyList]= useState({});
 
@@ -137,6 +137,7 @@ console.log("called",data)
                currency[splitCurr[0]].push(splitCurr[1])
             }
             setCurrencyList(currency);
+            setRecCurrencyList(currency[sendCurrency]);
          }
       });
     }, []);
