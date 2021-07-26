@@ -52,8 +52,9 @@ export default function WalletModal(props:any) {
                 //setConnected(true);
                 //console.log('connected',selectedWallet.publicKey.toBase58())
                 let  blockhash = connection.getRecentBlockhash();
-                console.log(blockhash,"Toke connected")
+                // console.log(blockhash,"Toke connected")
                 localStorage.setItem('loggedInToken', selectedWallet.publicKey.toBase58());
+              // console.log(selectedWallet.publicKet.toBase58())
                 object.setOpen(false)
                 object.setWalletConnected(true);
                 // window.opener.postMessage({

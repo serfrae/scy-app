@@ -36,7 +36,9 @@ const SwapPool = (props: any) => {
   const [currencyList,setCurrencyList]= useState({});
 
 const [price,setPrice] = useState("0")
-
+const [balance , setBalance] = useState(0)
+const [CurrencyConversionSend,setCurrencyConversionSend]=useState(0);
+const [CurrencyConversionRecieve,setCurrencyConversionRecieve] = useState(0);
 
 
   const handleClickOpen = (money:any) => {
@@ -79,6 +81,7 @@ console.log("called",data)
         }).then(response => response.json())
         .then(data => {
            console.log(data.result.value)
+           setBalance(data.result.value)
            if(sendMoney > data.result.value){
               alert("Insufficient Balance in your account")
            }
@@ -137,6 +140,43 @@ console.log("called",data)
          }
       });
     }, []);
+
+
+const handleConversion =(money:any)=>{
+
+   // if(e.target != undefined){
+      console.log(money+""+sendCurrency.toLowerCase()+""+recCurrency.toLowerCase())
+      setSendMoney(money)
+      
+
+      fetch(`https://api.coingecko.com/api/v3/simple/price?ids=serum,bonfida,bitcoin,solana,raydium&vs_currencies=${sendCurrency.toLowerCase()}`)
+      .then(response => response.json())
+      .then(data => {
+         console.log(data)
+         setCurrencyConversionSend(data.serum.btc)
+      }
+         )
+
+
+         fetch(`https://api.coingecko.com/api/v3/simple/price?ids=serum,bonfida,bitcoin,solana,raydium&vs_currencies=${recCurrency.toLowerCase()}`)
+         .then(response => response.json())
+         .then(data => {
+            console.log(data)
+            setCurrencyConversionRecieve(data.serum.btc)
+         }
+            )
+
+
+            if(CurrencyConversionSend != 0 && CurrencyConversionRecieve!= 0){
+               var dataConverted = (CurrencyConversionSend/CurrencyConversionRecieve)
+
+               setReceiveMoney(dataConverted)
+            }
+
+
+}
+
+
 	return (
 		<div className={classes.root} > 
          <Header {...props}/>
@@ -163,7 +203,7 @@ console.log("called",data)
                      <div className={classes.frominside}>
                      <TextField
                      type="number"
-                     onChange={(e)=>{setSendMoney(e.target.value)}}
+                     onChange={(e)=>{handleConversion(e.target.value)}}
                      value={sendMoney}
                      placeholder={"0.00"}
                      />
@@ -177,7 +217,7 @@ console.log("called",data)
                         ))}
                      </Select>
                      </div>
-                     <small>Balance: - {sendMoney}</small>
+                     <small>Balance: - {balance}</small>
                   </div>
                   <div className={classes.swipeBtn}><img src={swipeimgIcon} alt=""/></div>
                   <div className={classes.fromGroup}>
