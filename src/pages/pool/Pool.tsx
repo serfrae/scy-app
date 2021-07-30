@@ -70,14 +70,52 @@ const PoolList = (props: RouteComponentProps) => {
                setTableColumn(columns);
             }});
          }else if(filter === 'Orca'){
+            
+            fetch(radiumAPI+`coin/price`)
+            .then(response => response.json())
+            .then(data => {
+let priceArray : any = [];
+priceArray = data;
+console.log("data",priceArray)
+
+
             fetch(orcaAPI+'allPools')
             .then(response => response.json())
             .then(data => {
                if(data !== "undefined"){
                 let dataArray:any = [];
+                let liquidValue:any = "";
+                let currencyPrice : any  = "";
+                let calCoinPrice : any = "";
                 for(let obj in data){
-                   dataArray.push({name:data[obj].poolId,liquidity:data[obj].tokenAAmount,volume_24h:data[obj].apy.day,volume_7d:data[obj].apy.week,fee_24h:data[obj].apy.month});
-                }
+                   console.log("objectData",obj)
+currencyPrice = obj.split('/')
+console.log(currencyPrice[0])
+for (let data in priceArray){
+   console.log("priceData",data)
+if(currencyPrice[0] == data){
+   // console.log("varun",priceArray["ETH"])
+calCoinPrice = priceArray[currencyPrice[0]]
+}
+
+
+
+}
+
+
+if(calCoinPrice!=""){
+
+
+
+liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000))
+
+
+
+
+
+
+                   dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week)*100)} %`,fee_24h:data[obj].apy.month});
+                     }     }
                 const columnsOrca:any = [
                   ['Name','name',{
                      options:{
@@ -110,6 +148,7 @@ const PoolList = (props: RouteComponentProps) => {
                 setRowList(dataArray);
                 setTableColumn(columnsOrca);
              }});
+            })
          }
 
     }, [filter]);
