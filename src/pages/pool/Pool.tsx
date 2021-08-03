@@ -87,27 +87,31 @@ console.log("data",priceArray)
                 let liquidValue:any = "";
                 let currencyPrice : any  = "";
                 let calCoinPrice : any = "";
+                let calCoinPrice_scd : any = "";
                 for(let obj in data){
                    console.log("objectData",obj)
 currencyPrice = obj.split('/')
-console.log(currencyPrice[0])
+console.log("varun",currencyPrice[0])
+console.log("varun",currencyPrice[1])
 for (let data in priceArray){
    console.log("priceData",data)
 if(currencyPrice[0] == data){
    // console.log("varun",priceArray["ETH"])
 calCoinPrice = priceArray[currencyPrice[0]]
+calCoinPrice_scd = priceArray[currencyPrice[1]]
 }
-
-
-
 }
 
 
 if(calCoinPrice!=""){
 
+if(currencyPrice[0] == "USDT"|| currencyPrice[1] == "USDC"){
+   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000))
+}
+else{
+   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd)
+}
 
-
-liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000))
 
 
 

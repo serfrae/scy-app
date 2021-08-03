@@ -28,6 +28,9 @@ export default function WalletModal(props:any) {
  
   const network = clusterApiUrl('devnet');
   const [providerUrl ] = useState('https://www.sollet.io');
+  const [providerUrlPhantom ] = useState('https://phantom.app/');
+    //phantom wallet
+  const isPhantomInstalled = window.solana && window.solana.isPhantom
   const connection = useMemo(() => new Connection(network), [network]);
   const injectedWallet = useMemo(() => {
         try {
@@ -44,13 +47,22 @@ export default function WalletModal(props:any) {
      network,
    ]);
 
+
+   //phantom wallet
+   const phantomWallet = useMemo(() => new Wallet(providerUrlPhantom, network), [
+    providerUrlPhantom,
+    network,
+  ]);
+
+
+
    const object = props;
    useEffect(() => {
         if(selectedWallet !== undefined){
             if (selectedWallet) {
               selectedWallet.on('connect', () => {
                 //setConnected(true);
-                //console.log('connected',selectedWallet.publicKey.toBase58())
+                console.log('connected',selectedWallet.publicKey.toBase58())
                 let  blockhash = connection.getRecentBlockhash();
                 // console.log(blockhash,"Toke connected")
                 localStorage.setItem('loggedInToken', selectedWallet.publicKey.toBase58());
@@ -78,6 +90,19 @@ export default function WalletModal(props:any) {
           }, [selectedWallet]);
 
 
+          const getProvider = () => {
+            if ("solana" in window) {
+              const provider = window.solana;
+              if (provider.isPhantom) {
+                return provider;
+              }
+            }
+            window.open("https://phantom.app/", "_blank");
+          };
+
+
+
+
    return (
       <Dialog 
         aria-labelledby="spring-modal-title"
@@ -97,7 +122,7 @@ export default function WalletModal(props:any) {
                                 <img src={Sollet} alt=""/>
                         </ListItemIcon>
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick={()=>setSelectedWallet(phantomWallet)}>
                         <ListItemText primary="Phantom" />
                         <ListItemIcon>
                                 <img src={Phantom} alt=""/>
