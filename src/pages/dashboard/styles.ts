@@ -1694,8 +1694,22 @@ export default makeStyles((theme : any) => createStyles({
   },
 
   emptyBuilder:{
+    textAlign:'center',
+    padding:'80px 0',
+      '& .MuiButton-root':{
+         textTransform:'inherit',
+      },
+      '& .MuiTypography-h3':{
+        fontSize:14,
+        margin:'20px 0 16px 0',
+      },
 
   },
 
 
 }));
+
+ {
+    
+    
+}
