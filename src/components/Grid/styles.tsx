@@ -263,6 +263,15 @@ export default makeStyles((theme : any) => createStyles({
     },
     nodata:{
         
-    }
+    },
+	expandIcon:{
+		
+	},
+    compareTable:{
+
+    },
+	expandCell:{
+		
+	}
     
 }));

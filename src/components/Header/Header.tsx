@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+  import React,{useState} from 'react';
 import Chip from '@material-ui/core/Chip';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,6 +16,7 @@ import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceW
 import StoreMallDirectoryOutlinedIcon from '@material-ui/icons/StoreMallDirectoryOutlined';
 import logoIcon from '../../assets/icon/logo.svg';
 import SwapVertIcon from '@material-ui/icons/SwapVert';
+import AddIcon  from '@material-ui/icons/Add';
 import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import WalletModal from '../../pages/dashboard/walletModal';
@@ -159,6 +160,11 @@ const Header = ({ history } : RouteComponentProps) => {
             <ListItem className={classes.menuactive}>
                <NavLink className="navbar-item"  to="/swap">
                    <SwapVertIcon /> Swap
+               </NavLink>
+            </ListItem>
+            <ListItem className={classes.menuactive}>
+               <NavLink className="navbar-item" to="/builder">
+                   <AddIcon /> Builder
                </NavLink>
             </ListItem>
            

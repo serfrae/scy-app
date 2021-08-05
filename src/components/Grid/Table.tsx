@@ -11,6 +11,7 @@ import noDataIcon from '../../assets/icon/nodata.svg';
 import navIcon from '../../assets/icon/nav.svg';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
     const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
     stabilizedThis.sort((a, b) => {
@@ -50,15 +51,20 @@ export function Row({row={},columns=[],index=0}){
       ...((!!col[2] && !!col[2].options) ? col[2].options : {})
     }));
     return(
-      <TableRow key={index}>
+      <><TableRow key={index}>
           {
           cols.map((col,index) => (
+			
               <TableCell className={`cellrow ${col.cellClassName}${(col.number !== 'undefined' && col.number === true) ? ((row[col.fieldName] <= 1)?' lessvalue ':' greatervalue') : '' }`} key={`cellrow.(${col.field}${index})`} >
                 {(col.type !== 'undefined' && col.type === 'link') ?   <Link to={row['link']}> {renderTableCell({value: row[col.fieldName]})}</Link> :  <>{(col.hideZero !== 'undefined' && col.hideZero === true && (row[col.fieldName] === '0' || row[col.fieldName] === 0)) ? '': renderTableCell({value: row[col.fieldName]})}</> }
               </TableCell>
+			/*}</>*/
           ))
           }
-      </TableRow>      
+      </TableRow> 
+	 
+	  
+	  </>     
     );
 }
 

@@ -14,10 +14,62 @@ import chartredIcon from '../../assets/icon/Vector.svg';
 import waxtIcon from '../../assets/icon/WAX.svg';
 import learnIcon from '../../assets/icon/illustration_learn.svg';
 import Container from '@material-ui/core/Container';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import WalletModal from '../dashboard/walletModal';
 import {radiumAPI,orcaAPI} from '../../api/api';
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
+   
+  const [state, setState] = React.useState({
+    checkedB: true,
+    checkedC: false,
+    checkedD: true,
+    checkedE: false,
+    checkedF: true,
+    checkedG: false,
+    checkedH: true,
+    checkedI: false,
+    checkedJ: true,
+
+    checked1: true,
+    checked2: false,
+    checked3: true,
+    checked4: false,
+    checked5: true,
+    checked6: false,
+
+    checked7: true,
+    checked8: false,
+    checked9: true,
+    checked10: false,
+  });
+  const top100Films = [
+  { title: 'Raydium', year: 1994 },
+   ];
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState2({ ...state2, [event.target.name]: event.target.checked });
+  };
+  const [state2, setState2] = React.useState<{ age: string | number; name: string }>({
+    age: '',
+    name: 'hai',
+  });
+  const handleChange2 = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const name = event.target.name as keyof typeof state2;
+    setState2({
+      ...state2,
+      [name]: event.target.value,
+    });
+  };
+
    //const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
@@ -164,10 +216,280 @@ else{
          <Container fixed>
          
        {/* Second Section*/}
-        <Typography className={classes.subtitle} variant="h2">
+       <Grid className={classes.poolsParent} container>
+       <Grid item xs={3} className={classes.sideBarPool}>
+       <Typography className={classes.subtitle} variant="h2">
+          Browser
+       </Typography>
+       <Paper>
+         <Typography className={classes.headfilter}>
+            <span>
+               Filter
+            </span>
+         </Typography>
+         <div className={classes.filterbox}>
+          <Typography>
+             Type
+          </Typography>
+            <FormGroup row>
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedB}
+                  onChange={handleChange}
+                  name="checkedB"
+                  />
+                  }
+                  label="All"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedC}
+                  onChange={handleChange}
+                  name="checkedC"
+                  />
+                  }
+                  label="Synchrony Index"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedD}
+                  onChange={handleChange}
+                  name="checkedD"
+                  />
+                  }
+                  label="Yield farm"
+               />
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedE}
+                  onChange={handleChange}
+                  name="checkedE"
+                  />
+                  }
+                  label="Liquidity Pool"
+               />
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedF}
+                  onChange={handleChange}
+                  name="checkedF"
+                  />
+                  }
+                  label="Lending"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedG}
+                  onChange={handleChange}
+                  name="checkedG"
+                  />
+                  }
+                  label="Tokens"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedH}
+                  onChange={handleChange}
+                  name="checkedH"
+                  />
+                  }
+                  label="User Generated"
+               />
+
+                <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedI}
+                  onChange={handleChange}
+                  name="checkedI"
+                  />
+                  }
+                  label="My Drafts"
+               />
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checkedJ}
+                  onChange={handleChange}
+                  name="checkedJ"
+                  />
+                  }
+                  label="My Published Products"
+               />
+            </FormGroup>
+         </div>
+         <div className={classes.filterbox}>
+          <Typography>
+             Performance
+          </Typography>
+            <FormControl className={classes.selectSidebar}>
+              <InputLabel >Highest return</InputLabel>
+              <Select
+                native
+                value={state2.age}
+                onChange={handleChange2}
+                inputProps={{
+                  name: 'age',
+                }}
+              >
+                <option value={10}>Highest return</option>
+              </Select>
+            </FormControl>
+
+            <FormControl className={classes.selectSidebar}>
+              <InputLabel>in the last 7 days</InputLabel>
+              <Select
+                native
+                value={state2.age}
+                onChange={handleChange2}
+                inputProps={{
+                  name: 'age',
+                }}
+              >
+                <option value={10}>Highest return</option>
+              </Select>
+            </FormControl>
+         </div>
+
+         <div className={classes.filterbox}>
+          <Typography>
+             Platform
+          </Typography>
+            <FormGroup row>
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checked7}
+                  onChange={handleChange}
+                  name="checkedB"
+                  />
+                  }
+                  label="All"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checked8}
+                  onChange={handleChange}
+                  name="checkedC"
+                  />
+                  }
+                  label="Raydium"
+               />
+
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checked9}
+                  onChange={handleChange}
+                  name="Orca"
+                  />
+                  }
+                  label="Polkadot"
+               />
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={state.checked10}
+                  onChange={handleChange}
+                  name="checkedE"
+                  />
+                  }
+                  label="SolFarm"
+               />
+            </FormGroup>
+         </div>
+
+         <div className={classes.filterbox}>
+          <Typography>
+             Advanced Performance
+          </Typography>
+           <Grid container>
+           <Grid item xs={6}>
+               <FormControl className={classes.selectSidebar}>
+                 <InputLabel>Up</InputLabel>
+                 <Select
+                   native
+                   value={state2.age}
+                   onChange={handleChange2}
+                   inputProps={{
+                     name: 'age',
+                   }}
+                 >
+                   <option value={10}>Highest return</option>
+                 </Select>
+               </FormControl>
+            </Grid>
+            <Grid item xs={6} className={classes.calcSidebar}>
+               <TextField  id="" label="" defaultValue="14" />
+               <span>%</span>
+            </Grid>
+            </Grid> 
+             <FormControl className={classes.selectSidebar}>
+              <InputLabel >in the last 7 days</InputLabel>
+              <Select
+                native
+                value={state2.age}
+                onChange={handleChange2}
+                inputProps={{
+                  name: 'age',
+                }}
+              >
+                <option value={10}>in the last 7 days</option>
+              </Select>
+            </FormControl>
+         </div>
+
+          <div className={classes.filterbox}>
+          <Typography>
+             Community Ranking
+          </Typography>
+          <div className={classes.ratingStar}>
+             <StarRateSharpIcon/>
+             <StarRateSharpIcon/>
+             <StarRateSharpIcon/>
+             <StarRateSharpIcon/>
+             <StarRateSharpIcon className={classes.unactive} />
+             <span>4+</span>
+          </div>
+         </div>
+       </Paper>
+       </Grid>
+       <Grid item xs={9} className={classes.PoolsSec}>
+       <div className={classes.searchPools}>
+        <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={top100Films.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search"
+            margin="normal"
+            variant="outlined"
+            InputProps={{ ...params.InputProps, type: 'Search' }}
+          />
+        )}
+      />
+      <SearchSharpIcon/>
+      </div>
+        {/*<Typography className={classes.subtitle} variant="h2">
         Featured Pools
         </Typography>
-        <Grid className={classes.secondBox} container>
+        <Grid className={classes.secondBox}>
             <Grid item xs={4}>
             <Paper className={classes.boxgrid}>
                    <Typography className={classes.typograph}>
@@ -213,18 +535,22 @@ else{
                    <img src={learnIcon} alt=""/>
              </Paper>    
             </Grid>
-         </Grid>
+         </Grid>*/}
          {/* Pool Table data*/}
 
-         <SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>
+        <SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>
          <TableGrid 
           columns ={tableColumn}
           rows = {rows}
          />
+
+        
+        </Grid>
          <WalletModal 
             open ={openModal}
             setOpen = {setOpenModal}
          />
+         </Grid>
          </Container>
          <Footer {...props}/>
       </div>

@@ -11,6 +11,8 @@ import Farming from "./pages/farming/farming";
 import SwapPool from "./pages/swap/swap";
 import Liquidity from "./pages/liquidity/Liquidity";
 import ErrorMessage from "./pages/error/error";
+import BuilderList  from "./pages/builder/Builder";
+import CompareList  from "./pages/compare/Compare";
 function App() {
   return (
     <HashRouter>
@@ -20,6 +22,8 @@ function App() {
           path="/"
           render={() => <Redirect to="/dashboard" />}
         />
+        <PublicRoute path="/builder" component={BuilderList} />
+        <PublicRoute path="/compare" component={CompareList} />
         <PublicRoute path="/dashboard" component={Dashboard} />
         <PublicRoute path="/connected-pool" component={ConnectedPool} />
         <PublicRoute path="/pools/:id" component={PoolDetails} />

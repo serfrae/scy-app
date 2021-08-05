@@ -1638,64 +1638,37 @@ export default makeStyles((theme : any) => createStyles({
       boxShadow:'none',
       borderRadius:'0px',
     },
-    '& label': {
-      fontSize:'14px',
-      color:'rgba(255, 255, 255, 0.9) !important',
-      marginBottom:'10px',
-      transform: 'translate(0, 1px) scale(1)',
-    },
-    '& .MuiInputBase-input':{
-      height:'40px',
-      borderRadius: '4px',
-      border :'1px solid #242636',
-      padding: '0px 10px',
-      marginBottom:'0px',
-      color:'rgba(255, 255, 255, 0.42)',
-      fontSize:'14px',
-      marginTop:'10px',
-    },
-    '& .MuiInputBase-input::placeholder':{
-        color:'rgba(255, 255, 255, 0.42)',
-    },
-    '& .MuiInput-underline:before':{
-      borderBottom:'none',
-      display:'none',
-    },
-    '& .MuiInput-underline:after':{
-      display:'none',
-    },
-    '& .MuiFormControl-root': {
-      minWidth:'100%',
-    },
-    '& textarea': {
-      minHeight:'86px',
-      backgroundColor:'transparent',
-      color:'rgba(255, 255, 255, 0.42)',
-      border: '1px solid #242636',
-      width:'100%',
-      fontSize:'14px',
-      padding:'10px',
-      marginBottom:'20px',
-    },
-    '& .MuiNativeSelect-root':{
-      '& option':{
-        backgroundColor: '#202232',
-      },
-    },
-    '& .MuiInputBase-root': {
-      '& .MuiNativeSelect-icon': {
-          top: 'calc(50% - 6px)',
-          color: 'rgb(255 255 255 / 54%)',
-      },
-    },
   },
-  headingSecondtext:{
-      marginLeft:'0px !important',
+compareTable:{},
+btnEditTB:{
+    textAlign:'right',
+    '& .MuiButton-root':{
+        background:'transparent',
+        fontWeight:500,
+        fontSize:12,
+        color:'rgba(255, 255, 255, 0.9)',
+        padding:0,
+    },
+    '& .MuiSvgIcon-root':{
+        width:14,
+        height:14,
+        marginRight:5,
+    },
+},
+poolname:{
+	'& .coinIcons':{
+    paddingRight:24,
   },
-
-  emptyBuilder:{
-
-  },
-
-
+  fontWeight:500,
+  color:'rgba(255, 255, 255, 0.9)',
+},
+compareBtnGroup:{
+ '& .MuiButton-label':{
+    fontWeight:500,
+    textTransform:'initial',
+ },
+ '& .MuiButtonBase-root':{
+  marginBottom:20,
+ },
+},
 }));
