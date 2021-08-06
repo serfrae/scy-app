@@ -3,6 +3,9 @@ import {  makeStyles, createStyles } from '@material-ui/core/styles';
 export default makeStyles((theme : any) => createStyles({
     root:{
       paddingTop:'68px',
+      '& .MuiContainer-fixed':{
+          maxWidth:'1100px',
+      },
       '& .MuiContainer-root':{
         '@media (max-width:768px)':{
               paddingTop:'40px',
@@ -112,6 +115,9 @@ export default makeStyles((theme : any) => createStyles({
      marginTop:'48px',
      marginBottom:'24px',
      fontWeight:500,
+     '@media (max-width:768px)':{
+         marginTop:'0',
+      },
     },
     boxgrid:{
     background:'#1A1A23',
@@ -566,6 +572,7 @@ export default makeStyles((theme : any) => createStyles({
     marginTop:'20px',
     color:'rgba(255, 255, 255, 0.9)',
     paddingBottom:'0px',
+    marginBottom:'-10px',
   },
   tabcontent:{
    '& .MuiTypography-root':{
@@ -1669,6 +1676,13 @@ compareBtnGroup:{
  },
  '& .MuiButtonBase-root':{
   marginBottom:20,
+  boxShadow:'none',
  },
 },
+treeTable:{
+  '@media (max-width:768px)':{
+      width:785,
+  },
+},
+
 }));

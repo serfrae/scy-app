@@ -25,11 +25,10 @@ const Dashboard = (props: RouteComponentProps) => {
    const classes = useStyles();
    const [openModal,setOpenModal] = useState(false);
    const[walletConnect,setWalletConnected] = useState(walletStatus);
-   return (
-      <div className={classes.root} > 
+   return (  
+      <div className={classes.root} > {/* ok */}
          <Header {...props}/>
-         {/* First Section*/}
-         <Container fixed>
+                 <Container fixed>
          <Grid className={classes.welcomeContent}>
          <Grid item xs={12}>
             <Paper className={classes.paper}>

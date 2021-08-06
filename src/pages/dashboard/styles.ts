@@ -3,6 +3,9 @@ import {  makeStyles, createStyles } from '@material-ui/core/styles';
 export default makeStyles((theme : any) => createStyles({
     root:{
       paddingTop:'68px',
+      '& .MuiContainer-fixed':{
+          maxWidth:'1100px',
+      },
       '& .MuiContainer-root':{
         '@media (max-width:768px)':{
               paddingTop:'40px',
@@ -369,6 +372,9 @@ export default makeStyles((theme : any) => createStyles({
       border:'solid 1px #56575d',
       marginTop:'18px',
       borderRadius:'4px',
+      '@media (max-width:768px)':{
+         border:'0px none',
+      },
       '& .MuiListItem-root':{
         display:'inline-block',
         width:'auto',
@@ -376,7 +382,11 @@ export default makeStyles((theme : any) => createStyles({
         fontSize:'14px',
         borderRight:'solid 1px #56575d',
         marginRight:'-1px',
-      }
+        '@media (max-width:768px)':{
+           border:'solid 1px #56575d',
+        },
+      },
+     
     },
     portfolioList:{
      '& .MuiList-root':{
@@ -1559,11 +1569,17 @@ export default makeStyles((theme : any) => createStyles({
     '&  .buildindex_btn': {
       float:'right',
     },
+    '@media (max-width:768px)':{
+         marginTop:'0',
+      },
   },
   titlewithImg:{
     display:'flex',
     marginBottom:'25px',
     alignItems:'center',
+    '@media (max-width:768px)':{
+         marginBottom:'0px',
+      },
     '& img':{
       width:'32px',
       marginTop:'0px',
@@ -1575,7 +1591,7 @@ export default makeStyles((theme : any) => createStyles({
       color:'rgba(255, 255, 255, 0.9)',
       fontWeight:'500',
       margin:'0px',
-      marginLeft:'25px',
+      marginLeft:'22px',
     },
   },
   firstBuilderbox:{
@@ -1585,6 +1601,12 @@ export default makeStyles((theme : any) => createStyles({
       boxShadow:'none',
       borderRadius:'0px',
     },
+    '& .MuiGrid-grid-xs-6': {
+           '@media (max-width:768px)':{
+            maxWidth:'100%',
+            flexBasis:"100%",
+         },
+      },
   },
   btnsBuilders:{
     textAlign:'right',
@@ -1593,11 +1615,26 @@ export default makeStyles((theme : any) => createStyles({
       marginTop:'0px',
       marginLeft:'15px',
       border: '1px solid #56575d',
+      '@media (max-width:768px)':{
+         marginLeft:'0px',
+         display:'block',
+         marginBottom:'15px',
+      },
     },
     '& .buil_btn': {
       marginTop:'0px',
       marginLeft:'15px',
+      '@media (max-width:768px)':{
+        marginLeft:'0px',
+        marginBottom:'15px',
+      },
     },
+    '& img': {
+      marginRight:'6px',
+    },
+    '@media (max-width:768px)':{
+         textAlign:'left',
+      },
   },
   rigthside_indexbox:{
     color:'#fff',
@@ -1633,10 +1670,25 @@ export default makeStyles((theme : any) => createStyles({
   },
   secondBuilderbox: {
     marginBottom:'30px',
+    '& .MuiGrid-grid-xs-6': {
+           '@media (max-width:768px)':{
+            maxWidth:'100%',
+            flexBasis:"100%",
+         },
+      },
+      '& .MuiGrid-grid-xs-3': {
+           '@media (max-width:768px)':{
+            maxWidth:'50%',
+            flexBasis:"50%",
+         },
+      },
     '& .MuiPaper-root':{
       backgroundColor:'transparent',
       boxShadow:'none',
       borderRadius:'0px',
+    },
+    '& form': {
+      paddingTop:'0px',
     },
     '& label': {
       fontSize:'14px',
@@ -1676,6 +1728,8 @@ export default makeStyles((theme : any) => createStyles({
       fontSize:'14px',
       padding:'10px',
       marginBottom:'20px',
+      resize:'none',
+      borderRadius:'4px',
     },
     '& .MuiNativeSelect-root':{
       '& option':{
@@ -1692,6 +1746,21 @@ export default makeStyles((theme : any) => createStyles({
   headingSecondtext:{
       marginLeft:'0px !important',
   },
+
+  managePercentage: {
+    position:'relative',
+    '& span': {
+      position:'absolute',
+      padding:'10px 12px 10px 12px',
+      background:'#14151D',
+      borderLeft: '1px solid #242636',
+      borderRadius: '0px 4px 4px 0px',
+      right: '13px',
+      top: '39px',
+    },
+  },
+
+
 
   emptyBuilder:{
     textAlign:'center',

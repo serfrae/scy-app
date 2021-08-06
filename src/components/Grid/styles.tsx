@@ -10,8 +10,9 @@ export default makeStyles((theme : any) => createStyles({
         overflow:'hidden',
         "& table":{
             '@media (max-width:768px)':{
-                width:'700px',
+                width:'770px',
             },
+
         },
         '& td':{
             borderBottomColor:'#242636',
@@ -68,7 +69,7 @@ export default makeStyles((theme : any) => createStyles({
         '& svg.MuiSvgIcon-root,& svg.MuiSvgIcon-root ':{color:'#fff'},
         '@media (max-width:768px)':{
             overflow:'auto',
-            marginTop:'20px',
+            marginTop:'0',
         },
         '& .MuiTableCell-root span':{
            position:'absolute',

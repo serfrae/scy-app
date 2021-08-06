@@ -44,12 +44,21 @@ const CompareList = (props: RouteComponentProps) => {
             </Grid>
           </div>
           </div>
+
+
+
 		 <TableGrid 
           columns ={comparecolumns}
           rows = {compoolsrows}
           tablePagination={false}
 		  
 		  />
+
+
+         <div className={classes.tabinnercontent}>
+          
+          </div>
+          
          </Container>
          <Footer {...props}/>
       </div>

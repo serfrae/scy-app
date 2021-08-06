@@ -18,6 +18,9 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import vertcoinIcon from '../../assets/icon/vertcoin-right.svg';
 import emptyBoxIcon from '../../assets/icon/emptyBox.svg';
+import editIcon from '../../assets/icon/edit-white.svg';
+import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
+
 
 import Container from '@material-ui/core/Container';
 const BuilderList = (props: RouteComponentProps) => {
@@ -46,7 +49,7 @@ const BuilderList = (props: RouteComponentProps) => {
 
          <div className={classes.firstBuilderbox}>
          <div className={classes.tabinnercontent}>
-          <Grid container spacing={5}>
+          <Grid container spacing={6}>
            <Grid item xs={6}>
              <Paper className={classes.paper}>
                 <div className={classes.graphImg}>
@@ -64,8 +67,8 @@ const BuilderList = (props: RouteComponentProps) => {
            <Grid item xs={6}>
              <Paper className={classes.paper}>
                 <div className={classes.btnsBuilders}>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary">Edit</Button>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary">Compare in basket</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={editIcon} />Edit</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} />Compare in basket</Button>
                     <Button className="buil_btn" variant="contained" color="primary">More details</Button>
                 </div>
 
@@ -100,7 +103,7 @@ const BuilderList = (props: RouteComponentProps) => {
 
          <div className={classes.secondBuilderbox}>
             <div className={classes.tabinnercontent}>
-               <Grid container spacing={3}>
+               <Grid container spacing={2}>
                  <Grid item xs={6}>
                    <Paper className={classes.paper}>
                       <div className={classes.titlewithImg}>
@@ -111,9 +114,9 @@ const BuilderList = (props: RouteComponentProps) => {
                  <Grid item xs={6}>
                    <Paper className={classes.paper}>
                       <div className={classes.btnsBuilders}>
-                          <Button className="transparent_buil_btn" variant="contained" color="primary">Edit</Button>
-                          <Button className="transparent_buil_btn" variant="contained" color="primary">Compare in basket</Button>
-                          <Button className="buil_btn" variant="contained" color="primary">More details</Button>
+                          <Button className="transparent_buil_btn" variant="contained" color="primary">Save</Button>
+                          <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} />Compare in basket</Button>
+                          <Button className="buil_btn" variant="contained" color="primary">Publish</Button>
                       </div>
                    </Paper>
                  </Grid>
@@ -169,12 +172,14 @@ const BuilderList = (props: RouteComponentProps) => {
                      
                   </Grid>
 
-                  <Grid item xs={3}>
+                  <Grid className={classes.managePercentage} item xs={3}>
                      <TextField  label="Range" placeholder="6"  fullWidth  InputLabelProps={{shrink: true, }} />
+                     <span>%</span>
                   </Grid>
 
-                   <Grid item xs={3}>
-                     <TextField  label="-" placeholder="20"  fullWidth  InputLabelProps={{shrink: true, }} />
+                   <Grid className={classes.managePercentage} item xs={3}>
+                     <TextField  label="&nbsp;" placeholder="20"  fullWidth  InputLabelProps={{shrink: true, }} />
+                      <span>%</span>
                   </Grid>
 
                    <Grid item xs={6}>

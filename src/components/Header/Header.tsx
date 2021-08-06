@@ -15,6 +15,8 @@ import useStyles from "./styles";
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import StoreMallDirectoryOutlinedIcon from '@material-ui/icons/StoreMallDirectoryOutlined';
 import logoIcon from '../../assets/icon/logo.svg';
+import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
+import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 import SwapVertIcon from '@material-ui/icons/SwapVert';
 import AddIcon  from '@material-ui/icons/Add';
 import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
@@ -22,7 +24,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import WalletModal from '../../pages/dashboard/walletModal';
 import PersonIcon from '@material-ui/icons/Person';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import ActivitiesList from '../Grid/activities'
+import ActivitiesList from '../Grid/activities';
 import {  Popper } from '@material-ui/core';
 import {walletStatus,disConnectWallet} from './walletStatus';
 import {activitiesData} from '../../models/activities';
@@ -199,7 +201,15 @@ const Header = ({ history } : RouteComponentProps) => {
           
            </div>
             }
-           <IconButton className={classes.chipwallet}
+
+            <div className={classes.rigthIconsHeader}>
+              <span className={classes.mianHeaderIcon}>
+                <img src={cartCompareIcon}/> 
+                <span className={classes.countercartHeader}>4</span>
+              </span>
+              <span className={classes.mianHeaderIcon}><ScheduleOutlinedIcon/></span>
+              <span className={classes.mianHeaderIcon}>
+                <IconButton className={classes.chipwallet}
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -209,8 +219,20 @@ const Header = ({ history } : RouteComponentProps) => {
             >
               <MoreHorizIcon />
             </IconButton>
+              </span>
+            </div>
+
+           
            
           </div>
+
+          {/*<div className={classes.headerIcons}>
+
+            <img src={cartCompareIcon}/>
+            <img src={timeIcons}/>
+
+          </div>*/}
+
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"

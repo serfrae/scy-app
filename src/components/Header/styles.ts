@@ -78,12 +78,13 @@ export default makeStyles((theme : any) => createStyles({
       },
   },
   chipwallet:{
-    color:"#fff",
-    background:' rgba(230, 231, 233, 0.04)',
+    // color:"#fff",
+    //background:' rgba(230, 231, 233, 0.04)',
     width:'32px',
     height:'32px',
     padding:'4px',
-    borderRadius:'4px'
+    marginLeft:'-11px',
+    //borderRadius:'4px'
   },
   listmenu:{
     paddingLeft:"10px",
@@ -333,5 +334,43 @@ export default makeStyles((theme : any) => createStyles({
       marginRight:'50px',
       zIndex: 9999,
     },
-   
+
+    rigthIconsHeader:{
+      display:'flex',
+      '& img': {
+        width:'18px',
+      },
+    },
+    mianHeaderIcon: {
+        width:'32px',
+        height:'32px',
+        background: 'rgba(230, 231, 233, 0.04)',
+        borderRadius: '4px',
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        marginLeft:'10px',
+        position: 'relative',
+      '& img': {
+        marginRight:'0px',
+      },
+      '& svg.MuiSvgIcon-root':{
+        width: '19px',
+        height: '19px',
+      },
+    },
+    countercartHeader:{
+       background: '#FFA000',
+        minWidth: '20px',
+        height:'18px',
+        color: '#181819',
+        fontSize:'12px',
+        position: 'absolute',
+        borderRadius: '50px',
+        textAlign: 'center',
+        lineHeight: '18px',
+        top: '-5px',
+        right: '-6px',
+    }
+    
 }));
