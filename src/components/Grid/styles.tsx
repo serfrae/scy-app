@@ -8,6 +8,19 @@ export default makeStyles((theme : any) => createStyles({
         marginBottom:'36px',
         marginTop:10,
         overflow:'hidden',
+        '& .MuiTablePagination-toolbar': {
+            paddingLeft:'0px',
+            textAlign:'right',
+        },
+        '& .MuiTablePagination-caption': {
+            display:'inline-block',
+        },
+        '& .MuiTablePagination-actions': {
+            display:'inline-block',
+        },
+        '& .MuiTablePagination-input': {
+
+        },
         "& table":{
             '@media (max-width:768px)':{
                 width:'770px',
@@ -78,6 +91,12 @@ export default makeStyles((theme : any) => createStyles({
         '& a':{
             textDecoration:'none',
             color:'rgba(255, 255, 255, 0.9)',
+        },
+        '& .accordioncls':{
+         display:'none',
+        },
+        '& .open.cellrow':{
+        display:'table-row',
         },
     },
     searchFilter:{
@@ -266,13 +285,17 @@ export default makeStyles((theme : any) => createStyles({
         
     },
 	expandIcon:{
-		
+		cursor:'pointer',
 	},
     compareTable:{
 
     },
 	expandCell:{
 		
-	}
-    
+	},
+	expandOpenIcon:{
+		transform: 'rotate(180deg);'
+	},
+   
+
 }));

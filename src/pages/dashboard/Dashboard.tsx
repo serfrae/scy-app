@@ -111,11 +111,13 @@ const Dashboard = (props: RouteComponentProps) => {
           tablePagination={false}
           moreLinkText = {"View All Pools"}
           link="/pools"
+		  accordion={true}
          />
          <WalletModal 
             open ={openModal}
             setOpen = {setOpenModal}
             setWalletConnected= {setWalletConnected}
+			
          />
          </Container>
          <Footer {...props}/>

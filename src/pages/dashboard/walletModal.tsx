@@ -13,16 +13,57 @@ import SolFlare from '../../assets/icon/icon.svg';
 import Mathwallet from '../../assets/icon/image 3.svg';
 import LedgerIcon from '../../assets/icon/ledger.svg';
 import bonfidaIcon from '../../assets/icon/bonfida.svg';
-
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  clusterApiUrl,
+  SystemProgram
+} from "@solana/web3.js";
 
 // @ts-ignore
 import Wallet from '@project-serum/sol-wallet-adapter';
-import { Connection,  clusterApiUrl } from '@solana/web3.js';
+
 
 declare const window: any;
+type DisplayEncoding = "utf8" | "hex";
+type PhantomEvent = "disconnect" | "connect";
+type PhantomRequestMethod =
+  | "connect"
+  | "disconnect"
+  | "signTransaction"
+  | "signAllTransactions"
+  | "signMessage";
+interface ConnectOpts {
+  onlyIfTrusted: boolean;
+}
+interface PhantomProvider {
+  publicKey: PublicKey | null;
+  isConnected: boolean | null;
+  autoApprove: boolean | null;
+  signTransaction: (transaction: Transaction) => Promise<Transaction>;
+  signAllTransactions: (transactions: Transaction[]) => Promise<Transaction[]>;
+  signMessage: (
+    message: Uint8Array | string,
+    display?: DisplayEncoding
+  ) => Promise<any>;
+  connect: (opts?: Partial<ConnectOpts>) => Promise<void>;
+  disconnect: () => Promise<void>;
+  on: (event: PhantomEvent, handler: (args: any) => void) => void;
+  request: (method: PhantomRequestMethod, params: any) => Promise<any>;
+}
+const getProvider = (): PhantomProvider | undefined => {
+	  if ("solana" in window) {
+		const provider = (window as any).solana;
+		if (provider.isPhantom) {
+		  return provider;
+		}
+	  }
+	  window.open("https://phantom.app/", "_blank");
+	};
 export default function WalletModal(props:any) {
   const classes = useStyles();
-
+  const provider = getProvider();
 
   //wallet
  
@@ -40,7 +81,7 @@ export default function WalletModal(props:any) {
           return null;
         }
       }, [network]);
-   const [selectedWallet, setSelectedWallet] = useState(injectedWallet);
+   const [selectedWallet, setSelectedWallet] = useState({wallet:injectedWallet, status:false,type:''});
 
   const urlWallet = useMemo(() => new Wallet(providerUrl, network), [
      providerUrl,
@@ -53,35 +94,59 @@ export default function WalletModal(props:any) {
     providerUrlPhantom,
     network,
   ]);
-
-
-
+	const phantomWalletTrigger = (walletObj:any)=>{
+		//if(walletObj.type === "phantom" && provider){alert(provider.publicKey);}
+	   if(walletObj.type === "phantom" && provider){ 
+			 provider.connect();
+			 object.setOpen(false);
+			 //console.log(provider.publicKey,'provider.publicKey');
+			  props.setConnectedWalletType({provider:'phantom',providerObject:provider})
+			  provider.on("connect", () => {
+				  let key = provider.publicKey?.toBase58();
+				  
+				   if(key && key !== null){
+					    object.setWalletConnected(true);
+						localStorage.setItem('loggedInToken', (key).toString());
+				   }
+					console.log("Connected to wallet " + provider.publicKey?.toBase58());
+				});
+			
+			 return;
+		 }
+	   else{setSelectedWallet(walletObj)}
+	}
+	
+	
    const object = props;
    useEffect(() => {
-        if(selectedWallet !== undefined){
-            if (selectedWallet) {
-              selectedWallet.on('connect', () => {
+	   if(selectedWallet.status === false){ return ;}
+	  
+        if(selectedWallet.wallet !== undefined){
+            if (selectedWallet.wallet) {
+              selectedWallet.wallet.on('connect', () => {
+				  
                 //setConnected(true);
-                console.log('connected',selectedWallet.publicKey.toBase58())
+                console.log('connected',selectedWallet.wallet.publicKey.toBase58())
                 let  blockhash = connection.getRecentBlockhash();
                 // console.log(blockhash,"Toke connected")
-                localStorage.setItem('loggedInToken', selectedWallet.publicKey.toBase58());
+                localStorage.setItem('loggedInToken', selectedWallet.wallet.publicKey.toBase58());
               // console.log(selectedWallet.publicKet.toBase58())
                 object.setOpen(false)
                 object.setWalletConnected(true);
+				 props.setConnectedWalletType({provider:'salona',providerObject:blockhash})
                 // window.opener.postMessage({
                 //   jsonrpc: '2.0',
                 //    method: 'connected',
                 //    params: {publicKey: selectedWallet.publicKey.toBase58()}}, 'http://localhost:3000/')
                 // addLog('Connected to wallet ' + selectedWallet.publicKey.toBase58());
               });
-              selectedWallet.on('disconnect', () => {
+              selectedWallet.wallet.on('disconnect', () => {
                  console.log('disconnected')
                  //localStorage.removeItem('loggedInToken');
               });
-              selectedWallet.connect();
+              selectedWallet.wallet.connect();
               return () => {
-                selectedWallet.disconnect();
+                selectedWallet.wallet.disconnect();
               };
             }
           }else{
@@ -90,15 +155,6 @@ export default function WalletModal(props:any) {
           }, [selectedWallet]);
 
 
-          const getProvider = () => {
-            if ("solana" in window) {
-              const provider = window.solana;
-              if (provider.isPhantom) {
-                return provider;
-              }
-            }
-            window.open("https://phantom.app/", "_blank");
-          };
 
 
 
@@ -116,13 +172,13 @@ export default function WalletModal(props:any) {
           </div>
           <MuiDialogContent>
                 <List component="nav" aria-label="main mailbox folders" className={classes.modelbody}>
-                        <ListItem button onClick={()=>setSelectedWallet(urlWallet)}>
+                        <ListItem button onClick={()=>setSelectedWallet({wallet:urlWallet, status:true,type:'salona'})}>
                         <ListItemText primary="Sollet" />
                         <ListItemIcon>
                                 <img src={Sollet} alt=""/>
                         </ListItemIcon>
                         </ListItem>
-                        <ListItem button onClick={()=>setSelectedWallet(phantomWallet)}>
+                        <ListItem button onClick={()=>phantomWalletTrigger({wallet:phantomWallet, status:true,type:'phantom'})}>
                         <ListItemText primary="Phantom" />
                         <ListItemIcon>
                                 <img src={Phantom} alt=""/>

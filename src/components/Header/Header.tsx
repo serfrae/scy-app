@@ -36,9 +36,9 @@ const Header = ({ history } : RouteComponentProps) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [anchorElPopper, setAnchorElPopper] = React.useState(null);
-  
+  const[connectedWalletType,setConnectedWalletType] = useState({provider:'',providerObject:null})
   const[walletConnect,setWalletConnected] = useState(walletStatus);
- 
+  const [walletTrigger, setWalletTrigger] = useState(false);
   const open = Boolean(anchorElPopper);
   const id = open ? 'simple-popper' : undefined;
   
@@ -64,7 +64,7 @@ const Header = ({ history } : RouteComponentProps) => {
     handleMobileMenuClose();
   };
   const disconectWallet = () =>{
-      disConnectWallet();
+      disConnectWallet(connectedWalletType);
       //setWalletConnected(walletStatus);
       setAnchorEl(null);
       handleMobileMenuClose();
@@ -252,6 +252,9 @@ const Header = ({ history } : RouteComponentProps) => {
             open ={openModal}
             setOpen = {setOpenModal}
             setWalletConnected = {setWalletConnected}
+			walletTrigger = {walletTrigger}
+			setWalletTrigger = {setWalletTrigger}
+			setConnectedWalletType = {setConnectedWalletType}
          />
        
     </div>

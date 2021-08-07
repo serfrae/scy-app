@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Table, TableBody, TableFooter, TablePagination} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -39,7 +39,7 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   } 
-export function Row({row={},columns=[],index=0}){
+export function Row({row={},columns=[],index=0,accordion = false}){
      const classes = useStyles();
     let cols = columns.filter((col:any) => !col[2] || col[2].type !== 'collapse')
     .map((col:any) => ({
@@ -50,25 +50,42 @@ export function Row({row={},columns=[],index=0}){
       cellClassName: classes.headerCell,
       ...((!!col[2] && !!col[2].options) ? col[2].options : {})
     }));
+	const[currentIndex,setCurrentIndex] = useState(-1);
+	const setCurrentIndexToggle = (cellIndex:any)=>{
+		let crntIndex:any = cellIndex === currentIndex ? -1 : cellIndex;
+		setCurrentIndex(crntIndex)
+	}
     return(
       <><TableRow key={index}>
           {
           cols.map((col,index) => (
-			
+				
               <TableCell className={`cellrow ${col.cellClassName}${(col.number !== 'undefined' && col.number === true) ? ((row[col.fieldName] <= 1)?' lessvalue ':' greatervalue') : '' }`} key={`cellrow.(${col.field}${index})`} >
                 {(col.type !== 'undefined' && col.type === 'link') ?   <Link to={row['link']}> {renderTableCell({value: row[col.fieldName]})}</Link> :  <>{(col.hideZero !== 'undefined' && col.hideZero === true && (row[col.fieldName] === '0' || row[col.fieldName] === 0)) ? '': renderTableCell({value: row[col.fieldName]})}</> }
               </TableCell>
-			/*}</>*/
+				
           ))
           }
+		 {accordion === true &&
+			<TableCell className={`cellrow ${index}`} key={`cellrow.(${index}`} >
+					<ExpandMoreIcon className={currentIndex === index ? classes.expandOpenIcon : classes.expandIcon} onClick={()=>{setCurrentIndexToggle(index)}}/>
+			</TableCell>  
+		 }
       </TableRow> 
-	 
+	  { accordion === true &&
+		 <TableRow className={currentIndex === index ? `accordioncls open cellrow ${index}` : `accordioncls cellrow ${index}`} key={`collrow.(${index}`}>
+				<TableCell className={`cellrow ${index}`} key={`colllcell.(${index}`} colSpan={(cols.length + 1)}>
+					{ (row && row.hasOwnProperty('accordionData')) ? row['accordionData'] : ''}
+				</TableCell>
+		 </TableRow>	
+		  
+	  }	
 	  
 	  </>     
     );
 }
 
-export default function TableGrid({columns=[],rows=[],tablePagination =true, moreLinkText = "",link=""}){
+export default function TableGrid({columns=[],rows=[],tablePagination =true, moreLinkText = "",link="",accordion=false}){
     
   const classes = useStyles();
   const history = useHistory();
@@ -113,6 +130,12 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
                 </TableCell>
                 ))
             }
+			{accordion === true && 
+				<TableCell className={'headerClassName'} key={(cols.length+1)}>
+				
+				</TableCell>
+			
+			}
           </TableRow>
         </TableHead>
           { rows.length > 0 ?  <TableBody>
@@ -125,6 +148,7 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
                   columns={columns}
                   index ={index}
                   key={index}
+				  accordion ={accordion}
               />)
           })}   
             

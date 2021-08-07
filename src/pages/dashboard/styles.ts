@@ -1539,10 +1539,19 @@ export default makeStyles((theme : any) => createStyles({
      transform:'translate(14px, 8px) scale(1)',
      color:'#fff',
    },
-   // '& .Mui-focused':{
-   //  transform:'translate(14px, -7px) scale(1)',
-   //  fontSize:12,
-   // },
+    '& .Mui-focused':{
+     transform:'translate(0px, 0px) scale(1)',
+     fontSize:12,
+     '& fieldset': {
+      border:'1px solid #242636 !important',
+     },
+     '& label':{
+      transform:'translate(14px, -5px) scale(1)',
+     },
+    },
+    '& label.MuiInputLabel-outlined.MuiFormLabel-filled':{
+      transform:'translate(14px, -5px) scale(1)',
+    },
    '& .MuiSvgIcon-root':{
       position: 'absolute',
       top:'7px',
@@ -1759,7 +1768,6 @@ export default makeStyles((theme : any) => createStyles({
       top: '39px',
     },
   },
-
 
 
   emptyBuilder:{
