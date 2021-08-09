@@ -1,7 +1,8 @@
-  import React,{useState} from 'react';
+import React,{useState} from 'react';
 import Chip from '@material-ui/core/Chip';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,13 +29,21 @@ import ActivitiesList from '../Grid/activities';
 import {  Popper } from '@material-ui/core';
 import {walletStatus,disConnectWallet} from './walletStatus';
 import {activitiesData} from '../../models/activities';
+import WtcIcon from '../../assets/icon/WTCWTCWTC.svg';
+import BLTIcon from '../../assets/icon/BLT.svg';
+import cryIcon from '../../assets/icon/cry.svg';
+import trashIcon from '../../assets/icon/trash.svg';
+import cry2Icon from '../../assets/icon/cry2.svg';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 const Header = ({ history } : RouteComponentProps) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [cartMoreAnchorEl, setCartMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const [openModal,setOpenModal] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isCartMenuOpen = Boolean(cartMoreAnchorEl);
   const [anchorElPopper, setAnchorElPopper] = React.useState(null);
   const[connectedWalletType,setConnectedWalletType] = useState({provider:'',providerObject:null})
   const[walletConnect,setWalletConnected] = useState(walletStatus);
@@ -53,6 +62,7 @@ const Header = ({ history } : RouteComponentProps) => {
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    setAnchorElPopper(null)
   };
 
   const handleMobileMenuClose = () => {
@@ -72,8 +82,15 @@ const Header = ({ history } : RouteComponentProps) => {
   }
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
+    setAnchorElPopper(null)
   };
-
+  const handleCartMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setCartMoreAnchorEl(event.currentTarget);
+    setAnchorElPopper(null)
+  };
+  const handleCartMenuClose = ()=>{
+    setCartMoreAnchorEl(null); 
+  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -87,7 +104,11 @@ const Header = ({ history } : RouteComponentProps) => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={disconectWallet}>Disconnect Wallet</MenuItem>
+	  {walletConnect === false ?  
+      <MenuItem onClick={()=>{setOpenModal(true)}}>Connect Wallet</MenuItem>
+	  :
+	<MenuItem onClick={disconectWallet}>Disconnect Wallet</MenuItem>
+	  }
     </Menu>
   );
 
@@ -119,6 +140,43 @@ const Header = ({ history } : RouteComponentProps) => {
       </MenuItem>
       <MenuItem>
       {renderMenu}
+      </MenuItem>
+    </Menu>
+  );
+
+  const cartItemRender = (
+
+    <Menu
+      anchorEl={cartMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={'cart-item-data'}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isCartMenuOpen}
+      onClose={handleCartMenuClose}
+      className={classes.cartItemData}
+    >
+     <span className={classes.headerCart}>My basket</span>
+      <MenuItem className={classes.cartMenu}>
+          <img src={WtcIcon}/> <span>Pool name</span> {isCartMenuOpen} 
+          <i><img src={trashIcon} alt=""/></i>
+      </MenuItem>
+     <MenuItem className={classes.cartMenu}>
+         <img src={BLTIcon}/> <span>Pool name</span> {isCartMenuOpen}
+         <i><img src={trashIcon} alt=""/></i>
+      </MenuItem>
+      <MenuItem className={classes.cartMenu}>
+         <img src={cryIcon}/> <span>Pool name</span> {isCartMenuOpen}
+         <i><img src={trashIcon} alt=""/></i>
+      </MenuItem>
+      <MenuItem className={classes.cartMenu}>
+         <img src={cry2Icon}/> <span>Pool name</span> {isCartMenuOpen}
+         <i><img src={trashIcon} alt=""/></i>
+      </MenuItem>
+      <MenuItem className={classes.cartlink}>
+      <NavLink   to="/compare">
+       Go to compare <NavigateNextIcon/>
+      </NavLink>
       </MenuItem>
     </Menu>
   );
@@ -203,11 +261,14 @@ const Header = ({ history } : RouteComponentProps) => {
             }
 
             <div className={classes.rigthIconsHeader}>
-              <span className={classes.mianHeaderIcon}>
+              <span className={classes.mianHeaderIcon} onClick={handleCartMenuOpen}>
                 <img src={cartCompareIcon}/> 
                 <span className={classes.countercartHeader}>4</span>
               </span>
-              <span className={classes.mianHeaderIcon}><ScheduleOutlinedIcon/></span>
+              {cartItemRender}
+			   {walletConnect === false &&
+				<span className={classes.mianHeaderIcon}><ScheduleOutlinedIcon/></span>
+			   }
               <span className={classes.mianHeaderIcon}>
                 <IconButton className={classes.chipwallet}
               edge="end"

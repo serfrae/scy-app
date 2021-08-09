@@ -26,6 +26,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import WalletModal from '../dashboard/walletModal';
 import {radiumAPI,orcaAPI} from '../../api/api';
+import {PoolData} from './pooldata';
+export const numberFormat = (value) =>
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(value);
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
    
@@ -53,7 +59,12 @@ const PoolList = (props: RouteComponentProps) => {
     checked10: false,
   });
   const top100Films = [
-  { title: 'Raydium', year: 1994 },
+  { title: 'Suggestions', },
+  { title: 'Raydium', },
+  { title: 'xxxx',  },
+  { title: 'xxxx',  },
+  { title: 'xxxx',  },
+  { title: 'xxxx',  },
    ];
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState2({ ...state2, [event.target.name]: event.target.checked });
@@ -73,7 +84,7 @@ const PoolList = (props: RouteComponentProps) => {
    //const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
-   const [filter,setFilter] = useState('Radium');
+   const [filter,setFilter] = useState('Orca');
    const columns:any = [
       ['Name','name',{
          options:{
@@ -158,10 +169,11 @@ calCoinPrice_scd = priceArray[currencyPrice[1]]
 if(calCoinPrice!=""){
 
 if(currencyPrice[0] == "USDT"|| currencyPrice[1] == "USDC"){
-   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000))
+   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)).toLocaleString()
 }
 else{
-   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd)
+   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd).toLocaleString()
+
 }
 
 
@@ -170,17 +182,10 @@ else{
 
 
 
-                   dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week)*100)} %`,fee_24h:data[obj].apy.month});
+                   dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week) * 100).toFixed(1)} %`,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
                      }     }
                 const columnsOrca:any = [
-                  ['Name','name',{
-                     options:{
-                           order:true,
-                          
-                           
-                  },  
-                   
-                  }],
+                  ['Name','name'],
                   ['Liquidity','liquidity'],
                   ['Est. Fees','volume_24h',{
                      options:{
@@ -190,7 +195,15 @@ else{
                        } 
                    
                   }],
-                  ['Yearly ROI','volume_7d',{
+                  ['24h','fee_24h',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }],
+                  ['7D','volume_7d',{
                      options:{
                            order:true,
                            number:true,
@@ -538,10 +551,11 @@ else{
          </Grid>*/}
          {/* Pool Table data*/}
 
-        <SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>
+        {/*<SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>*/}
          <TableGrid 
           columns ={tableColumn}
           rows = {rows}
+          accordion={true}
          />
 
         

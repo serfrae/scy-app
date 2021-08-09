@@ -4,7 +4,7 @@ export default makeStyles((theme : any) => createStyles({
     root:{
       paddingTop:'68px',
       '& .MuiContainer-fixed':{
-          maxWidth:'1100px',
+          maxWidth:'1280px',
       },
       '& .MuiContainer-root':{
         '@media (max-width:768px)':{
@@ -1684,5 +1684,49 @@ treeTable:{
       width:785,
   },
 },
+chart:{
+      marginBottom:0,
+      background:'transparent',
+  },
+  pricehead:{
+    display:'flex',
+  },
+  graphPrice:{
+    marginBottom:50,
+    '& .MuiList-padding':{
+      marginTop:0,
+      float:'right',
+    },
+    '& .MuiListItem-root':{
+      marginBottom:0,
+    },
+    '& svg g text':{
+      fill:'rgba(255, 255, 255, 0.42)',
+    },
+    '& root':{
+      padding:0,
+    },
+  },
+  chartFt:{
+   paddingLeft:0,
+   marginBottom:20,
+   marginTop:30,
+   display:'inline-block',
+   '& span':{
+      display:'flex',
+      alignItems: 'center',
+      fontSize:14,
+      color:'rgba(255, 255, 255, 0.7)',
+      float:'left',
+      marginRight:35,
+   },
+   '& i':{
+      background:'#DD425A',
+      width:8,
+      height:8,
+      borderRadius: '50%',
+      marginRight:5,
+   },
+  },
 
 }));

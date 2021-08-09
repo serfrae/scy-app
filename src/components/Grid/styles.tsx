@@ -7,7 +7,8 @@ export default makeStyles((theme : any) => createStyles({
         borderRadius:'8px',
         marginBottom:'36px',
         marginTop:10,
-        overflow:'hidden',
+        overflow:'auto',
+        width: '100%',
         '& .MuiTablePagination-toolbar': {
             paddingLeft:'0px',
             textAlign:'right',
@@ -25,7 +26,6 @@ export default makeStyles((theme : any) => createStyles({
             '@media (max-width:768px)':{
                 width:'770px',
             },
-
         },
         '& td':{
             borderBottomColor:'#242636',
@@ -47,6 +47,9 @@ export default makeStyles((theme : any) => createStyles({
             fontWeight:'400',
             position:'relative',
         },
+        // '& thead th:first-child':{
+        //     minWidth: '190px',
+        //     },
         '& tbody td':{
             background:'#14151D',
             borderBottomColor:'#242636',
@@ -84,20 +87,39 @@ export default makeStyles((theme : any) => createStyles({
             overflow:'auto',
             marginTop:'0',
         },
+       
         '& .MuiTableCell-root span':{
            position:'absolute',
            top:'14px',
         },
+        '& .MuiTableCell-root span.MuiButton-label':{
+                width: '100%',
+                display: 'inherit',
+                alignItems: 'inherit',
+                justifyContent: 'inherit',
+                maxWidth: '100%',
+                position: 'initial',
+        },
+
         '& a':{
             textDecoration:'none',
             color:'rgba(255, 255, 255, 0.9)',
         },
         '& .accordioncls':{
          display:'none',
+         '& td.MuiTableCell-root': {
+                padding:'0px',
+            },
         },
         '& .open.cellrow':{
         display:'table-row',
         },
+
+        
+
+
+
+        
     },
     searchFilter:{
         background: '#1A1A23',
@@ -279,7 +301,6 @@ export default makeStyles((theme : any) => createStyles({
     },
     formControl:{
         
-
     },
     nodata:{
         
@@ -296,6 +317,6 @@ export default makeStyles((theme : any) => createStyles({
 	expandOpenIcon:{
 		transform: 'rotate(180deg);'
 	},
-   
+    
 
 }));

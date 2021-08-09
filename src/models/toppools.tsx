@@ -8,7 +8,7 @@ import digibyteIcon from '../assets/icon/digibyte.svg';
 import litecoinIcon from '../assets/icon/litecoin.svg';
 import ethereumClassicIcon from '../assets/icon/ethereum-classic.svg';
 import bitcoinIcon from '../assets/icon/bitcoin.svg';
-
+import {PoolData} from '../pages/pool/pooldata';
  export const toppoolscolumns:any = [
     ['Name','name',{
        options:{
@@ -55,6 +55,7 @@ import bitcoinIcon from '../assets/icon/bitcoin.svg';
           "alltime":'12.27',
           "hours":2.65,
           "lastdays":<img src={chartIcon} alt=""/>,
+		   "accordionData":<PoolData />
 		 
     },
     {
@@ -70,7 +71,7 @@ import bitcoinIcon from '../assets/icon/bitcoin.svg';
        "alltime":'.26',
        "hours":.65,
        "lastdays":<img src={chartredIcon} alt=""/>,
-	    "accordionData":111
+	    "accordionData":<PoolData />
    },
    {
       "name":'Fund name',
@@ -84,7 +85,7 @@ import bitcoinIcon from '../assets/icon/bitcoin.svg';
       "alltime":'10.01',
       "hours":2.65,
       "lastdays":<img src={chartIcon} alt=""/>,
-	  "accordionData":111
+	  "accordionData":<PoolData />
    },
    {
       "name":'Tund name',
@@ -104,6 +105,6 @@ import bitcoinIcon from '../assets/icon/bitcoin.svg';
       "alltime":'.12',
       "hours":.65,
       "lastdays":<img src={chartredIcon} alt=""/>,
-	  "accordionData":111
+	  "accordionData":<PoolData />
    }
  ];

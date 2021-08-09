@@ -351,6 +351,7 @@ export default makeStyles((theme : any) => createStyles({
         alignItems:'center',
         marginLeft:'10px',
         position: 'relative',
+        cursor:'pointer',
       '& img': {
         marginRight:'0px',
       },
@@ -371,6 +372,60 @@ export default makeStyles((theme : any) => createStyles({
         lineHeight: '18px',
         top: '-5px',
         right: '-6px',
-    }
-    
+    },
+	cartItemList:{
+		
+	},
+  headerCart:{
+   padding:'0px 20px',
+   marginBottom:12,
+   display:'block',
+  },
+  cartMenu:{
+    width:334,
+    padding:'12px 20px',
+    borderBottom:'solid 1px #242636',
+    display:'block',
+    '& span':{
+       marginLeft:14,
+       lineHeight:'32px',
+       fontSize:14,
+    },
+    '& img':{
+     float:'left',
+    },
+    '& i':{
+      float:'right',
+    },
+  },
+  cartItemData:{
+    '& .MuiPopover-paper':{
+      background:'#1A1A23',
+      color:'#fff',
+      top:'60px !important',
+    },
+    '& .MuiList-root':{
+      paddingTop:20,
+      paddingBottom:0,
+    },
+  },
+  cartlink:{
+    display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
+    padding:0,
+    '& a':{
+      fontSize:14,
+      color:'#4A4DE6',
+      marginTop:10,
+       display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
+      textDecoration:'none',
+      marginBottom:15,
+    },
+    '& .MuiSvgIcon-root':{
+      width:18,
+    },
+  },
 }));
