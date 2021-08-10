@@ -4,7 +4,7 @@ export default makeStyles((theme : any) => createStyles({
     root:{
       paddingTop:'68px',
       '& .MuiContainer-fixed':{
-          maxWidth:'1100px',
+          maxWidth:'1280px',
       },
       '& .MuiContainer-root':{
         '@media (max-width:768px)':{
@@ -84,10 +84,11 @@ export default makeStyles((theme : any) => createStyles({
         display:'inline-block',
         textAlign:'left',
         marginTop:'0',
+        padding: '25px',
       },
       '& .makeStyles-blicon-7':{
         textAlign:'right',
-      }
+      },
     },
     dashboardcontetn:{
       flex:'0 0 65%'
@@ -95,6 +96,10 @@ export default makeStyles((theme : any) => createStyles({
     blicon:{
       flex:'0 0 35%',
       textAlign:'right',
+      '@media (max-width:768px)':{
+          textAlign: 'left',
+          marginTop: '20px',
+        },
     },
     
     welcomeContent:{
@@ -115,15 +120,19 @@ export default makeStyles((theme : any) => createStyles({
      marginTop:'48px',
      marginBottom:'24px',
      fontWeight:500,
+      '@media (max-width:768px)':{
+         marginTop: '20px',
+      },
     },
+
     boxgrid:{
-    background:'#1A1A23',
-    border:'1px solid #242636',
-    borderRight: 'none',
-    borderRadius:'8px 0px 0px 8px',
-    padding:'20px',
-    paddingTop:'10px',
-    height:'100%',
+      background:'#1A1A23',
+      border:'1px solid #242636',
+      borderRight: 'none',
+      borderRadius:'8px 0px 0px 8px',
+      padding:'20px',
+      paddingTop:'10px',
+      height:'100%',
     },
     boxgridMid:{
       background:'#1A1A23',
@@ -1418,7 +1427,13 @@ export default makeStyles((theme : any) => createStyles({
        border:'solid 1px #242636',
        borderRadius:3,
        overflow:'hidden',
+       marginBottom:'30px',
     },
+    '@media (max-width:768px)':{
+        paddingRight: '0px',
+        maxWidth: '100%',
+        flexBasis: '100%',
+      },
   },
   headfilter:{
     padding: '20px 18px',
@@ -1512,10 +1527,11 @@ export default makeStyles((theme : any) => createStyles({
     color: 'rgba(255, 255, 255, 0.42) !important',
   },
   searchPools:{
-    width:'360px',
+    width:'100%',
+    maxWidth: '360px',
     float:'right',
     position: 'relative',
-    zIndex: 9999,
+    zIndex: 9,
     marginTop:40,
     marginBottom:20,
     '& .MuiFormControl-fullWidth':{
@@ -1551,6 +1567,7 @@ export default makeStyles((theme : any) => createStyles({
     },
     '& label.MuiInputLabel-outlined.MuiFormLabel-filled':{
       transform:'translate(14px, -5px) scale(1)',
+      fontSize:12,
     },
    '& .MuiSvgIcon-root':{
       position: 'absolute',
@@ -1559,12 +1576,21 @@ export default makeStyles((theme : any) => createStyles({
       color:'rgba(255, 255, 255, 0.42)',
       fontSize:'20px',
    },
+   '& .MuiAutocomplete-inputFocused':{
+     fontSize:12,
+     paddingLeft:'12px !important'
+   },
   },
   PoolsSec:{
     '& .MuiToolbar-gutters':{
      display:'block',
      width:'100%',
     },
+    '@media (max-width:768px)':{
+        marginTop:'0',
+        maxWidth: '100%',
+        flexBasis: '100%',
+      },
   },
   builder_header:{
     marginTop:"40px",
@@ -1629,6 +1655,11 @@ export default makeStyles((theme : any) => createStyles({
          display:'block',
          marginBottom:'15px',
       },
+      '& .btnsBuildersSpace': {
+         borderTop: '1px solid #242636',
+    paddingTop: '20px',
+    paddingBottom: '20px',
+      },
     },
     '& .buil_btn': {
       marginTop:'0px',
@@ -1644,6 +1675,11 @@ export default makeStyles((theme : any) => createStyles({
     '@media (max-width:768px)':{
          textAlign:'left',
       },
+  },
+  btnsBuildersSpace: {
+    borderTop: '1px solid #242636',
+    paddingTop: '20px',
+    paddingBottom: '20px',
   },
   rigthside_indexbox:{
     color:'#fff',
@@ -1768,8 +1804,6 @@ export default makeStyles((theme : any) => createStyles({
       top: '39px',
     },
   },
-
-
   emptyBuilder:{
     textAlign:'center',
     padding:'80px 0',
@@ -1780,13 +1814,12 @@ export default makeStyles((theme : any) => createStyles({
         fontSize:14,
         margin:'20px 0 16px 0',
       },
-
   },
+TableAcrodSec:{
+  '& h2':{
+    marginLeft:0,
+  },
+},
 
 
 }));
-
- {
-    
-    
-}

@@ -34,6 +34,7 @@ import BLTIcon from '../../assets/icon/BLT.svg';
 import cryIcon from '../../assets/icon/cry.svg';
 import trashIcon from '../../assets/icon/trash.svg';
 import cry2Icon from '../../assets/icon/cry2.svg';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 const Header = ({ history } : RouteComponentProps) => {
   const classes = useStyles();
@@ -114,6 +115,7 @@ const Header = ({ history } : RouteComponentProps) => {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
+
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -122,26 +124,45 @@ const Header = ({ history } : RouteComponentProps) => {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      className={classes.mobileMenuTo}
     >
       <MenuItem>
-          <BarChartIcon /> Dashboard
+         <NavLink className="navbar-item" to="/dashboard">
+            <BarChartIcon /> Dashboard
+          </NavLink>
       </MenuItem>
       <MenuItem>
+      <NavLink className="navbar-item" to="/pools">
            <TrendingUpIcon/> Pools
+          </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
+       <NavLink className="navbar-item" to="/farming">
           <StoreMallDirectoryOutlinedIcon/> Farming
+          </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
+      <NavLink className="navbar-item" to="/liquidity">
       <BubbleChartOutlinedIcon/> Liquidity
+      </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
+      <NavLink className="navbar-item" to="/swap">
        <SwapVertIcon/> Swap
+       </NavLink>
       </MenuItem>
       <MenuItem>
-      {renderMenu}
+        <NavLink className="navbar-item" to="/builder">
+           <AddIcon /> Builder
+       </NavLink>
       </MenuItem>
+      <MenuItem>
+      <PermIdentityIcon /> My account {renderMenu}
+      </MenuItem>
+
     </Menu>
+
+   
   );
 
   const cartItemRender = (

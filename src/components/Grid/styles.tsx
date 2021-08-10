@@ -200,6 +200,9 @@ export default makeStyles((theme : any) => createStyles({
     searchToolbarGrid:{
         paddingRight:0,
         paddingLeft:0,
+        '@media (max-width:500px)':{
+            marginBottom:'15px',
+        },
         '& .title':{
             fontStyle: 'normal',
             fontWeight: 500,
@@ -211,6 +214,10 @@ export default makeStyles((theme : any) => createStyles({
             borderRadius: 4,
             textTransform: 'capitalize',
             float:'right',
+             '@media (max-width:768px)':{
+                marginBottom:'15px',
+                marginRight:'15px',  
+             },
         },
         '& .MuiGrid-grid-xs-8':{
             '@media (max-width:768px)':{
@@ -270,7 +277,7 @@ export default makeStyles((theme : any) => createStyles({
         background: '#1A1A23',
         border: '1px solid #242636',
         borderRadius: 4,
-        margin: '0px 16px',
+        margin: '0px 15px',
         color: 'rgba(255, 255, 255, 0.42)',
         float:'right',
         position: 'relative',

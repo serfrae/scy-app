@@ -38,6 +38,9 @@ export default makeStyles((theme : any) => createStyles({
   },
   menuItem:{
     flex:'0 0 46%',
+    '@media (max-width:768px)':{
+      flex:'auto',
+    },
   },
   innermenu:{
     display:'flex'
@@ -396,6 +399,7 @@ export default makeStyles((theme : any) => createStyles({
     },
     '& i':{
       float:'right',
+      margin:'10px 0',
     },
   },
   cartItemData:{
@@ -428,4 +432,33 @@ export default makeStyles((theme : any) => createStyles({
       width:18,
     },
   },
+  mobileMenuTo:{
+    '& .MuiPopover-paper':{
+      background:'#1A1A23',
+      borderRadius:5,
+      top:'63px!important',
+      border:'solid 1px hsl(0deg 0% 100% / 9%)',
+    },
+    '& a.navbar-item':{
+      display:'flex',
+      alignItems:'center',
+      width:250,
+      color:'#fff',
+      textDecoration:'none',
+    },
+    '& .MuiSvgIcon-root':{
+     marginRight:5,
+    },
+    '& .MuiListItem-button':{
+      padding:'10px 15px',
+      borderBottom:'solid 1px hsl(0deg 0% 100% / 9%)',
+    },
+    '& .MuiMenu-list':{
+      padding:0,
+    },
+    '& .MuiButtonBase-root':{
+      color:'#fff',
+    },
+  },
+
 }));
