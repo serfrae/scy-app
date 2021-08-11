@@ -60,6 +60,40 @@ export const Secondstep= () => {
         <TextField  label="Amount to Invest" placeholder="Amount to invest" fullWidth  InputLabelProps={{shrink: true, }} />
         <TextField  label="Risk tolerance (a percentage of daiyly buy to protect yourself)" placeholder="Risk tolerance" fullWidth  InputLabelProps={{shrink: true, }} />
       </form>
+
+      <div className={classes.portfolioMain}>
+            <p className={classes.headingThirdstep}>This page is for portfolio makeup etc. </p>
+            <form noValidate autoComplete="off">
+              <TextField  label="Portfolio Name" placeholder="Portfolio name" fullWidth  InputLabelProps={{shrink: true, }} />
+              <TextField  label="Amount to Invest" placeholder="Amount to invest" fullWidth  InputLabelProps={{shrink: true, }} />
+
+              <div className={classes.radioListing}>
+               <FormControl component="fieldset">
+                  <FormLabel component="legend">Need to approve everey transaction</FormLabel>
+                  <RadioGroup aria-label="gender" name="gender1">
+                   <FormControlLabel value="Yes"  control={<Radio />} label="yes" />
+                    <FormControlLabel value="No"  control={<Radio />} label="No" />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+
+              <TextField  label="buying new token (either limit or need approval)" placeholder="Token" fullWidth  InputLabelProps={{shrink: true, }} />
+            
+            <div className={classes.radioListing}>
+               <FormControl component="fieldset">
+                  <FormLabel component="legend">Allow actions that follow certain strategies like market cap (yes or no</FormLabel>
+                  <RadioGroup aria-label="gender" name="gender1">
+                   <FormControlLabel value="Yes"  control={<Radio />} label="yes" />
+                    <FormControlLabel value="No"  control={<Radio />} label="No" />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+
+               <TextField  label="Whitelist/blacklist tokens / marketcaps / volume" placeholder="Whitelist/blacklist tokens / marketcaps / volume" fullWidth  InputLabelProps={{shrink: true, }} />
+
+            </form>
+      </div>
+
     </div>
     );
 }
@@ -71,6 +105,16 @@ export const Thirdstep= () => {
         <Typography variant="h5">
           Confirmation page W/ disclaimer again 
         </Typography>
+
+        <p className={classes.confirmapageDetails}>
+          Dynamic stop loss
+
+          We want to have a stoploss that moves with take profit points
+          E.g. TP(take profit) is at +20% from entry and SL(Stop Loss) is -20%
+          When TP is hit SL is raised to the original buy-in location. 
+          SL can be moved less proportionally e.g. SL is set for -10% from buy-in 
+          instead of at buy in. 
+        </p>
       </div>
     </div>
     );

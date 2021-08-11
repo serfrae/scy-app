@@ -1857,11 +1857,20 @@ confirmationPage:{
     padding:'40px 0px',
     color: '#fff',
   },
+  '& p':{
+    color:'#fff',
+    fontSize:'14px',
+  },
 },
 
 radioListing:{
   '& lagend.MuiFormLabel-root': {
     color:'#fff',
+  },
+  '& .MuiFormLabel-root': {
+    color: '#fff',
+    fontSize: '12px',
+    paddingTop: '20px',
   },
   '& label.MuiFormControlLabel-root':{
     color:'#fff',
@@ -1917,8 +1926,19 @@ transparent_cancel_btn:{
          display:'block',
          marginBottom:'15px',
       },
-      
 },
+
+portfolioMain: {
+
+},
+
+headingThirdstep:{
+  fontSize:'16px',
+  color:'#fff',
+  marginBottom: '0px',
+  marginTop: '30px',
+},
+
 
 
 }));
