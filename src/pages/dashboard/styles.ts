@@ -12,6 +12,7 @@ export default makeStyles((theme : any) => createStyles({
         },
       },
     },
+
     breadcrumbsBar:{
         width:'100%',
         borderBottom:'solid 1px #1A1A23',
@@ -221,6 +222,28 @@ export default makeStyles((theme : any) => createStyles({
       background:'#14151D',
       width:'480px',
      },
+
+     '& label.MuiInputLabel-formControl':{
+      color:'#fff',
+      position: 'relative',
+      marginBottom: '5px',
+      marginTop: '20px',
+     },
+
+     '& .MuiInputBase-input':{
+        height:'40px',
+        borderRadius: '4px',
+        border :'1px solid #242636',
+        padding: '0px 10px',
+        marginBottom:'1px',
+        color:'#fff',
+        fontSize:'14px',
+        marginTop:'0px',
+      },
+
+      '& .MuiInputBase-root': {
+        marginTop: '0px',
+      },
      
     },
     searchToolbar:{
@@ -242,6 +265,10 @@ export default makeStyles((theme : any) => createStyles({
           position: 'relative',
           right:'15px',
       },
+      
+    },
+    modelbodycontant:{
+      color:'#fff',
     },
     modelbody:{
       padding:'20px',
@@ -1819,6 +1846,78 @@ TableAcrodSec:{
   '& h2':{
     marginLeft:0,
   },
+},
+
+
+confirmationPage:{
+  textAlign:'center',
+  color:'#fff',
+  '& h5':{
+    fontSize:'18px',
+    padding:'40px 0px',
+    color: '#fff',
+  },
+},
+
+radioListing:{
+  '& lagend.MuiFormLabel-root': {
+    color:'#fff',
+  },
+  '& label.MuiFormControlLabel-root':{
+    color:'#fff',
+  },
+  '& .MuiRadio-colorSecondary.Mui-checked': {
+    color: '#303f9f',
+  },
+  '& .MuiRadio-root': {
+      color: '#505370',
+  },
+},
+instructions:{
+
+},
+
+mainStepperclass:{
+  background:'transparent',
+  padding: '25px 15px 15px 15px',
+  borderBottom: '1px solid #1a1a23',
+},
+
+button:{
+
+},
+completed:{
+
+},
+middleContantBody:{
+  padding: '10px 20px 0px 20px',
+},
+step2form:{
+
+},
+modelFooterSection: {
+    borderTop: '1px solid #1a1a23',
+    marginTop: '15px',
+    paddingTop: '10px',
+    paddingBottom: '15px',
+    '& .button.MuiButton-containedPrimary': {
+      textTransform: 'capitalize',
+    },
+},
+
+transparent_cancel_btn:{
+    backgroundColor:'transparent',
+      marginTop:'0px',
+      marginLeft:'15px',
+      border: '1px solid #56575d',
+      color: '#fff !important',
+      textTransform: 'capitalize',
+      '@media (max-width:768px)':{
+         marginLeft:'0px',
+         display:'block',
+         marginBottom:'15px',
+      },
+      
 },
 
 
