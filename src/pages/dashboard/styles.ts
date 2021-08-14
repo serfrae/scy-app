@@ -218,6 +218,9 @@ export default makeStyles((theme : any) => createStyles({
     },
     highlight:{},
     modalDialog:{
+      '&  .MuiDialog-paper':{
+        overflow:'inherit !important',
+      },
      '& .MuiDialog-paperWidthSm':{
       background:'#14151D',
       width:'480px',
@@ -1474,6 +1477,12 @@ export default makeStyles((theme : any) => createStyles({
     color:'#fff',
     padding:'16px 20px',
     border:'solid 1px #242636',
+      '& .MuiInput-underline:after':{
+      border: '#22222b !important',
+      },
+      '& .MuiInput-underline:hover:not(.Mui-disabled):before':{
+      border: '#22222b',
+      },
     '& .MuiFormControlLabel-root':{
       display: 'block',
       width:"100%",
@@ -1707,6 +1716,9 @@ export default makeStyles((theme : any) => createStyles({
     borderTop: '1px solid #242636',
     paddingTop: '20px',
     paddingBottom: '20px',
+    '& .MuiTouchRipple-root':{
+      display:'none',
+    },
   },
   rigthside_indexbox:{
     color:'#fff',
@@ -1860,6 +1872,7 @@ confirmationPage:{
   '& p':{
     color:'#fff',
     fontSize:'14px',
+    textAlign:'left',
   },
 },
 
@@ -1883,7 +1896,12 @@ radioListing:{
   },
 },
 instructions:{
-
+  '& .MuiInput-underline:after':{
+    border: 'none !important',
+},
+'& .MuiInput-underline:hover:not(.Mui-disabled):before':{
+  border: 'none',
+},
 },
 
 mainStepperclass:{
@@ -1900,6 +1918,7 @@ completed:{
 },
 middleContantBody:{
   padding: '10px 20px 0px 20px',
+  overflow:'auto',
 },
 step2form:{
 
@@ -1937,6 +1956,7 @@ headingThirdstep:{
   color:'#fff',
   marginBottom: '0px',
   marginTop: '30px',
+  textAlign: 'left',
 },
 
 

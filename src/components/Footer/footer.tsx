@@ -13,7 +13,7 @@ const Footer = ({ history } : RouteComponentProps) => {
         <Toolbar className={classes.footerinner}>
           
           <Typography className={classes.fttitle} variant="h6" noWrap>
-             © 2021 Muon.
+             © 2021 Synchrony.
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

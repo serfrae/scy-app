@@ -17,8 +17,7 @@ import {
   Connection,
   PublicKey,
   Transaction,
-  clusterApiUrl,
-  SystemProgram
+  clusterApiUrl
 } from "@solana/web3.js";
 
 // @ts-ignore
@@ -71,7 +70,7 @@ export default function WalletModal(props:any) {
   const [providerUrl ] = useState('https://www.sollet.io');
   const [providerUrlPhantom ] = useState('https://phantom.app/');
     //phantom wallet
-  const isPhantomInstalled = window.solana && window.solana.isPhantom
+  //const isPhantomInstalled = window.solana && window.solana.isPhantom
   const connection = useMemo(() => new Connection(network), [network]);
   const injectedWallet = useMemo(() => {
         try {
@@ -133,7 +132,7 @@ export default function WalletModal(props:any) {
               // console.log(selectedWallet.publicKet.toBase58())
                 object.setOpen(false)
                 object.setWalletConnected(true);
-				 props.setConnectedWalletType({provider:'salona',providerObject:blockhash})
+				 object.setConnectedWalletType({provider:'salona',providerObject:blockhash})
                 // window.opener.postMessage({
                 //   jsonrpc: '2.0',
                 //    method: 'connected',
@@ -152,7 +151,7 @@ export default function WalletModal(props:any) {
           }else{
             console.log('selectedwallet is undefined')
           }
-          }, [selectedWallet]);
+          }, [selectedWallet,object,connection]);
 
 
 

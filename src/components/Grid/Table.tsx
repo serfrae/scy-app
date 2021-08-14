@@ -121,6 +121,7 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
    
    return (
     <div className={classes.treeTable}>
+    <div className={classes.treeTableChild}>
       <Table className="tree-table" aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -167,7 +168,8 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
                </TableRow>
             </TableFooter>    
           }  
-          </Table>  
+          </Table> 
+          </div> 
           {tablePagination === true &&     
           <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

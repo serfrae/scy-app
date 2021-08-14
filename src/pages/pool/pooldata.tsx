@@ -1,40 +1,28 @@
-import React  from "react";
+import React,{useState}  from "react";
 import useStyles from "../dashboard/styles";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Graphs from "../../components/Grid/graphs";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
-
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
-
-
-import dashIcon from '../../assets/icon/dash-dash.svg';
-import vertcoinIcon from '../../assets/icon/vertcoin-right.svg';
-import {columnsVault,columnsReturn,rowsVault,rowsReturn,dataLine,optionsLine} from '../../models/connected';
-import editIcon from '../../assets/icon/edit-white.svg';
+import {dataLine,optionsLine} from '../../models/connected';
 import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
-
-
-
-export const Firststep= () => {
+import CloseIcon from '@material-ui/icons/Close';
+export const Firststep = ({setFirstStep}) => {
   const classes = useStyles();
   return (
     <div>
@@ -42,25 +30,29 @@ export const Firststep= () => {
        <FormControl component="fieldset">
           {/*<FormLabel component="legend">Gender</FormLabel>*/}
           <RadioGroup aria-label="gender" name="gender1">
-            <FormControlLabel value="Safe follow (recomanded)"  control={<Radio />} label="Safe follow (recomanded)" />
-            <FormControlLabel value="Auto follow "  control={<Radio />} label="Auto follow" />
-            <FormControlLabel value="custom follow"  control={<Radio />} label="Custom follow" />
+            <FormControlLabel value="1" onChange={()=>{setFirstStep(1)}} control={<Radio />} label="Safe follow (recomanded)" />
+            <FormControlLabel value="2" onChange={()=>{setFirstStep(2)}}  control={<Radio />} label="Auto follow" />
+            <FormControlLabel value="3" onChange={()=>{setFirstStep(3)}} control={<Radio />} label="Custom follow" />
           </RadioGroup>
         </FormControl>
       </div>
     </div>
     );
 }
-export const Secondstep= () => {
+export const Secondstep= ({
+	firstStep
+}) => {
   const classes = useStyles();
+  
   return (
     <div>
+	{ (firstStep === 1 || firstStep === 2 )? 	
       <form noValidate autoComplete="off">
         <TextField  label="Portfolio Name" placeholder="Portfolio name" fullWidth  InputLabelProps={{shrink: true, }} />
         <TextField  label="Amount to Invest" placeholder="Amount to invest" fullWidth  InputLabelProps={{shrink: true, }} />
         <TextField  label="Risk tolerance (a percentage of daiyly buy to protect yourself)" placeholder="Risk tolerance" fullWidth  InputLabelProps={{shrink: true, }} />
       </form>
-
+		:
       <div className={classes.portfolioMain}>
             <p className={classes.headingThirdstep}>This page is for portfolio makeup etc. </p>
             <form noValidate autoComplete="off">
@@ -93,28 +85,30 @@ export const Secondstep= () => {
 
             </form>
       </div>
-
+	}
     </div>
     );
 }
-export const Thirdstep= () => {
+export const Thirdstep= ({firstStep}) => {
   const classes = useStyles();
   return (
     <div>
       <div className={classes.confirmationPage}>
-        <Typography variant="h5">
-          Confirmation page W/ disclaimer again 
-        </Typography>
-
-        <p className={classes.confirmapageDetails}>
+		{ (firstStep === 1 || firstStep===2) ?
+			<Typography variant="h5">
+			  Confirmation page W/ disclaimer again 
+			</Typography>
+		:
+        <Typography>
           Dynamic stop loss
-
+          
           We want to have a stoploss that moves with take profit points
           E.g. TP(take profit) is at +20% from entry and SL(Stop Loss) is -20%
           When TP is hit SL is raised to the original buy-in location. 
           SL can be moved less proportionally e.g. SL is set for -10% from buy-in 
           instead of at buy in. 
-        </p>
+        </Typography>
+        }
       </div>
     </div>
     );
@@ -123,18 +117,6 @@ export const Thirdstep= () => {
 function getSteps() {
   return ['1', '2', '3'];
 }
-function getStepContent(step: number) {
-  switch (step) {
-    case 0:
-      return <Firststep/>;
-    case 1:
-      return <Secondstep/>;
-    case 2:
-      return <Thirdstep/>;
-    default:
-      return 'Unknown step';
-  }
-}
 
 export const PoolData = () => {
 
@@ -142,7 +124,7 @@ export const PoolData = () => {
   const [completed, setCompleted] = React.useState(new Set<number>());
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const steps = getSteps();
-
+  const[firstStep,setFirstStep]= useState(0);
   const totalSteps = () => {
     return getSteps().length;
   };
@@ -151,9 +133,6 @@ export const PoolData = () => {
     setActiveStep(step);
   };
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -170,20 +149,7 @@ export const PoolData = () => {
   const isLastStep = () => {
     return activeStep === totalSteps() - 1;
   };
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
+  
 
 
   const handleReset = () => {
@@ -203,26 +169,13 @@ export const PoolData = () => {
     setActiveStep(newActiveStep);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+ 
 
-  const handleComplete = () => {
-    const newCompleted = new Set(completed);
-    newCompleted.add(activeStep);
-    setCompleted(newCompleted);
-    if (completed.size !== totalSteps() - skippedSteps()) {
-      handleNext();
-    }
-  };
 
   function isStepComplete(step: number) {
     return completed.has(step);
   }
-  const [value, setValue] = React.useState('female');
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+ 
 
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
@@ -235,6 +188,10 @@ export const PoolData = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const setFirstSteps = (val)=>{
+	  setFirstStep(val);
+	  handleNext();
+  }
 
    const classes = useStyles();
     return (
@@ -281,7 +238,7 @@ export const PoolData = () => {
                 <div className={classes.btnsBuilders}>
                   <div className={classes.btnsBuildersSpace}>
                     <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={handleClickOpen}>Follow</Button>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} />Add to basket</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt=""/>Add to basket</Button>
                     <Button className="buil_btn" variant="contained" color="primary">More detail</Button>
                     <div className={classes.modelhead}>
                       <Dialog
@@ -293,6 +250,7 @@ export const PoolData = () => {
                       >
                         <div className={classes.modelhead}>
                         <DialogTitle id="responsive-dialog-title">Choose one</DialogTitle>
+                        <CloseIcon/>
                         </div>
 
                           <Stepper alternativeLabel nonLinear activeStep={activeStep} className={classes.mainStepperclass}>
@@ -310,7 +268,7 @@ export const PoolData = () => {
                                           completed={isStepComplete(index)}
                                           {...buttonProps}
                                         >
-                                          {label}
+                                        
                                         </StepButton>
                                       </Step>
                                     );
@@ -326,42 +284,31 @@ export const PoolData = () => {
                                     </div>
                                   ) : (
                                     <div>
-                                      <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                                      <Typography className={classes.instructions}>
+										  { activeStep === 0 &&
+											<Firststep setFirstStep={setFirstSteps}/>
+										  }
+										  { activeStep === 1 &&
+											<Secondstep firstStep={firstStep}/>
+										  }
+										  { activeStep === 2 &&
+											<Thirdstep firstStep={firstStep}/>
+										  }
+									  </Typography>
                                     </div>
                                   )}
                                 </div>
                     
                         <div className={classes.modelFooterSection}>
                         <DialogActions>
-                          <Button disabled={activeStep === 0} onClick={handleBack} className={classes.transparent_cancel_btn}>
-                                          cancel
-                                        </Button>
+                         
                           <Button variant="contained"
                                           color="primary"
                                           onClick={handleNext}
                                           className={classes.button}>
-                            confirm
+                            Submit
                           </Button>
-                           {isStepOptional(activeStep) && !completed.has(activeStep) && (
-                                          <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleSkip}
-                                            className={classes.button}
-                                          >
-                                            Skip
-                                          </Button>
-                                        )}
-                                         {activeStep !== steps.length &&
-                                          (completed.has(activeStep) ? (
-                                            <Typography variant="caption" className={classes.completed}>
-                                              Step {activeStep + 1} already completed
-                                            </Typography>
-                                          ) : (
-                                            <Button variant="contained" color="primary" onClick={handleComplete}>
-                                              {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
-                                            </Button>
-                                          ))}
+                           
                         </DialogActions>
                         </div>
 

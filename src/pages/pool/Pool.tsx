@@ -7,16 +7,10 @@ import Footer from '../../components/Footer/footer';
 import useStyles from "../dashboard/styles";
 import Typography from '@material-ui/core/Typography';
 import TableGrid from '../../components/Grid/Table';
-import SearchToolBar from '../../components/Grid/searchtoolbar';
-import comIcon from '../../assets/icon/Combined.svg';
-import chartIcon from '../../assets/icon/Chart.svg';
-import chartredIcon from '../../assets/icon/Vector.svg';
-import waxtIcon from '../../assets/icon/WAX.svg';
-import learnIcon from '../../assets/icon/illustration_learn.svg';
 import Container from '@material-ui/core/Container';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
@@ -35,7 +29,7 @@ export const numberFormat = (value) =>
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
    
-  const [state, setState] = React.useState({
+  const [state] = React.useState({
     checkedB: true,
     checkedC: false,
     checkedD: true,
@@ -85,7 +79,7 @@ const PoolList = (props: RouteComponentProps) => {
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
    const [filter,setFilter] = useState('Orca');
-   const columns:any = [
+   const columnData:any = [
       ['Name','name',{
          options:{
                order:true,
@@ -122,7 +116,7 @@ const PoolList = (props: RouteComponentProps) => {
       }],
       ['1y Fees / Liquidity','liquidity'],
    ];
-   const [tableColumn,setTableColumn] = useState(columns);
+   const [tableColumn,setTableColumn] = useState(columnData);
    useEffect(() => {
       if(filter === 'Radium'){
          fetch(radiumAPI+'pairs')
@@ -130,7 +124,7 @@ const PoolList = (props: RouteComponentProps) => {
          .then(data => {
             if(data !== "undefined"){
                setRowList(data);
-               setTableColumn(columns);
+               setTableColumn(columnData);
             }});
          }else if(filter === 'Orca'){
             
@@ -139,7 +133,6 @@ const PoolList = (props: RouteComponentProps) => {
             .then(data => {
 let priceArray : any = [];
 priceArray = data;
-console.log("data",priceArray)
 
 
             fetch(orcaAPI+'allPools')
@@ -152,23 +145,22 @@ console.log("data",priceArray)
                 let calCoinPrice : any = "";
                 let calCoinPrice_scd : any = "";
                 for(let obj in data){
-                   console.log("objectData",obj)
+                  
 currencyPrice = obj.split('/')
-console.log("varun",currencyPrice[0])
-console.log("varun",currencyPrice[1])
+
 for (let data in priceArray){
-   console.log("priceData",data)
-if(currencyPrice[0] == data){
-   // console.log("varun",priceArray["ETH"])
+   
+if(currencyPrice[0] === data){
+
 calCoinPrice = priceArray[currencyPrice[0]]
 calCoinPrice_scd = priceArray[currencyPrice[1]]
 }
 }
 
 
-if(calCoinPrice!=""){
+if(calCoinPrice !== ""){
 
-if(currencyPrice[0] == "USDT"|| currencyPrice[1] == "USDC"){
+if(currencyPrice[0] === "USDT"|| currencyPrice[1] === "USDC"){
    liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)).toLocaleString()
 }
 else{
@@ -394,8 +386,8 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checked8}
-                  onChange={handleChange}
+                  checked={ filter === "Radium" ? true : false}
+                  onChange={()=>{setFilter('Radium');}}
                   name="checkedC"
                   />
                   }
@@ -405,12 +397,12 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checked9}
-                  onChange={handleChange}
+				  checked={ filter === "Orca" ? true : false}
+                  onChange={()=>{setFilter('Orca');}}
                   name="Orca"
                   />
                   }
-                  label="Polkadot"
+                  label="Orca"
                />
                <FormControlLabel
                   control={
@@ -430,7 +422,7 @@ else{
              Advanced Performance
           </Typography>
            <Grid container>
-           <Grid item xs={6}>
+           <Grid item xs={12}>
                <FormControl className={classes.selectSidebar}>
                  <InputLabel>Up</InputLabel>
                  <Select
@@ -445,7 +437,7 @@ else{
                  </Select>
                </FormControl>
             </Grid>
-            <Grid item xs={6} className={classes.calcSidebar}>
+            <Grid item xs={12} className={classes.calcSidebar} style={{marginBottom:10,}}>
                <TextField  id="" label="" defaultValue="14" />
                <span>%</span>
             </Grid>

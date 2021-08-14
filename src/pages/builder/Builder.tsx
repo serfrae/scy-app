@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,25 +7,22 @@ import Footer from '../../components/Footer/footer';
 import useStyles from "../dashboard/styles";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {columnsVault,columnsReturn,rowsVault,rowsReturn,dataLine,optionsLine} from '../../models/connected';
+import {dataLine,optionsLine} from '../../models/connected';
 import Graphs from "../../components/Grid/graphs";
 import dashIcon from '../../assets/icon/dash-dash.svg';
 import TextField from '@material-ui/core/TextField'; 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import vertcoinIcon from '../../assets/icon/vertcoin-right.svg';
 import emptyBoxIcon from '../../assets/icon/emptyBox.svg';
 import editIcon from '../../assets/icon/edit-white.svg';
 import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
-
-
 import Container from '@material-ui/core/Container';
 const BuilderList = (props: RouteComponentProps) => {
    const classes = useStyles();
-      const [state, setState] = React.useState({
+      const [state] = React.useState({
       age: '',
       name: 'age',
       });
@@ -67,8 +64,8 @@ const BuilderList = (props: RouteComponentProps) => {
            <Grid item xs={6}>
              <Paper className={classes.paper}>
                 <div className={classes.btnsBuilders}>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={editIcon} />Edit</Button>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} />Compare in basket</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={editIcon} alt=""/>Edit</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt="Icon Compare"/>Compare in basket</Button>
                     <Button className="buil_btn" variant="contained" color="primary">More details</Button>
                 </div>
 
@@ -115,7 +112,7 @@ const BuilderList = (props: RouteComponentProps) => {
                    <Paper className={classes.paper}>
                       <div className={classes.btnsBuilders}>
                           <Button className="transparent_buil_btn" variant="contained" color="primary">Save</Button>
-                          <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} />Compare in basket</Button>
+                          <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt=""/>Compare in basket</Button>
                           <Button className="buil_btn" variant="contained" color="primary">Publish</Button>
                       </div>
                    </Paper>
@@ -236,7 +233,7 @@ const BuilderList = (props: RouteComponentProps) => {
          <div className={classes.secondBuilderbox}>
             <div className={classes.tabinnercontent}>
               <div className={classes.emptyBuilder}>
-                 <img src={emptyBoxIcon} />
+                 <img src={emptyBoxIcon} alt=""/>
                  <Typography variant="h3">
                     You don’t have any index yet.
                  </Typography>

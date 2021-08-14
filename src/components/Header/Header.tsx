@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import Chip from '@material-ui/core/Chip';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -179,19 +178,19 @@ const Header = ({ history } : RouteComponentProps) => {
     >
      <span className={classes.headerCart}>My basket</span>
       <MenuItem className={classes.cartMenu}>
-          <img src={WtcIcon}/> <span>Pool name</span> {isCartMenuOpen} 
+          <img src={WtcIcon}  alt=""/> <span>Pool name</span> {isCartMenuOpen} 
           <i><img src={trashIcon} alt=""/></i>
       </MenuItem>
      <MenuItem className={classes.cartMenu}>
-         <img src={BLTIcon}/> <span>Pool name</span> {isCartMenuOpen}
+         <img src={BLTIcon}  alt=""/> <span>Pool name</span> {isCartMenuOpen}
          <i><img src={trashIcon} alt=""/></i>
       </MenuItem>
       <MenuItem className={classes.cartMenu}>
-         <img src={cryIcon}/> <span>Pool name</span> {isCartMenuOpen}
+         <img src={cryIcon}  alt=""/> <span>Pool name</span> {isCartMenuOpen}
          <i><img src={trashIcon} alt=""/></i>
       </MenuItem>
       <MenuItem className={classes.cartMenu}>
-         <img src={cry2Icon}/> <span>Pool name</span> {isCartMenuOpen}
+         <img src={cry2Icon}  alt=""/> <span>Pool name</span> {isCartMenuOpen}
          <i><img src={trashIcon} alt=""/></i>
       </MenuItem>
       <MenuItem className={classes.cartlink}>
@@ -283,7 +282,7 @@ const Header = ({ history } : RouteComponentProps) => {
 
             <div className={classes.rigthIconsHeader}>
               <span className={classes.mianHeaderIcon} onClick={handleCartMenuOpen}>
-                <img src={cartCompareIcon}/> 
+                <img src={cartCompareIcon}  alt=""/> 
                 <span className={classes.countercartHeader}>4</span>
               </span>
               {cartItemRender}

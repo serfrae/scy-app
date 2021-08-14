@@ -1,6 +1,5 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/footer';
@@ -9,7 +8,6 @@ import useStyles from "./styles";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import EditIcon from '@material-ui/icons/Edit';
@@ -20,6 +18,22 @@ import CartGraphData from './comparedata';
 
 const CompareList = (props: RouteComponentProps) => {
    const classes = useStyles();
+   let oldColumn = comparecolumns;
+   const[columns,setColumns] = useState(comparecolumns);
+   const[editColumn,setEditColumns] = useState(false);
+   const setEditColumn = (status) =>{
+	   if(status === true){
+	   let newColumn = ['','blank'];
+		oldColumn.push(newColumn);
+		setColumns(oldColumn);
+	   }else{
+		   oldColumn.pop();
+		   
+	   }
+	   setEditColumns(status);
+	   setColumns(oldColumn);
+	   
+   }
    return (
       <div className={classes.root} > 
          <Header {...props}/>
@@ -39,14 +53,17 @@ const CompareList = (props: RouteComponentProps) => {
                </Typography>
               </Grid>
               <Grid  item xs={6} className={classes.compareBtnGroup}>
-              <div className={classes.btnEditTB}>
-               <Button variant="contained"><EditIcon/>Edit</Button>
+			 {editColumn === false ? 
+			   <div className={classes.btnEditTB}>
+				<Button variant="contained" onClick={()=>{setEditColumn(true)}}><EditIcon/>Edit</Button>
                </div>
+			   :
                <div className={classes.btnsBuilders}>
                           
-                          <Button className="transparent_buil_btn" variant="contained" color="primary">Cancel</Button>
+                          <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={()=>{setEditColumn(false)}}>Cancel</Button>
                           <Button className="buil_btn" variant="contained" color="primary">Save</Button>
                       </div>
+			 }
               </Grid>
             </Grid>
           </div>
@@ -55,7 +72,7 @@ const CompareList = (props: RouteComponentProps) => {
 
 
 		 <TableGrid 
-          columns ={comparecolumns}
+          columns ={columns}
           rows = {compoolsrows}
           tablePagination={false}
 		  

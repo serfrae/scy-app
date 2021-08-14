@@ -7,7 +7,7 @@ export default makeStyles((theme : any) => createStyles({
         borderRadius:'8px',
         marginBottom:'36px',
         marginTop:10,
-        overflow:'auto',
+        overflow:'inherit',
         width: '100%',
         '& .MuiTablePagination-toolbar': {
             paddingLeft:'0px',
@@ -114,12 +114,9 @@ export default makeStyles((theme : any) => createStyles({
         '& .open.cellrow':{
         display:'table-row',
         },
-
-        
-
-
-
-        
+        '& .tree-table':{
+            overflow:'auto',
+        },
     },
     searchFilter:{
         background: '#1A1A23',
@@ -325,5 +322,12 @@ export default makeStyles((theme : any) => createStyles({
 		transform: 'rotate(180deg);'
 	},
     
-
+   treeTableChild:{
+    overflow:'auto',
+    display:'block',
+    width:'100%',
+    '& .MuiTable-root':{
+     width:930,
+    },
+   },
 }));

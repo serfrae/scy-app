@@ -37,8 +37,7 @@ const SwapPool = (props: any) => {
   const[currencyConversion,setCurrencyConversion] = useState({}); 
 const [price,setPrice] = useState("0")
 const [balance , setBalance] = useState(0)
-const [CurrencyConversionSend,setCurrencyConversionSend]=useState(0);
-const [CurrencyConversionRecieve,setCurrencyConversionRecieve] = useState(0);
+
 
 
   const handleClickOpen = (money:any) => {
@@ -97,9 +96,7 @@ console.log("called",data)
     
    
    }
-  const setSendMoney = (money:any)=>{
-      setMoney(money);
-  }
+  
   const setRecCurrencyData = (currency:any)=>{
    setRecCurrency(currency);
    setRecMoney(0.00);
@@ -151,7 +148,7 @@ console.log("called",data)
             setCurrencyConversion(data);
          }
       });
-    }, []);
+    }, [sendCurrency,setRecCurrencyList]);
 
 
 const handleConversion =(money:any)=>{
