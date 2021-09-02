@@ -116,6 +116,14 @@ const PoolList = (props: RouteComponentProps) => {
       }],
       ['1y Fees / Liquidity','liquidity'],
    ];
+   const syncColumnData:any = [
+      ['Name','pool_name',{
+         options:{
+               order:true,
+              
+               
+      }}
+	  ]];
    const [tableColumn,setTableColumn] = useState(columnData);
    useEffect(() => {
       if(filter === 'Radium'){
@@ -125,6 +133,14 @@ const PoolList = (props: RouteComponentProps) => {
             if(data !== "undefined"){
                setRowList(data);
                setTableColumn(columnData);
+            }});
+         }else  if(filter === 'Synchrony'){
+         fetch('http://122.160.128.251/uploads/synchrony/poolapi.php')
+         .then(response => response.json())
+         .then(data => {
+            if(data !== "undefined"){
+               setRowList(data);
+               setTableColumn(syncColumnData);
             }});
          }else if(filter === 'Orca'){
             
@@ -372,16 +388,7 @@ else{
              Platform
           </Typography>
             <FormGroup row>
-               <FormControlLabel
-                  control={
-                  <Checkbox
-                  checked={state.checked7}
-                  onChange={handleChange}
-                  name="checkedB"
-                  />
-                  }
-                  label="All"
-               />
+              
 
                <FormControlLabel
                   control={
@@ -404,16 +411,17 @@ else{
                   }
                   label="Orca"
                />
-               <FormControlLabel
+			   <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checked10}
-                  onChange={handleChange}
-                  name="checkedE"
+				  checked={ filter === "Synchrony" ? true : false}
+                  onChange={()=>{setFilter('Synchrony');}}
+                  name="Synchrony"
                   />
                   }
-                  label="SolFarm"
+                  label="Synchrony"
                />
+               
             </FormGroup>
          </div>
 
@@ -473,7 +481,9 @@ else{
        </Paper>
        </Grid>
        <Grid item xs={9} className={classes.PoolsSec}>
+	  
        <div className={classes.searchPools}>
+	    <Typography component="h1">{filter} Pools</Typography>
         <Autocomplete
         freeSolo
         id="free-solo-2-demo"
