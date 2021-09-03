@@ -327,7 +327,7 @@ export default makeStyles((theme : any) => createStyles({
     display:'block',
     width:'100%',
     '& .MuiTable-root':{
-     width:930,
+     width:'100%',
     },
    },
 }));

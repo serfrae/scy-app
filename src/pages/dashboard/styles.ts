@@ -1505,6 +1505,10 @@ export default makeStyles((theme : any) => createStyles({
       fontSize:14,
       marginBottom:14,
       width:'100%',
+      color:'#fff',
+    },
+    '& .Mui-disabled':{
+      color:'#949494 !important',
     },
     '& .MuiGrid-grid-xs-6':{
       paddingRight:8,
@@ -1568,8 +1572,10 @@ export default makeStyles((theme : any) => createStyles({
     float:'right',
     position: 'relative',
     zIndex: 9,
-    marginTop:40,
-    marginBottom:20,
+    marginTop:25,
+    marginBottom:15,
+    marginRight:20,
+
     '& .MuiFormControl-fullWidth':{
         width:'100%',
         margin: 0,
@@ -1621,6 +1627,12 @@ export default makeStyles((theme : any) => createStyles({
     '& .MuiToolbar-gutters':{
      display:'block',
      width:'100%',
+    },
+    '& .synHead':{
+      fontSize:18,
+      color: '#fff',
+      marginTop:44,
+      marginBottom:21,
     },
     '@media (max-width:768px)':{
         marginTop:'0',

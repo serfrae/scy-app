@@ -14,6 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
+import {toppoolscolumns,toppoolsrows} from '../../models/toppools';
 import Select from '@material-ui/core/Select';
 import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -29,29 +30,7 @@ export const numberFormat = (value) =>
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
    
-  const [state] = React.useState({
-    checkedB: true,
-    checkedC: false,
-    checkedD: true,
-    checkedE: false,
-    checkedF: true,
-    checkedG: false,
-    checkedH: true,
-    checkedI: false,
-    checkedJ: true,
-
-    checked1: true,
-    checked2: false,
-    checked3: true,
-    checked4: false,
-    checked5: true,
-    checked6: false,
-
-    checked7: true,
-    checked8: false,
-    checked9: true,
-    checked10: false,
-  });
+  const [filterType,setFilterType] = useState('SynchronyIndex');
   const top100Films = [
   { title: 'Suggestions', },
   { title: 'Raydium', },
@@ -60,8 +39,8 @@ const PoolList = (props: RouteComponentProps) => {
   { title: 'xxxx',  },
   { title: 'xxxx',  },
    ];
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState2({ ...state2, [event.target.name]: event.target.checked });
+  const handleChange = (filterName) => {
+		setFilterType(filterName);
   };
   const [state2, setState2] = React.useState<{ age: string | number; name: string }>({
     age: '',
@@ -117,13 +96,35 @@ const PoolList = (props: RouteComponentProps) => {
       ['1y Fees / Liquidity','liquidity'],
    ];
    const syncColumnData:any = [
-      ['Name','pool_name',{
-         options:{
-               order:true,
-              
-               
-      }}
-	  ]];
+                  ['Name','pool_name'],
+                  ['Liquidity','liquidity'],
+                  ['Est. Fees','estfees',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }],
+                  ['24h','hours24',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }],
+                  ['7D','week',{
+                     options:{
+                           order:true,
+                           number:true,
+                           hideZero:true,
+                       } 
+                   
+                  }
+                  ],
+                 
+               ];
    const [tableColumn,setTableColumn] = useState(columnData);
    useEffect(() => {
       if(filter === 'Radium'){
@@ -253,53 +254,49 @@ else{
              Type
           </Typography>
             <FormGroup row>
-               <FormControlLabel
-                  control={
-                  <Checkbox
-                  checked={state.checkedB}
-                  onChange={handleChange}
-                  name="checkedB"
-                  />
-                  }
-                  label="All"
-               />
+               
 
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedC}
-                  onChange={handleChange}
+                  checked={filterType === "SynchronyIndex" ? true: false}
+                  onChange={(e)=>{handleChange('SynchronyIndex')}}
                   name="checkedC"
                   />
                   }
                   label="Synchrony Index"
                />
-
-               <FormControlLabel
+			   <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedD}
-                  onChange={handleChange}
-                  name="checkedD"
-                  />
-                  }
-                  label="Yield farm"
-               />
-               <FormControlLabel
-                  control={
-                  <Checkbox
-                  checked={state.checkedE}
-                  onChange={handleChange}
+                  checked={filterType === "LiquidityPool" ? true: false}
+                  onChange={(e)=>{handleChange('LiquidityPool')}}
                   name="checkedE"
                   />
                   }
                   label="Liquidity Pool"
                />
+
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedF}
-                  onChange={handleChange}
+                  checked={filterType === "Yieldfarm" ? true: false}
+                  onChange={(e)=>{handleChange('Yieldfarm')}}
+				  className={'disabled'}
+				  disabled={true}
+                  name="checkedD"
+                  />
+                  }
+                  label="Yield farm"
+               />
+               
+               <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={filterType === "Lending" ? true: false}
+                  onChange={(e)=>{handleChange('Lending')}}
+				  className={'disabled'}
+				  disabled={true}
                   name="checkedF"
                   />
                   }
@@ -309,8 +306,10 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedG}
-                  onChange={handleChange}
+                  checked={filterType === "Tokens" ? true: false}
+                  onChange={(e)=>{handleChange('Tokens')}}
+				  className={'disabled'}
+				  disabled={true}
                   name="checkedG"
                   />
                   }
@@ -320,8 +319,10 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedH}
-                  onChange={handleChange}
+                  checked={filterType === "UserGenerated" ? true: false}
+                  onChange={(e)=>{handleChange('UserGenerated')}}
+				  className={'disabled'}
+				  disabled={true}
                   name="checkedH"
                   />
                   }
@@ -331,8 +332,10 @@ else{
                 <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedI}
-                  onChange={handleChange}
+                  checked={filterType === "MyDrafts" ? true: false}
+                  onChange={(e)=>{handleChange('MyDrafts')}}
+				  className={'disabled'}
+				  disabled={true}
                   name="checkedI"
                   />
                   }
@@ -341,8 +344,10 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={state.checkedJ}
-                  onChange={handleChange}
+                  checked={filterType === "MyPublishedProducts" ? true: false}
+                  onChange={(e)=>{handleChange('MyPublishedProducts')}}
+				  className={'disabled'}
+				  disabled={true}
                   name="checkedJ"
                   />
                   }
@@ -393,7 +398,19 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
+				  checked={ filter === "Orca" ? true : false}
+                  onChange={()=>{setFilter('Orca');}}
+				  disabled={filterType === "LiquidityPool" ? false : true}
+                  name="Orca"
+                  />
+                  }
+                  label="Orca"
+               />
+               <FormControlLabel
+                  control={
+                  <Checkbox
                   checked={ filter === "Radium" ? true : false}
+				   disabled={filterType === "LiquidityPool" ? false : true}
                   onChange={()=>{setFilter('Radium');}}
                   name="checkedC"
                   />
@@ -401,20 +418,11 @@ else{
                   label="Raydium"
                />
 
-               <FormControlLabel
-                  control={
-                  <Checkbox
-				  checked={ filter === "Orca" ? true : false}
-                  onChange={()=>{setFilter('Orca');}}
-                  name="Orca"
-                  />
-                  }
-                  label="Orca"
-               />
 			   <FormControlLabel
                   control={
                   <Checkbox
 				  checked={ filter === "Synchrony" ? true : false}
+				   disabled={filterType === "LiquidityPool" ? false : true}
                   onChange={()=>{setFilter('Synchrony');}}
                   name="Synchrony"
                   />
@@ -481,9 +489,9 @@ else{
        </Paper>
        </Grid>
        <Grid item xs={9} className={classes.PoolsSec}>
-	  
+		{filterType === "SynchronyIndex" ? <Typography component="h1" className="synHead">Synchrony Index</Typography> : <Typography component="h1">{filter} Pools</Typography> }
        <div className={classes.searchPools}>
-	    <Typography component="h1">{filter} Pools</Typography>
+	    
         <Autocomplete
         freeSolo
         id="free-solo-2-demo"
@@ -554,12 +562,20 @@ else{
          {/* Pool Table data*/}
 
         {/*<SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>*/}
-         <TableGrid 
-          columns ={tableColumn}
-          rows = {rows}
-          accordion={true}
-         />
-
+		{filterType === "SynchronyIndex" ?
+		
+          <TableGrid 
+          columns ={toppoolscolumns}
+          rows = {toppoolsrows}
+          tablePagination={false}
+		 />
+		:
+			<TableGrid 
+			  columns ={tableColumn}
+			  rows = {rows}
+			  accordion={true}
+			 />
+		}
         
         </Grid>
          <WalletModal 

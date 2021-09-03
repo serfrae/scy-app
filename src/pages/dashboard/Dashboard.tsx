@@ -35,7 +35,7 @@ const Dashboard = (props: RouteComponentProps) => {
                 <div className={classes.dashboardwelcome}>
                 <div className={classes.dashboardcontetn}>
                   <Typography className={classes.title} variant="h1">
-                      Welcome to Muon App
+                      Welcome to Synchrony App
                    </Typography>
                    <Typography className={classes.typograph} >
                    A brief introduction, Unlock all the features by connecting your wallet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. 
@@ -92,7 +92,7 @@ const Dashboard = (props: RouteComponentProps) => {
             <Paper className={classes.commingsec}>
                   <div className={classes.commingcontent}>
                     <Typography className={classes.commingtitle}>
-                    Learn with Muon, Coming soon
+                    Learn with Synchrony, Coming soon
                    </Typography>
                    <Typography className={classes.typograph} >
                          Amet minim mollit non deserunt est sit aliqua dolor do amet sint. 
@@ -111,7 +111,7 @@ const Dashboard = (props: RouteComponentProps) => {
           tablePagination={false}
           moreLinkText = {"View All Pools"}
           link="/pools"
-		  accordion={true}
+		  
          />
          <WalletModal 
             open ={openModal}
