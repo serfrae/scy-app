@@ -14,7 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import {toppoolscolumns,toppoolsrows} from '../../models/toppools';
+import {toppoolscolumns,toppoolsrows,walletcolumns,walletrows} from '../../models/toppools';
 import Select from '@material-ui/core/Select';
 import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -280,14 +280,12 @@ else{
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={filterType === "Yieldfarm" ? true: false}
-                  onChange={(e)=>{handleChange('Yieldfarm')}}
-				  className={'disabled'}
-				  disabled={true}
+                  checked={filterType === "Wallet" ? true: false}
+                  onChange={(e)=>{handleChange('Wallet')}}
                   name="checkedD"
                   />
                   }
-                  label="Yield farm"
+                  label="Wallet"
                />
                
                <FormControlLabel
@@ -489,7 +487,7 @@ else{
        </Paper>
        </Grid>
        <Grid item xs={9} className={classes.PoolsSec}>
-		{filterType === "SynchronyIndex" ? <Typography component="h1" className="synHead">Synchrony Index</Typography> : <Typography component="h1">{filter} Pools</Typography> }
+		{filterType === "Wallet" ?  <Typography component="h1" className="synHead">Wallet Profile</Typography> : <>{filterType === "SynchronyIndex" ? <Typography component="h1" className="synHead">Synchrony Index</Typography> : <Typography component="h1" className="synHead">{filter} Pools</Typography> }</> }
        <div className={classes.searchPools}>
 	    
         <Autocomplete
@@ -562,7 +560,19 @@ else{
          {/* Pool Table data*/}
 
         {/*<SearchToolBar title={'Pools'} filter={filter} setFilter={setFilter}/>*/}
-		{filterType === "SynchronyIndex" ?
+		{filterType === "Wallet" ?
+		
+		 <TableGrid 
+          columns ={walletcolumns}
+          rows = {walletrows}
+          tablePagination={false}
+		  accordion={true}
+		 />
+		
+		
+		:
+		
+		<>{filterType === "SynchronyIndex" ?
 		
           <TableGrid 
           columns ={toppoolscolumns}
@@ -575,8 +585,8 @@ else{
 			  rows = {rows}
 			  accordion={true}
 			 />
+		}</>
 		}
-        
         </Grid>
          <WalletModal 
             open ={openModal}

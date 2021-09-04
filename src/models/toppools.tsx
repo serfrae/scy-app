@@ -108,3 +108,49 @@ import {PoolData} from '../pages/pool/pooldata';
 	  "accordionData":<PoolData />
    }
  ];
+export const walletcolumns:any = [
+    ['Nick name','name',{
+       options:{
+             order:true,
+         } 
+     
+    }],
+    ['Wallet Address','wallet_address'],
+    ['Net Worth','networth'],
+    ['Number of Assets','assets',{
+       options:{
+             order:true,
+             number:true,
+         } 
+     
+    }
+    ],
+    ['Performance','performance',{
+       options:{
+             order:true,
+             number:true,
+         } 
+     
+    }],
+   
+	
+ ];
+ 
+  export const walletrows:any = [
+    {
+          "name":'Wallet Name',
+          "wallet_address":'Address',
+          "assets":
+            <>
+               <img src={ethereumIcon} className="coinIcons" alt=""/>
+               <img src={zcashIcon} className="coinIcons" alt=""/>
+               <img src={dashDashIcon} className="coinIcons" alt=""/>
+               <span className="moreValue">+3</span>
+            </>,
+          "networth":12.27,
+          "performance":2.65,
+           "accordionData":<PoolData />
+		 
+    }
+	];
+	
