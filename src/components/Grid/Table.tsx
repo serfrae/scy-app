@@ -56,24 +56,17 @@ export function Row({row={},columns=[],index=0,accordion = false}){
 		setCurrentIndex(crntIndex)
 	}
     return(
-      <><TableRow key={index}>
-          {
-          cols.map((col,index) => (
-				
-              <TableCell className={`cellrow ${col.cellClassName}${(col.number !== 'undefined' && col.number === true) ? ((row[col.fieldName] <= 1)?' lessvalue ':' greatervalue') : '' }`} key={`cellrow.(${col.field}${index})`} >
+      <><TableRow key={index}>{
+          cols.map((col,index) => (<TableCell className={`cellrow ${col.cellClassName}${(col.number !== 'undefined' && col.number === true) ? ((row[col.fieldName] <= 1)?' lessvalue ':' greatervalue') : '' }`} key={`cellrow.(${col.field}${index})`} >
                 {(col.type !== 'undefined' && col.type === 'link') ?   <Link to={row['link']}> {renderTableCell({value: row[col.fieldName]})}</Link> :  <>{(col.hideZero !== 'undefined' && col.hideZero === true && (row[col.fieldName] === '0' || row[col.fieldName] === 0)) ? '': renderTableCell({value: row[col.fieldName]})}</> }
               </TableCell>
 				
           ))
           }
-		 {accordion === true &&
-			<TableCell className={`cellrow ${index}`} key={`cellrow.(${index}`} >
+		 {accordion === true &&<TableCell className={`cellrow ${index}`} key={`cellrow.(${index}`} >
 					<ExpandMoreIcon className={currentIndex === index ? classes.expandOpenIcon : classes.expandIcon} onClick={()=>{setCurrentIndexToggle(index)}}/>
 			</TableCell>  
-		 }
-      </TableRow> 
-	  { accordion === true &&
-		 <TableRow className={currentIndex === index ? `accordioncls open cellrow ${index}` : `accordioncls cellrow ${index}`} key={`collrow.(${index}`}>
+		 }</TableRow>{ accordion === true &&<TableRow className={currentIndex === index ? `accordioncls open cellrow ${index}` : `accordioncls cellrow ${index}`} key={`collrow.(${index}`}>
 				<TableCell className={`cellrow ${index}`} key={`colllcell.(${index}`} colSpan={(cols.length + 1)}>
 					{ (row && row.hasOwnProperty('accordionData')) ? row['accordionData'] : ''}
 				</TableCell>
@@ -122,26 +115,11 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
    return (
     <div className={classes.treeTable}>
     <div className={classes.treeTableChild}>
-      <Table className="tree-table" aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            {cols.map((col:any, index:any)=>(
-                <TableCell className={col.headerClassName} key={index}>
+      <Table className="tree-table" aria-label="collapsible table"><TableHead><TableRow>{cols.map((col:any, index:any)=>(<TableCell className={col.headerClassName} key={index}>
                   { col.field} {(col.order !== 'undefined' && col.order === true) && <span onClick={()=>{changeOrderData(col.fieldName,order)}}><ArrowDropUpIcon className={order === "asc" ?  "disabled ":'' }/> <ArrowDropDownIcon className={order === "desc" ?  "disabled down":'down' }/> </span>}
-                </TableCell>
-                ))
-            }
-			{accordion === true && 
-				<TableCell className={'headerClassName'} key={(cols.length+1)}>
-				
-				</TableCell>
-			
-			}
-          </TableRow>
-        </TableHead>
-          { rows.length > 0 ?  <TableBody>
-           
-          {stableSort(rows, getComparator(order, orderBy))
+                </TableCell>))}
+			{accordion === true &&<TableCell className={'headerClassName'} key={(cols.length+1)}></TableCell>}</TableRow></TableHead>
+          { rows.length > 0 ?<TableBody>{stableSort(rows, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
               return( <Row
@@ -150,23 +128,13 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
                   index ={index}
                   key={index}
 				  accordion ={accordion}
-              />)
-          })}   
-            
-          </TableBody>  
-           :
-           <TableBody><TableRow> <TableCell className={classes.nodata} key={'0'} colSpan={columns.length} align="center">
+              />)})}</TableBody>  
+           :<TableBody><TableRow><TableCell className={classes.nodata} key={'0'} colSpan={columns.length} align="center">
              <div className="nodata"><img src={noDataIcon} alt=""/><p>No Data</p> </div> 
-            </TableCell></TableRow></TableBody>
-          }
-          {(moreLinkText &&  rows.length > 0)!== "" &&
-           <TableFooter>
-              <TableRow>
-              <TableCell className={classes.viewAll} key={'0'} colSpan={columns.length} align="center">
+            </TableCell></TableRow></TableBody>}
+          {(moreLinkText &&  rows.length > 0)!== "" &&<TableFooter><TableRow><TableCell className={classes.viewAll} key={'0'} colSpan={columns.length} align="center">
                    <div className="view-all"  onClick={handleRequest}><p>{moreLinkText} <img src={navIcon} alt=""/></p> </div> 
-               </TableCell>
-               </TableRow>
-            </TableFooter>    
+               </TableCell></TableRow></TableFooter>    
           }  
           </Table> 
           </div> 

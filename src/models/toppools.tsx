@@ -153,4 +153,31 @@ export const walletcolumns:any = [
 		 
     }
 	];
-	
+   export const dataColumn:any = [
+      ['Sol Pulse','id'],
+      ['Name','name'],
+      ['Category','category',{
+         options:{
+               order:true,
+              
+           } 
+       
+      }
+      ],
+      ['Market Cap','market_cap',{
+         options:{
+               order:true,
+              
+           } 
+       
+      }],
+      ['Performance 24H','price_24_h',{
+        options:{
+           number:true
+        }
+     }
+     ],
+  
+     ['Twitter Followers','twitter_followers']
+     
+   ];

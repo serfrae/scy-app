@@ -409,8 +409,10 @@ export default makeStyles((theme : any) => createStyles({
       display:'inline-block',
       padding: '0',
       border:'solid 1px #56575d',
-      marginTop:'18px',
+      marginTop:'0',
       borderRadius:'4px',
+      marginLeft:'30px',
+	  cursor:'pointer',
       '@media (max-width:768px)':{
          border:'0px none',
       },
@@ -423,9 +425,20 @@ export default makeStyles((theme : any) => createStyles({
         marginRight:'-1px',
         '@media (max-width:768px)':{
            border:'solid 1px #56575d',
+           fontSize:12,
+           padding:10,
         },
+		'&:hover':{
+			background:'#eee',
+			color:'#000',
+			cursor:'pointer'
+		},
+		
       },
-     
+     '& .MuiListItem-root.active':{
+			background:'#eee',
+			color:'#000'
+		}
     },
     portfolioList:{
      '& .MuiList-root':{
@@ -1678,11 +1691,27 @@ export default makeStyles((theme : any) => createStyles({
     },
   },
   firstBuilderbox:{
-    marginBottom:'25px',
+    marginBottom:'0',
     '& .MuiPaper-root':{
       background:'transparent',
       boxShadow:'none',
       borderRadius:'0px',
+    },
+    '& .MuiGrid-grid-xs-3 .MuiPaper-rounded':{
+      background:'#1a1a23',
+      marginTop:'-1px',
+      padding:'25px 20px',
+    },
+    '& .tabTableInner':{
+        color:'rgba(255, 255, 255, 0.9);',
+        border:'1px solid #303138',
+        padding:0,
+        background:'#14151d',
+        borderRadius:0,
+        paddingBottom: 0,
+    },
+    '& .MuiGrid-container':{
+      padding:'18px 16px',
     },
     '& .MuiGrid-grid-xs-6': {
            '@media (max-width:768px)':{
@@ -1690,6 +1719,10 @@ export default makeStyles((theme : any) => createStyles({
             flexBasis:"100%",
          },
       },
+  '& .MuiLink-root':{
+    marginTop:'10px',
+    display:'block',
+  },
   },
   btnsBuilders:{
     textAlign:'right',
@@ -1751,6 +1784,7 @@ export default makeStyles((theme : any) => createStyles({
  divederTwobox: {
     width:'50%',
     display:'inline-block',
+    color:'rgba(255, 255, 255, 0.42);',
     '& h5': {
       color:'rgba(255, 255, 255, 0.42);',
       textTransform:'uppercase',
@@ -1971,6 +2005,78 @@ headingThirdstep:{
   textAlign: 'left',
 },
 
-
-
+tableDetailToggle:{
+  background:'#14151d',
+  paddingLeft:'20px',
+  '& .MuiPaper-elevation1':{
+    padding:'24px 20px',
+    background:'#1a1a23   !important',
+    display:'inline-block',
+    width:'100%',
+  },
+},
+valuetogglehead:{
+  color: 'rgba(255, 255, 255, 0.9);',
+  fontSize:20,
+  marginTop: 0,
+  fontWeight: 500,
+  marginBottom:0,
+  textTransform:'inherit',
+  float:'left',
+},
+submitAudit:{
+  fontSize:10,
+  paddingTop:10,
+  marginTop:10,
+  borderTop:'solid 1px rgb(237 237 237 / 12%)',
+},
+stateKey:{
+      display:'inline-block',
+      width:'100%',
+      background:'#14151d',
+      marginTop:'30px',
+      padding:'0 24px',
+  '& h2':{
+    color:'rgba(255, 255, 255, 0.9)',
+    fontSize:20,
+    marginTop: 30,
+    fontWeight:500,
+    marginBottom: 0,
+    textTransform:'inherit',
+  },
+  '& p':{
+    margintop:0,
+  },
+},
+btnGroupWithserach:{
+  marginTop:30,
+  marginBottom:0,
+  display:'inline-block',
+  width:'100%',
+'& .MuiButtonBase-root':{
+  textTransform:'inherit',
+  background:'transparent',
+  border:'solid 1px #fff',
+  marginRight:20,
+  '@media (max-width:768px)':{
+    marginTop:15,
+},
+},
+},
+btnGroupLeft:{
+  float:'left',
+  '& .activeBtn':{
+    background:'#4A4DE6 !important',
+    border:'#4A4DE6 !important',
+  },
+},
+btnSearch:{
+  float:'right',
+  width:'50%',
+  '@media (max-width:768px)':{
+      width:'100%',
+      marginTop:'23px',
+      marginBottom:20,
+},
+},
 }));

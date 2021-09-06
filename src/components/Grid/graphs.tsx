@@ -7,6 +7,20 @@ import { Bar, Doughnut, Line} from 'react-chartjs-2';
 import noDataIcon from '../../assets/icon/nodata.svg';
 const Graphs = (props: any) => {
     const classes = useStyles();
+	const graphData = {"chart24":'24h',"chart":'7d',"chart30":'30d'};
+	const setChartDatakey = (key)=>{
+		let dataKey = "";
+		if(key === "24h"){
+			dataKey = "chart24";
+		}else if(key === "7d"){
+			dataKey = "chart";
+		}else if(key === "30d"){
+			dataKey = "chart30";
+		}
+		console.log(key,'key');
+		console.log(dataKey,'dataKey');
+		props.setChartData(dataKey);
+	}
     return (
       <>
         {
@@ -84,7 +98,7 @@ const Graphs = (props: any) => {
                     <Bar
                         data={props.data}
                         options={props.options}
-                        type={""}
+                        type={"bar"}
                         />  <div className={classes.clearfix}></div> </>
                 }
                 </>
@@ -99,7 +113,7 @@ const Graphs = (props: any) => {
                     <> <div className={classes.pullRight}>
                         <List className={classes.graphBtn}>
                         {props.data.customLables.map((key:any,index:any)=>(
-                            <ListItem key={index}>
+                            <ListItem className={ graphData[props.chartData] === key ? 'active':''} key={index} onClick= {()=> { setChartDatakey(key) }}>
                                 {key}
                             </ListItem>
                             ))}

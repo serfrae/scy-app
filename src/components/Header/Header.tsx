@@ -132,19 +132,10 @@ const Header = ({ history } : RouteComponentProps) => {
       </MenuItem>
       <MenuItem>
       <NavLink className="navbar-item" to="/pools">
-           <TrendingUpIcon/> Pools
+           <TrendingUpIcon/> Browser
           </NavLink>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-       <NavLink className="navbar-item" to="/farming">
-          <StoreMallDirectoryOutlinedIcon/> Farming
-          </NavLink>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-      <NavLink className="navbar-item" to="/liquidity">
-      <BubbleChartOutlinedIcon/> Liquidity
-      </NavLink>
-      </MenuItem>
+      
       <MenuItem onClick={handleProfileMenuOpen}>
       <NavLink className="navbar-item" to="/swap">
        <SwapVertIcon/> Swap
@@ -224,19 +215,10 @@ const Header = ({ history } : RouteComponentProps) => {
             </ListItem>
             <ListItem className={classes.menuactive}>
                <NavLink className="navbar-item" to="/pools">
-                   <TrendingUpIcon /> Pools
+                   <TrendingUpIcon /> Browser
                </NavLink>
             </ListItem>
-            <ListItem className={classes.menuactive}>
-               <NavLink className="navbar-item" to="/farming">
-                   <StoreMallDirectoryOutlinedIcon   /> Farming
-               </NavLink>
-            </ListItem>
-            <ListItem className={classes.menuactive}>
-               <NavLink className="navbar-item" to="/liquidity">
-                   <BubbleChartOutlinedIcon /> Liquidity
-               </NavLink>
-            </ListItem>
+           
             <ListItem className={classes.menuactive}>
                <NavLink className="navbar-item"  to="/swap">
                    <SwapVertIcon /> Swap

@@ -7,7 +7,7 @@ export default makeStyles((theme : any) => createStyles({
         borderRadius:'8px',
         marginBottom:'36px',
         marginTop:10,
-        overflow:'inherit',
+        overflow:'auto',
         width: '100%',
         '& .MuiTablePagination-toolbar': {
             paddingLeft:'0px',
@@ -24,7 +24,7 @@ export default makeStyles((theme : any) => createStyles({
         },
         "& table":{
             '@media (max-width:768px)':{
-                width:'770px',
+                width:'995px',
             },
         },
         '& td':{
@@ -56,6 +56,7 @@ export default makeStyles((theme : any) => createStyles({
             fontWeight:'400',
             padding:'8px 20px',
             height:'56px',
+            paddingRight:0,
         },
         '& tbody td .coinIcons':{
             display:'inline-block',
@@ -114,8 +115,8 @@ export default makeStyles((theme : any) => createStyles({
         '& .open.cellrow':{
         display:'table-row',
         },
-        '& .tree-table':{
-            overflow:'auto',
+        '& .MuiTableRow-root':{
+            cursor:'pointer',
         },
     },
     searchFilter:{
@@ -322,12 +323,12 @@ export default makeStyles((theme : any) => createStyles({
 		transform: 'rotate(180deg);'
 	},
     
-   treeTableChild:{
-    overflow:'auto',
-    display:'block',
-    width:'100%',
-    '& .MuiTable-root':{
-     width:'100%',
-    },
-   },
+    treeTableChild:{
+        overflow:'auto',
+        display:'block',
+        width:'100%',
+        '& .MuiTable-root':{
+         width:'100%',
+        },
+       },
 }));
