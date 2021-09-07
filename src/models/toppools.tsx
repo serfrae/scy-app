@@ -181,3 +181,23 @@ export const walletcolumns:any = [
      ['Twitter Followers','twitter_followers']
      
    ];
+   
+  export const allColumnPool:any = [
+      ['Name','name',{
+         options:{
+               order:true,
+              
+               
+      },  
+       
+      }],
+      ['Liquidity','liquidity'],
+      ['Fees (24hr)','fee_24h',{
+         options:{
+               order:true,
+               number:true,
+               hideZero:true,
+           } 
+       
+      }],
+   ];
