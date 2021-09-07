@@ -324,7 +324,7 @@ else{
                   name="checkedH"
                   />
                   }
-                  label="User Generated"
+                  label="community products"
                />
 
                 <FormControlLabel

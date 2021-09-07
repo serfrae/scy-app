@@ -152,7 +152,7 @@ const BuilderList = (props: RouteComponentProps) => {
 
                   <Grid item xs={6}>
                      <FormControl className={classes.formControl}>
-                     <InputLabel shrink htmlFor="age-native-label-placeholder">Time Periodc </InputLabel>
+                     <InputLabel shrink htmlFor="age-native-label-placeholder">Evaluation Timeframe </InputLabel>
                      <NativeSelect
                      value={state.age} onChange={handleChange} placeholder="Choose Time Period" fullWidth
                      inputProps={{
@@ -178,13 +178,18 @@ const BuilderList = (props: RouteComponentProps) => {
                      <TextField  label="&nbsp;" placeholder="20"  fullWidth  InputLabelProps={{shrink: true, }} />
                       <span>%</span>
                   </Grid>
+                  
+                  <Grid className={classes.managePercentage} item xs={3}>
+                     <TextField  label="Range" placeholder="6"  fullWidth  InputLabelProps={{shrink: true, }} />
+                     <span>%</span>
+                  </Grid>
 
                    <Grid item xs={6}>
 
                    <FormControl className={classes.formControl}>
-                     <InputLabel shrink htmlFor="age-native-label-placeholder">Rebalance Period </InputLabel>
+                     <InputLabel shrink htmlFor="age-native-label-placeholder">Rebalance Interval </InputLabel>
                      <NativeSelect
-                     value={state.age} onChange={handleChange} placeholder="Choose Rebalance Period" fullWidth
+                     value={state.age} onChange={handleChange} placeholder="Choose Rebalance Interval" fullWidth
                      inputProps={{
                      name: 'age',
                      id: 'age-native-label-placeholder',
