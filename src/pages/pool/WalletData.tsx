@@ -140,7 +140,7 @@ function getSteps() {
   return ['1', '2', '3'];
 }
 
-export const PoolData = () => {
+export const WalletData = () => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set<number>());
@@ -273,9 +273,9 @@ export const PoolData = () => {
               <Paper className={classes.paper}>
                 <div className={classes.btnsBuilders}>
                   <div className={classes.btnsBuildersSpace}>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={handleClickLiquidity}>Add Liquidity</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={handleClickOpen}>Follow</Button>
                     <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt=""/>Add to basket</Button>
-                    <Button className="buil_btn" variant="contained" color="primary">More detail</Button>
+                    <Button className="buil_btn" variant="contained" color="primary" >More detail</Button>
                     
                     <div className={classes.modelhead}>
                        <Dialog
@@ -289,23 +289,21 @@ export const PoolData = () => {
 
                         <div className={classes.modelhead}>
                           <DialogTitle id="alert-dialog-title">Add Liquidity</DialogTitle>
-                              <div className={classes.icongroup}>
-                                <IconButton ><InfoOutlinedIcon/></IconButton>
-                                <IconButton className={classes.buttonrightside}><SettingsOutlinedIcon/></IconButton>
-                                 <CloseIcon onClick={handleClose2}/>
-                              </div>
+                          <CloseIcon onClick={handleClose2}/>
                         </div> 
 
 
+                        
+
                         <div className={classes.mainswapboxed}>
-                        {/*<div className={classes.swaphead}>
+                        <div className={classes.swaphead}>
                            <Typography>Add Liquidity</Typography>
                               <div className={classes.icongroup}>
                                 <IconButton ><InfoOutlinedIcon/></IconButton>
                                 <IconButton ><SettingsOutlinedIcon/></IconButton>
                               </div>
-                        </div>*/}
-                        <div className={classes.swapboxed} style={{border: '0px none',background: 'transparent',padding: '0px 10px', marginBottom:'10px',}}>
+                        </div>
+                        <div className={classes.swapboxed}>
                           <div className={classes.fromGroup}>
                             <InputLabel> Input  </InputLabel>
                             <div className={classes.frominside}>
@@ -342,7 +340,7 @@ export const PoolData = () => {
 
 
                             <div className={classes.btnGroup}>
-                              <Button onClick={handleClickOpen}>Connect Wallet</Button> 
+                              <Button onClick={handleClickOpen}>Enter an amount to swap</Button> 
                             </div>
 
                         </div>

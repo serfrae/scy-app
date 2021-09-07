@@ -27,9 +27,10 @@ export default makeStyles((theme : any) => createStyles({
           float:'right',
       },
       '& .MuiBreadcrumbs-ol' :{
-        color:'#4A4DE6',
-        fontSize:'12px',
+          color:'#4A4DE6',
+          fontSize:'12px',
       },
+      
       '& .MuiBreadcrumbs-separator':{
           margin:'0 7px',
           color:'rgba(255, 255, 255, 0.32)',
@@ -42,11 +43,20 @@ export default makeStyles((theme : any) => createStyles({
         color:'rgba(0, 0, 0, 0.54)',
         width:'auto',
         float:'left',
-        padding:'8px 0',
+        padding:'0px 0',
+      },
+      '& li.MuiBreadcrumbs-li p.active' :{
+        borderBottom: '1px solid #fff',
+        fontSize: '14px',
+        color: 'rgba(255, 255, 255, 0.9)',
+      },
+      '& li.MuiBreadcrumbs-li p' :{
+        padding:'20px 15px',
+        borderBottom: '1px solid #1a1a23',
       },
     },
     breadcrumbsinner:{
-      padding: '10px 0',
+      padding: '0px 0',
       maxWidth: '1230px',
       margin:'0 auto',
       display:'table',
@@ -133,7 +143,7 @@ export default makeStyles((theme : any) => createStyles({
       borderRadius:'8px 0px 0px 8px',
       padding:'20px',
       paddingTop:'10px',
-      height:'100%',
+      // height:'100%',
     },
     boxgridMid:{
       background:'#1A1A23',
@@ -875,13 +885,27 @@ export default makeStyles((theme : any) => createStyles({
     width:'32px',
     height:'32px',
     background:'rgba(230, 231, 233, 0.04)',
-    marginLeft:'12px',
+    marginLeft:'0px',
+    marginRight: '12px',
     marginTop:'0',
     '& .MuiSvgIcon-root':{
       width:'15px',
       color:'#fff',
     },
+    '& button.MuiSvgIcon-root:last-child':{
+      marginRight: '25px',
+    },
   },
+  '& .MuiButtonBase-root svg':{
+        right: 'inherit',
+        marginTop: '0px',
+  },
+  '& svg' :{
+    marginTop: '5px',
+  },
+ },
+ buttonrightside: {
+  marginRight:'25px !important',
  },
  swapboxed:{
   background:'#1A1A23',
@@ -1757,6 +1781,22 @@ export default makeStyles((theme : any) => createStyles({
          textAlign:'left',
       },
   },
+
+  mainswapboxed :{
+    paddingRight:'15px',
+    paddingLeft:'15px',
+    paddingBottom: '30px',
+    '& IconButton':{
+      borderRadius: '4px',
+    },
+    '& .swapboxed' : {
+      border: '0px none',
+      display: 'inline-block',
+      padding: '0 10px',
+      background: 'transparent',
+    },
+  }, 
+
   btnsBuildersSpace: {
     borderTop: '1px solid #242636',
     paddingTop: '20px',
@@ -1764,6 +1804,7 @@ export default makeStyles((theme : any) => createStyles({
     '& .MuiTouchRipple-root':{
       display:'none',
     },
+    
   },
   rigthside_indexbox:{
     color:'#fff',
@@ -1781,6 +1822,14 @@ export default makeStyles((theme : any) => createStyles({
       marginTop:'10px',
     }
   },
+
+  informationTooltip:{
+    '& button' :{
+      padding: '0px',
+      minWidth: '30px',
+    },
+  },
+
  divederTwobox: {
     width:'50%',
     display:'inline-block',
@@ -2079,4 +2128,9 @@ btnSearch:{
       marginBottom:20,
 },
 },
+
+LiquidityMainPopup:{
+
+},
+
 }));

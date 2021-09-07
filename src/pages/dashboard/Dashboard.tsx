@@ -25,12 +25,15 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import {walletStatus} from '../../components/Header/walletStatus';
 import {PoolDatas} from '../pool/pooldatas';
 import {PoolName} from '../pool/PoolName';
+import Discovery from '../connected/Discovery';
+import { Breadcrumbs,Link,Select,MenuItem } from "@material-ui/core";
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import {TwitterFollowers} from '../pool/TwitterFollowers';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 const Dashboard = (props: RouteComponentProps) => {
    const classes = useStyles();
    const [openModal,setOpenModal] = useState(false);
-   
+   const[currentTab,setCurrentTab] = useState('MyInvestment');
    const[walletConnect,setWalletConnected] = useState(walletStatus);
    console.log("walletStatus",walletConnect);
    const[searchFilter,setSearchFilter] = useState('');
@@ -63,7 +66,16 @@ const Dashboard = (props: RouteComponentProps) => {
    return (  
       <div className={classes.root} > {/* ok */}
          <Header {...props}/>
-                 <Container fixed>
+		  <div className={classes.breadcrumbsBar}>
+         <div className={classes.breadcrumbsinner}>
+         <Breadcrumbs separator={''} className={"tabingSwitch"}   aria-label="breadcrumb">
+            <Typography color="textPrimary" className={currentTab === "MyInvestment" ? 'active' :''} onClick={()=>{setCurrentTab('MyInvestment')}}>My Investment</Typography>
+            <Typography color="textPrimary" className={currentTab === "Discovery" ? 'active' :''} onClick={()=>{setCurrentTab('Discovery')}}>Discovery</Typography>
+         </Breadcrumbs>
+         </div>
+         </div>
+	{currentTab === "MyInvestment" ?	 
+      <Container fixed>
       {walletConnect === false &&  <Grid className={classes.welcomeContent}>
          <Grid item xs={12}>
             <Paper className={classes.paper}>
@@ -187,6 +199,9 @@ const Dashboard = (props: RouteComponentProps) => {
 			
          />
          </Container>
+		 :
+			<Discovery {...props}/> 
+		}
          <Footer {...props}/>
       </div>
   );

@@ -22,7 +22,7 @@ const ValueLabel = (props) => {
 };
 
 
-const CartGraphData = () => {
+const CartGraphData = ({data=[]}) => {
   const classes = useStyles();
   const format = () => tick => tick;
   const[chartData] = useState(confidence);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Header from '../../components/Header/Header';
@@ -14,13 +14,43 @@ import EditIcon from '@material-ui/icons/Edit';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {comparecolumns,compoolsrows} from '../../models/compare';
 import CartGraphData from './comparedata';
-
-
+import {dataColumn} from '../../models/toppools';
+import {API_URL} from '../../api/api';
+import {TwitterFollowers} from '../pool/TwitterFollowers';
+import {PoolDatas} from '../pool/pooldatas';
+import {PoolName} from '../pool/PoolName';
 const CompareList = (props: RouteComponentProps) => {
    const classes = useStyles();
    let oldColumn = comparecolumns;
    const[columns,setColumns] = useState(comparecolumns);
    const[editColumn,setEditColumns] = useState(false);
+   const[searchFilter,setSearchFilter] = useState('');
+   const[searchText,setSearchText] = useState('');
+   const[dataRows,setDataRows] = useState([]);
+   const[dataSingleRows,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
+   useEffect(() => {
+		 let dataFiler:any = [];
+		 if(searchFilter !== ''){ dataFiler.push("category="+searchFilter) }
+		 if(searchText !== ''){ dataFiler.push("search="+searchText) }
+		 let url = API_URL+'synchronyapi.php';
+		 if(dataFiler.length > 0){ url += "?"+(dataFiler.join("&"));}
+         fetch(url)
+         .then(response =>response.json())
+         .then(data => { for(var i=0;i<data.length;i++){data[i].twitter_followers = <TwitterFollowers followers={data[i].twitter_followers}/>; data[i].title =data[i].name; data[i].accordionData = <PoolDatas row={data[i]}/>; data[i].name = <PoolName name={data[i].name} image={data[i].logo}/>; } setDataRows(data);})
+		 .catch(err =>{});
+		/**************Solana********************/
+		 fetch(API_URL+'solanaapi.php')
+         .then(response =>response.json())
+         .then(data => { setDataSingleRows(data);})
+		 .catch(err =>{});
+
+    },[searchFilter,searchText]);
+		
+	const filterSearch = (value,item)=>{
+		setSearchText(item);
+		console.log(item);
+		
+	}
    const setEditColumn = (status) =>{
 	   if(status === true){
 	   let newColumn = ['','blank'];
@@ -71,12 +101,12 @@ const CompareList = (props: RouteComponentProps) => {
 
 
 
-		 <TableGrid 
-          columns ={columns}
-          rows = {compoolsrows}
+		<TableGrid 
+          columns ={dataColumn}
+          rows = {dataRows}
           tablePagination={false}
-		  
-		  />
+		    accordion={true}
+         />
 
         <div className={classes.graphPrice}>
          <div className={classes.tabinnercontent}>
@@ -99,7 +129,7 @@ const CompareList = (props: RouteComponentProps) => {
               </Grid>
             </Grid>
           </div>
-			<CartGraphData />
+			<CartGraphData data={dataRows}/>
          <div className={classes.chartFt}>
              <span><i style={{background:'#DD425A'}}></i> Pool name</span>
              <span><i style={{background:'#FF7B43'}}></i> Pool name...</span>

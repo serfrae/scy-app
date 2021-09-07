@@ -9,6 +9,7 @@ import litecoinIcon from '../assets/icon/litecoin.svg';
 import ethereumClassicIcon from '../assets/icon/ethereum-classic.svg';
 import bitcoinIcon from '../assets/icon/bitcoin.svg';
 import {PoolData} from '../pages/pool/pooldata';
+import {WalletData} from '../pages/pool/WalletData';
  export const toppoolscolumns:any = [
     ['Name','name',{
        options:{
@@ -149,7 +150,7 @@ export const walletcolumns:any = [
             </>,
           "networth":12.27,
           "performance":2.65,
-           "accordionData":<PoolData />
+           "accordionData":<WalletData />
 		 
     }
 	];
@@ -180,4 +181,24 @@ export const walletcolumns:any = [
   
      ['Twitter Followers','twitter_followers']
      
+   ];
+   
+  export const allColumnPool:any = [
+      ['Name','name',{
+         options:{
+               order:true,
+              
+               
+      },  
+       
+      }],
+      ['Liquidity','liquidity'],
+      ['Fees (24hr)','fee_24h',{
+         options:{
+               order:true,
+               number:true,
+               hideZero:true,
+           } 
+       
+      }],
    ];

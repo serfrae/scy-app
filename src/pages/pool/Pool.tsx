@@ -14,7 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import {toppoolscolumns,toppoolsrows,walletcolumns,walletrows} from '../../models/toppools';
+import {toppoolscolumns,toppoolsrows,walletcolumns,walletrows,allColumnPool} from '../../models/toppools';
 import Select from '@material-ui/core/Select';
 import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -29,7 +29,7 @@ export const numberFormat = (value) =>
   }).format(value);
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
-   
+   const[apiStep,setApiStep] = useState(0);
   const [filterType,setFilterType] = useState('SynchronyIndex');
   const top100Films = [
   { title: 'Suggestions', },
@@ -143,13 +143,79 @@ const PoolList = (props: RouteComponentProps) => {
                setRowList(data);
                setTableColumn(syncColumnData);
             }});
+         }else  if(filter === 'All'){
+			 let commonRowsData:any = [];
+			 fetch('http://122.160.128.251/uploads/synchrony/poolapi.php')
+			 .then(response => response.json())
+			 .then(data => {
+				if(data !== "undefined"){
+				   for(var i = 0; i < data.length; i++ ){
+					   commonRowsData.push({name:data[i].pool_name,liquidity:data[i].liquidity,fee_24h:data[i].estfees,accordionData: <PoolData/>});
+				   }
+				   //
+				}
+				fetch(radiumAPI+'pairs')
+				 .then(response => response.json())
+				 .then(data => {
+					if(data !== "undefined"){
+					    for(var i = 0; i < data.length; i++ ){
+						commonRowsData.push({name:data[i].name,liquidity:data[i].liquidity,fee_24h:data[i].fee_24h,accordionData: <PoolData/>});
+						}
+					}
+					 fetch(radiumAPI+`coin/price`)
+            .then(response => response.json())
+            .then(data => {
+				let priceArray : any = [];
+				priceArray = data;
+
+
+            fetch(orcaAPI+'allPools')
+            .then(response => response.json())
+            .then(data => {
+               if(data !== "undefined"){
+                let dataArray:any = [];
+                let liquidValue:any = "";
+                let currencyPrice : any  = "";
+                let calCoinPrice : any = "";
+                let calCoinPrice_scd : any = "";
+                for(let obj in data){
+        
+					currencyPrice = obj.split('/')
+
+					for (let data in priceArray){
+					   
+					if(currencyPrice[0] === data){
+
+					calCoinPrice = priceArray[currencyPrice[0]]
+					calCoinPrice_scd = priceArray[currencyPrice[1]]
+					}
+					}
+
+					if(calCoinPrice !== ""){
+					if(currencyPrice[0] === "USDT"|| currencyPrice[1] === "USDC"){
+					   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)).toLocaleString()
+					}
+					else{
+					   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd).toLocaleString()
+
+					}
+					if(liquidValue === "NaN") { liquidValue= 0; }
+                   commonRowsData.push({name:data[obj].poolId,liquidity:liquidValue,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
+                     }     }
+					setRowList(commonRowsData);
+					setTableColumn(allColumnPool);
+             }});
+            })	
+				});
+			 });
+			 
          }else if(filter === 'Orca'){
             
             fetch(radiumAPI+`coin/price`)
             .then(response => response.json())
             .then(data => {
-let priceArray : any = [];
-priceArray = data;
+				let priceArray : any = [];
+				priceArray = data;
 
 
             fetch(orcaAPI+'allPools')
@@ -163,34 +229,34 @@ priceArray = data;
                 let calCoinPrice_scd : any = "";
                 for(let obj in data){
                   
-currencyPrice = obj.split('/')
+					currencyPrice = obj.split('/')
 
-for (let data in priceArray){
-   
-if(currencyPrice[0] === data){
+					for (let data in priceArray){
+					   
+					if(currencyPrice[0] === data){
 
-calCoinPrice = priceArray[currencyPrice[0]]
-calCoinPrice_scd = priceArray[currencyPrice[1]]
-}
-}
-
-
-if(calCoinPrice !== ""){
-
-if(currencyPrice[0] === "USDT"|| currencyPrice[1] === "USDC"){
-   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)).toLocaleString()
-}
-else{
-   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd).toLocaleString()
-
-}
+					calCoinPrice = priceArray[currencyPrice[0]]
+					calCoinPrice_scd = priceArray[currencyPrice[1]]
+					}
+					}
 
 
+					if(calCoinPrice !== ""){
+
+					if(currencyPrice[0] === "USDT"|| currencyPrice[1] === "USDC"){
+					   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)).toLocaleString()
+					}
+					else{
+					   liquidValue = Math.round((calCoinPrice*(data[obj].tokenAAmount/1000000))+(data[obj].tokenBAmount/1000000)*calCoinPrice_scd).toLocaleString()
+
+					}
 
 
 
 
 
+				
+					if(liquidValue === "NaN") { liquidValue= 0; }
                    dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week) * 100).toFixed(1)} %`,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
                      }     }
                 const columnsOrca:any = [
@@ -223,6 +289,7 @@ else{
                   ],
                  
                ];
+			   console.log("dataArray",dataArray);
                 setRowList(dataArray);
                 setTableColumn(columnsOrca);
              }});
@@ -391,7 +458,17 @@ else{
              Platform
           </Typography>
             <FormGroup row>
-              
+               <FormControlLabel
+                  control={
+                  <Checkbox
+				  checked={ filter === "All" ? true : false}
+                  onChange={()=>{setFilter('All');}}
+				  disabled={filterType === "LiquidityPool" ? false : true}
+                  name="All"
+                  />
+                  }
+                  label="All"
+               />
 
                <FormControlLabel
                   control={
