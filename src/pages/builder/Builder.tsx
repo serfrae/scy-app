@@ -152,7 +152,7 @@ const BuilderList = (props: RouteComponentProps) => {
 
                   <Grid item xs={6}>
                      <FormControl className={classes.formControl}>
-                     <InputLabel shrink htmlFor="age-native-label-placeholder">Time Periodc </InputLabel>
+                     <InputLabel shrink htmlFor="age-native-label-placeholder">Evalutaion Timeframe </InputLabel>
                      <NativeSelect
                      value={state.age} onChange={handleChange} placeholder="Choose Time Period" fullWidth
                      inputProps={{
@@ -182,7 +182,7 @@ const BuilderList = (props: RouteComponentProps) => {
                    <Grid item xs={6}>
 
                    <FormControl className={classes.formControl}>
-                     <InputLabel shrink htmlFor="age-native-label-placeholder">Rebalance Period </InputLabel>
+                     <InputLabel shrink htmlFor="age-native-label-placeholder">Rebalance Interval </InputLabel>
                      <NativeSelect
                      value={state.age} onChange={handleChange} placeholder="Choose Rebalance Period" fullWidth
                      inputProps={{
@@ -197,9 +197,29 @@ const BuilderList = (props: RouteComponentProps) => {
                      </NativeSelect>
                      </FormControl>
                   </Grid>
+
+                  <Grid item xs={6}>
+                     <TextField  label="Whitelisted Tokens" placeholder="Whitelisted Tokens" fullWidth  InputLabelProps={{shrink: true, }} />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                     <TextField  label="Deviation Threshold" placeholder="Deviation Threshold" fullWidth  InputLabelProps={{shrink: true, }} />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                     <TextField  label="Min/Max Weighting" placeholder="Min/Max Weighting" fullWidth  InputLabelProps={{shrink: true, }} />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                     <TextField  label="Evaluation Range" placeholder="Evaluation Range" fullWidth  InputLabelProps={{shrink: true, }} />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                     <TextField  label="Maximum Number of Assets" placeholder="Index name" fullWidth  InputLabelProps={{shrink: true, }} />
+                  </Grid>
                  
                   
-                  <Grid item xs={6}> 
+                 {/* <Grid item xs={6}> 
                   <FormControl className={classes.formControl}>
                      <InputLabel shrink htmlFor="age-native-label-placeholder">Set Maximum fees </InputLabel>
                      <NativeSelect
@@ -216,7 +236,7 @@ const BuilderList = (props: RouteComponentProps) => {
                      </NativeSelect>
                      </FormControl>
 
-                  </Grid>
+                  </Grid>*/}
                   
                   <Grid item xs={12}> 
                   <InputLabel>Summary</InputLabel>

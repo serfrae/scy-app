@@ -27,6 +27,7 @@ const CompareList = (props: RouteComponentProps) => {
    const[searchFilter,setSearchFilter] = useState('');
    const[searchText,setSearchText] = useState('');
    const[dataRows,setDataRows] = useState([]);
+   const[chartData,setChartData] = useState([]);
    const[dataSingleRows,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
    useEffect(() => {
 		 let dataFiler:any = [];
@@ -36,7 +37,9 @@ const CompareList = (props: RouteComponentProps) => {
 		 if(dataFiler.length > 0){ url += "?"+(dataFiler.join("&"));}
          fetch(url)
          .then(response =>response.json())
-         .then(data => { for(var i=0;i<data.length;i++){data[i].twitter_followers = <TwitterFollowers followers={data[i].twitter_followers}/>; data[i].title =data[i].name; data[i].accordionData = <PoolDatas row={data[i]}/>; data[i].name = <PoolName name={data[i].name} image={data[i].logo}/>; } setDataRows(data);})
+         .then(data => { for(var i=0;i<data.result.length;i++){data.result[i].twitter_followers = <TwitterFollowers followers={data.result[i].twitter_followers}/>; data.result[i].title =data.result[i].name; data.result[i].accordionData = <PoolDatas row={data.result[i]}/>; data.result[i].name = <PoolName name={data.result[i].name} image={data.result[i].logo}/>; } setDataRows(data.result);
+			setChartData(data.chart);
+		 })
 		 .catch(err =>{});
 		/**************Solana********************/
 		 fetch(API_URL+'solanaapi.php')
@@ -129,12 +132,13 @@ const CompareList = (props: RouteComponentProps) => {
               </Grid>
             </Grid>
           </div>
-			<CartGraphData data={dataRows}/>
+		   <CartGraphData data={chartData}/>
+		  
          <div className={classes.chartFt}>
-             <span><i style={{background:'#DD425A'}}></i> Pool name</span>
-             <span><i style={{background:'#FF7B43'}}></i> Pool name...</span>
-             <span><i style={{background:'#4CAF50'}}></i> Pool name</span>
-             <span><i style={{background:'#4A4DE6'}}></i> Pool name...</span>
+             <span><i style={{background:'#DD425A'}}></i> Solana</span>
+             <span><i style={{background:'#FF7B43'}}></i> Raydium</span>
+             <span><i style={{background:'#4CAF50'}}></i> Bonfida</span>
+             <span><i style={{background:'#4A4DE6'}}></i>  Akash Network</span>
           </div>
           </div>
           </div>

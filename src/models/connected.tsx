@@ -359,10 +359,9 @@ export const optionsLine = {
  
   scales: {
     y: {
-      max: 1.5,
-      min: 0,
+      
       ticks: {
-          stepSize:.50
+          stepSize:.05
       }
     }
     

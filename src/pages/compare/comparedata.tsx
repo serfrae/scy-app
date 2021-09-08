@@ -22,7 +22,7 @@ const ValueLabel = (props) => {
 };
 
 
-const CartGraphData = ({data=[]}) => {
+const CartGraphData = ({data}) => {
   const classes = useStyles();
   const format = () => tick => tick;
   const[chartData] = useState(confidence);
@@ -38,19 +38,24 @@ const CartGraphData = ({data=[]}) => {
           />
 
           <LineSeries
-            name="TV news"
-            valueField="tvNews"
-            argumentField="year"
+            name="Solana"
+            valueField="1"
+            argumentField="0a"
           />
           <LineSeries
             name="Church"
-            valueField="church"
-            argumentField="year"
+            valueField="3"
+            argumentField="0a"
           />
           <LineSeries
             name="Military"
-            valueField="military"
-            argumentField="year"
+            valueField="5"
+            argumentField="0a"
+          />
+		  <LineSeries
+            name="Military"
+            valueField="7"
+            argumentField="0a"
           />
           
           <Animation />

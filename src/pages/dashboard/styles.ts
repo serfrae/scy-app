@@ -53,6 +53,7 @@ export default makeStyles((theme : any) => createStyles({
       '& li.MuiBreadcrumbs-li p' :{
         padding:'20px 15px',
         borderBottom: '1px solid #1a1a23',
+        fontSize: '14px',
       },
     },
     breadcrumbsinner:{
