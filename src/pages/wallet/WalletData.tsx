@@ -29,7 +29,7 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import digibyteIcon from '../../assets/icon/digibyte.svg';
 import swipeimgIcon from '../../assets/icon/swipeP.svg';
 import WhiteInformationIcon from '../../assets/icon/whiteInformationIcon.png';
-import {columns,rows,graphdata,bardata,baroptions} from '../../models/connected';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
 import Zoom from '@material-ui/core/Zoom';
@@ -245,19 +245,7 @@ export const WalletData = () => {
                 </div>
               </Paper>
             </Grid>
-            <Grid item xs={1}></Grid>
-               <Grid item xs={5} className={classes.portfolio} style={{marginTop:0, paddingTop:0 , paddingLeft:80, paddingBottom:0,}}>
-                 <Paper className={classes.boxgrid} style={{border: 'none', }}>
-                 <Typography className={classes.prottitle} variant="h3" style={{ marginTop:0,}}>
-                       Portfolio Allocation
-                  </Typography>
-                  <Graphs
-                   type="Doughnut"
-                   data={graphdata}
-                  />
-                  </Paper>
-            </Grid>
-            <Grid item xs={12} className={classes.piaChat}>
+            <Grid item xs={6}>
               <Paper className={classes.paper}>
                 <div className={classes.rigthside_indexbox}>
                   <h5>Asset Summary</h5>
@@ -441,7 +429,6 @@ export const WalletData = () => {
               </Paper>
              </Grid>
           </Grid>
-
         </div>
 
 

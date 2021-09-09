@@ -149,6 +149,6 @@ export default function TableGrid({columns=[],rows=[],tablePagination =true, mor
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
           }
-    </div>
+    </div>  
   );
 }

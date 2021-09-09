@@ -29,7 +29,7 @@ const Discovery = (props: RouteComponentProps) => {
          <Container fixed>
          <Grid className={classes.secondBox} container>
             <Grid item xs={8} className={classes.graphtitle}>
-            <Typography className={classes.subtitle}>
+            <Typography className={classes.subtitle} style={{ marginTop:0, }}>
                    Discovery
                </Typography>
             <Paper className={classes.boxgrid}>
@@ -82,6 +82,18 @@ const Discovery = (props: RouteComponentProps) => {
 		</Grid>
 		</Grid>
         
+        <Grid  container className="TableIndex">
+          <Typography className={classes.subtitle} style={{ marginTop:0, }}>
+                  Synchrony Index
+               </Typography>
+            <Grid item xs={12} >
+           <TableGrid 
+          columns ={toppoolscolumns}
+          rows = {toppoolsrows}
+          tablePagination={false}
+		 />
+        </Grid>
+        </Grid>
          </Container>
          
       </div>

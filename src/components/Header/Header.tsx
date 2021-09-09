@@ -218,6 +218,11 @@ const Header = ({ history } : RouteComponentProps) => {
                    <TrendingUpIcon /> Browser
                </NavLink>
             </ListItem>
+            <ListItem className={classes.menuactive}>
+               <NavLink className="navbar-item" to="/wallet">
+                   <TrendingUpIcon /> Wallet 
+               </NavLink>
+            </ListItem>
            
             <ListItem className={classes.menuactive}>
                <NavLink className="navbar-item"  to="/swap">

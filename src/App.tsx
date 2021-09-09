@@ -13,6 +13,8 @@ import Liquidity from "./pages/liquidity/Liquidity";
 import ErrorMessage from "./pages/error/error";
 import BuilderList  from "./pages/builder/Builder";
 import CompareList  from "./pages/compare/Compare";
+import Wallet  from "./pages/wallet/Wallet";
+
 function App() {
   return (
     <HashRouter>
@@ -33,7 +35,9 @@ function App() {
         <PublicRoute path="/swap" component={SwapPool} />
         <PublicRoute path="/farming" component={Farming} />
         <PublicRoute path="/error" component={ErrorMessage} />
-         <PublicRoute path="/interaction-details" component={InteractionDetails} />
+        <PublicRoute path="/interaction-details" component={InteractionDetails} />
+        <PublicRoute path="/wallet" component={Wallet} />
+
       
       </Switch>
     </HashRouter>

@@ -29,7 +29,7 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import digibyteIcon from '../../assets/icon/digibyte.svg';
 import swipeimgIcon from '../../assets/icon/swipeP.svg';
 import WhiteInformationIcon from '../../assets/icon/whiteInformationIcon.png';
-import {columns,rows,graphdata,bardata,baroptions} from '../../models/connected';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
 import Zoom from '@material-ui/core/Zoom';
@@ -140,7 +140,7 @@ function getSteps() {
   return ['1', '2', '3'];
 }
 
-export const WalletData = () => {
+export const PoolData = () => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set<number>());
@@ -245,19 +245,7 @@ export const WalletData = () => {
                 </div>
               </Paper>
             </Grid>
-            <Grid item xs={1}></Grid>
-               <Grid item xs={5} className={classes.portfolio} style={{marginTop:0, paddingTop:0 , paddingLeft:80, paddingBottom:0,}}>
-                 <Paper className={classes.boxgrid} style={{border: 'none', }}>
-                 <Typography className={classes.prottitle} variant="h3" style={{ marginTop:0,}}>
-                       Portfolio Allocation
-                  </Typography>
-                  <Graphs
-                   type="Doughnut"
-                   data={graphdata}
-                  />
-                  </Paper>
-            </Grid>
-            <Grid item xs={12} className={classes.piaChat}>
+            <Grid item xs={6}>
               <Paper className={classes.paper}>
                 <div className={classes.rigthside_indexbox}>
                   <h5>Asset Summary</h5>
@@ -285,9 +273,9 @@ export const WalletData = () => {
               <Paper className={classes.paper}>
                 <div className={classes.btnsBuilders}>
                   <div className={classes.btnsBuildersSpace}>
-                    <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={handleClickOpen}>Follow</Button>
+                    <Button className="transparent_buil_btn" variant="contained" color="primary" onClick={handleClickLiquidity}>Add Liquidity</Button>
                     <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt=""/>Add to basket</Button>
-                    <Button className="buil_btn" variant="contained" color="primary" >More detail</Button>
+                    <Button className="buil_btn" variant="contained" color="primary">More detail</Button>
                     
                     <div className={classes.modelhead}>
                        <Dialog
@@ -301,21 +289,23 @@ export const WalletData = () => {
 
                         <div className={classes.modelhead}>
                           <DialogTitle id="alert-dialog-title">Add Liquidity</DialogTitle>
-                          <CloseIcon onClick={handleClose2}/>
+                              <div className={classes.icongroup}>
+                                <IconButton ><InfoOutlinedIcon/></IconButton>
+                                <IconButton className={classes.buttonrightside}><SettingsOutlinedIcon/></IconButton>
+                                 <CloseIcon onClick={handleClose2}/>
+                              </div>
                         </div> 
 
 
-                        
-
                         <div className={classes.mainswapboxed}>
-                        <div className={classes.swaphead}>
+                        {/*<div className={classes.swaphead}>
                            <Typography>Add Liquidity</Typography>
                               <div className={classes.icongroup}>
                                 <IconButton ><InfoOutlinedIcon/></IconButton>
                                 <IconButton ><SettingsOutlinedIcon/></IconButton>
                               </div>
-                        </div>
-                        <div className={classes.swapboxed}>
+                        </div>*/}
+                        <div className={classes.swapboxed} style={{border: '0px none',background: 'transparent',padding: '0px 10px', marginBottom:'10px',}}>
                           <div className={classes.fromGroup}>
                             <InputLabel> Input  </InputLabel>
                             <div className={classes.frominside}>
@@ -352,7 +342,7 @@ export const WalletData = () => {
 
 
                             <div className={classes.btnGroup}>
-                              <Button onClick={handleClickOpen}>Enter an amount to swap</Button> 
+                              <Button onClick={handleClickOpen}>Connect Wallet</Button> 
                             </div>
 
                         </div>
@@ -441,7 +431,6 @@ export const WalletData = () => {
               </Paper>
              </Grid>
           </Grid>
-
         </div>
 
 

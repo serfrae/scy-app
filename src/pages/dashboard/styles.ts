@@ -2133,5 +2133,9 @@ btnSearch:{
 LiquidityMainPopup:{
 
 },
-
+piaChat:{
+  background:'#16161b',
+  border:'solid 1px #363640',
+  bordeaRdius:6,
+},
 }));

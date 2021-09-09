@@ -324,9 +324,12 @@ export default makeStyles((theme : any) => createStyles({
 	},
     
     treeTableChild:{
-        overflow:'auto',
         display:'block',
         width:'100%',
+        overflow:'hidden',
+        '@media (max-width:768px)':{
+            overflow:'auto',
+        },
         '& .MuiTable-root':{
          width:'100%',
         },
