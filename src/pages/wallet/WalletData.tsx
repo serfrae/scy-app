@@ -44,7 +44,7 @@ export const Firststep = ({setFirstStep}) => {
           {/*<FormLabel component="legend">Gender</FormLabel>*/}
           <RadioGroup aria-label="gender" name="gender1">
             <div className={classes.informationTooltip}>
-             <FormControlLabel value="1" onChange={()=>{setFirstStep(1)}} control={<Radio />} label="Safe follow (recomanded)" />
+             <FormControlLabel value="1" onChange={()=>{setFirstStep(1)}} control={<Radio />} label="Safe follow (recommended)" />
              <Tooltip TransitionComponent={Zoom} title="This follows wallet movements as long as the wallet movement is in the top 30 SOL tokens by marketcap"><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} /> </Button></Tooltip>
             </div> 
             <div className={classes.informationTooltip}>
