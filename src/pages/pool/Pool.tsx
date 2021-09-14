@@ -421,7 +421,7 @@ const PoolList = (props: RouteComponentProps) => {
                   name="checkedH"
                   />
                   }
-                  label="User Generated"
+                  label="Community Index"
                />
                <FormControlLabel
                   control={

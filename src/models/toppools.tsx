@@ -39,7 +39,7 @@ import {WalletData} from '../pages/pool/WalletData';
  ];
  export const toppoolsrows:any = [
     {
-          "name":'Fund name',
+          "name":'Synchrony Fund',
           "volume":'$5,425,960.21',
           "topassets":
             <>
@@ -75,7 +75,7 @@ import {WalletData} from '../pages/pool/WalletData';
 	    "accordionData":<PoolData />
    },
    {
-      "name":'Fund name',
+      "name":'Synchrony Fund',
       "volume":'$5,425,960.21',
       "topassets":
             <>

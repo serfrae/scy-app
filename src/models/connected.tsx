@@ -25,7 +25,7 @@ export const columns:any = [
  ];
  export const rows:any = [
     {
-          "name":'Fund name',
+          "name":'Solana Ecosystem Index (SEI)',
           "alltime":'12.27%',
           "thismonth":'12.27%',
           "lastdays":<img src={chartIcon} alt=""/>,
@@ -41,7 +41,7 @@ export const columns:any = [
        "shareprice":'$5,425,960.21',
  },
  {
-  "name":'Fund name',
+  "name":'Synchrony Fund',
   "alltime":'12.27%',
   "thismonth":'12.27%',
   "lastdays":<img src={chartIcon} alt=""/>,
@@ -85,7 +85,7 @@ export const columns:any = [
  ];
  export const toprows:any = [
     {
-          "name":'Fund name',
+          "name":'Synchrony Fund',
           "volume":'$5,425,960.21',
           "topassets":<img src={avtarIcon} alt=""/>,
           "alltime":'12.27',
@@ -101,7 +101,7 @@ export const columns:any = [
        "lastdays":<img src={chartredIcon} alt=""/>
  },
  {
-    "name":'Fund name',
+    "name":'Synchrony Fund',
     "volume":'$5,425,960.21',
     "topassets":<img src={avtarIcon} alt=""/>,
     "alltime":'10.01',
@@ -118,8 +118,8 @@ export const columns:any = [
 }
  ];
  export const graphdata:any = {
-    labels: ['A longng fund name...', 'Fund name', 'Fund name',
-             'A longng fund name...'],
+    labels: ['A longng Synchrony Fund...', 'Synchrony Fund', 'Synchrony Fund',
+             'A longng Synchrony Fund...'],
     precision:2,
     datasets: [
       {
@@ -142,8 +142,8 @@ export const columns:any = [
     ]
   }
   export const graphFunddata:any = {
-    labels: ['A longng fund name...', 'Fund name', 'Fund name',
-             'A longng fund name...','A longng fund name...','A longng fund name...','A longng fund name...'],
+    labels: ['A longng Synchrony Fund...', 'Synchrony Fund', 'Synchrony Fund',
+             'A longng Synchrony Fund...','A longng Synchrony Fund...','A longng Synchrony Fund...','A longng Synchrony Fund...'],
     precision:2,
     datasets: [
       {

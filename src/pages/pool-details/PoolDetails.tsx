@@ -82,7 +82,7 @@ function a11yProps(index: any) {
             <Link color="inherit" href="/pools" onClick={handleClick}>
              Pools
             </Link>
-            <Typography color="textPrimary">This is a Fund name</Typography>
+            <Typography color="textPrimary">This is a Synchrony Fund</Typography>
          </Breadcrumbs>
          <Button className="subscribed" variant="contained" color="primary"
                   onClick={(e)=>{toggleDrawer(true,e)}}
@@ -92,7 +92,7 @@ function a11yProps(index: any) {
          <Container fixed>
          <Grid className={classes.poolDetailsbar}>
          <Grid item md={6}>
-         <Typography variant="h1">This is a Fund name</Typography>
+         <Typography variant="h1">This is a Synchrony Fund</Typography>
          <div><Chip className={classes.lightgreen} label="Long/Short"/>
          <Chip className={classes.opcitygreen} label="124 deposers"/>
          </div>
@@ -162,7 +162,7 @@ function a11yProps(index: any) {
             <Grid container>
                <Grid item md={6}>
                   <Typography>
-                     <small>Name</small>Fund name
+                     <small>Name</small>Synchrony Fund
                   </Typography>
                </Grid>
                <Grid item md={6}>
