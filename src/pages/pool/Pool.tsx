@@ -307,7 +307,10 @@ const PoolList = (props: RouteComponentProps) => {
 
 				
 					if(liquidValue === "NaN") { liquidValue= 0; }
-                   dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week) * 100).toFixed(1)} %`,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
+
+
+                   //dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:`${data[obj].apy.day}`,volume_7d:`${Math.round((data[obj].apy.week) * 100).toFixed(1)} %`,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
+                   dataArray.push({name:data[obj].poolId,liquidity:liquidValue,volume_24h:parseFloat(`${data[obj].apy.day}`).toFixed(2),volume_7d:`${Math.round((data[obj].apy.week) * 100).toFixed(1)} %`,fee_24h:`${Math.round((data[obj].apy.day) * 100).toFixed(1)} %`,accordionData: <PoolData/>});
                      }     }
                 const columnsOrca:any = [
                   ['Name','name'],

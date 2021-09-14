@@ -638,7 +638,7 @@ export default makeStyles((theme : any) => createStyles({
     borderRadius:'8px',
     marginTop:'20px',
     color:'rgba(255, 255, 255, 0.9)',
-    paddingBottom:'0px',
+    paddingBottom:'20px',
   },
   tabcontent:{
    '& .MuiTypography-root':{
@@ -1907,7 +1907,7 @@ export default makeStyles((theme : any) => createStyles({
       width:'100%',
       fontSize:'14px',
       padding:'10px',
-      marginBottom:'20px',
+      marginBottom:'0px',
       resize:'none',
       borderRadius:'4px',
     },
@@ -1925,6 +1925,38 @@ export default makeStyles((theme : any) => createStyles({
   },
   headingSecondtext:{
       marginLeft:'0px !important',
+  },
+
+  addmorefieldsmain:{
+    position:'relative',
+  },
+
+  addmorefields:{
+    backgroundColor: '#4a4de6',
+    color: '#fff',
+    textTransform: 'initial',
+    position: 'absolute',
+    top: '38px',
+    right: '13px',
+    borderRadius: '0px 3px 3px 0px',
+    padding: '9px 20px',
+    '&:hover' :{
+      backgroundColor: '#303f9f',
+    },
+  },
+  closefields:{
+      backgroundColor: '#282a39',
+      color: '#fff',
+      textTransform: 'initial',
+      position: 'absolute',
+      top: '22px',
+      right: '13px',
+      borderRadius: '0px 3px 3px 0px',
+      padding: '9px 10px',
+      minWidth:'45px',
+      '&:hover':{
+        backgroundColor:'#292933',
+      },
   },
 
   managePercentage: {

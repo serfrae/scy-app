@@ -29,13 +29,15 @@ const BuilderList = (props: RouteComponentProps) => {
 		RangeFrom:'',
 		RangeTo:'',
 		RebalanceInterval:'',
-		WhitelistedTokens:'',
+		//WhitelistedTokens:'',
 		DeviationThreshold:'',
 		minWeighting:'',
 		maxWeighting:'',
 		Summary:'',
 		MaximumAssets:'',
 		EvaluationRange:'',
+      test : [''],
+      WhitelistedTokens: [''],
       };
 	  const history = useHistory();
       const [formData,setFormData] = React.useState(defaultParam);
@@ -49,6 +51,36 @@ const BuilderList = (props: RouteComponentProps) => {
 			.then(response => response.json())
 			.then(data =>{ setFormData(defaultParam); localStorage.setItem("fromFollow","Yes"); history.push("/pools");});	
 	  };
+
+
+
+     // handle input change
+      const handleInputChange = (e, index) => {
+         e.preventDefault();
+        const { name, value } = e.target;
+        const list = {...formData};
+        list.WhitelistedTokens[index]= value;
+        setFormData(list);
+      };
+       
+      // handle click event of the Remove button
+      const handleRemoveClick  = (e, index) => {
+          e.preventDefault();
+        const list = {...formData};
+        list.WhitelistedTokens.splice(index, 1);
+        setFormData(list);
+      };
+       
+      //handle click event of the Add button
+      const handleAddClick = (e, index) => {
+          e.preventDefault();
+          const list = {...formData};
+          let newIndex = index+1;
+          list.WhitelistedTokens[newIndex] = '';
+          setFormData(list);
+      };
+
+
    return (
       <div className={classes.root} > 
          <Header {...props}/>
@@ -219,9 +251,7 @@ const BuilderList = (props: RouteComponentProps) => {
                      </FormControl>
                   </Grid>
 
-                  <Grid item xs={6}>
-                     <TextField onChange={(e)=>{setFormData({...formData,WhitelistedTokens:e.target.value})}}  label="Whitelisted Tokens" placeholder="Whitelisted Tokens" fullWidth  InputLabelProps={{shrink: true, }} value={formData.WhitelistedTokens} />
-                  </Grid>
+                  
 
                   <Grid item xs={6}>
                      <TextField  onChange={(e)=>{setFormData({...formData,DeviationThreshold:e.target.value})}} label="Deviation Threshold" placeholder="Deviation Threshold" fullWidth  InputLabelProps={{shrink: true, }} value={formData.DeviationThreshold}/>
@@ -266,11 +296,25 @@ const BuilderList = (props: RouteComponentProps) => {
                      </FormControl>
 
                   </Grid>*/}
+
+
                   
                   <Grid item xs={12}> 
                   <InputLabel>Summary</InputLabel>
                   <TextareaAutosize onChange={(e)=>{setFormData({...formData,Summary:e.target.value})}}  aria-label="empty textarea" placeholder="Enter Index Summary"  value={formData.Summary}/>
                   </Grid>
+
+                   {formData.WhitelistedTokens.map((x, i) => {
+                       return (
+                        <Grid item xs={12} style={{position:'relative',}}>
+                           <TextField onChange={e => handleInputChange(e, i)}  label="Whitelisted Tokens" placeholder="Whitelisted Tokens" fullWidth  InputLabelProps={{shrink: true, }} value={formData.WhitelistedTokens[i]} />
+                           
+                           {formData.WhitelistedTokens.length !== 1 &&     <Button className={classes.addmorefields}  onClick={(e) => handleRemoveClick(e,i)}>X</Button>}
+                           {formData.WhitelistedTokens.length - 1 === i && <Button className={classes.addmorefields}  onClick={(e) => handleAddClick(e,i)}>Add More</Button>}
+                        </Grid>
+                       );
+                     })}
+
                   {/*<Button className="buil_btn" variant="contained" color="primary" onClick={handleSubmit}>Add Index</Button>*/}
                   </Grid>
                </form>
