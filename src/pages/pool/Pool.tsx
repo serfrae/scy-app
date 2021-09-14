@@ -152,6 +152,12 @@ const PoolList = (props: RouteComponentProps) => {
          .then(response => response.json())
          .then(data => {
             if(data !== "undefined"){
+				 for(var i = 0; i < data.length; i++ ){
+					data[i].volume_24h = data[i].volume_24h.toFixed(2);
+					data[i].fee_24h = data[i].fee_24h.toFixed(2);
+					data[i].volume_7d = data[i].volume_7d.toFixed(2);
+					data[i].liquidity = data[i].liquidity.toFixed(2);
+				 }
                setRowList(data);
                setTableColumn(columnData);
             }});
