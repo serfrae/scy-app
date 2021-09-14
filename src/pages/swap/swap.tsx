@@ -18,7 +18,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import CloseIcon from '@material-ui/icons/Close';
 import InfoTooltip from "./InfoTooltip";
 import WalletModal from '../../pages/dashboard/walletModal';
-import {serumAPI,radiumAPI} from '../../api/api';
+import {serumAPI,RaydiumAPI} from '../../api/api';
 const SwapPool = (props: any) => {
 	const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -141,7 +141,7 @@ console.log("called",data)
             setRecCurrencyList(currency[sendCurrency]);
          }
       });
-      fetch(radiumAPI+'coin/price')
+      fetch(RaydiumAPI+'coin/price')
       .then(response => response.json())
       .then(data => {
          if(data !== "undefined"){

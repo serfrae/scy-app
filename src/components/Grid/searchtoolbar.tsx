@@ -62,7 +62,7 @@ import useStyles from "./styles";
                               props.setFilter( e.target.value,
                               );
                             }} >
-                        <MenuItem  value={'Radium'}>Radium</MenuItem >
+                        <MenuItem  value={'Raydium'}>Raydium</MenuItem >
                         <MenuItem  value={'Orca'}>Orca</MenuItem >
                        </Select>
                     </FormControl>

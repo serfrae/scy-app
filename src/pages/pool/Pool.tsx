@@ -30,7 +30,7 @@ import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import WalletModal from '../dashboard/walletModal';
-import {radiumAPI,orcaAPI} from '../../api/api';
+import {RaydiumAPI,orcaAPI} from '../../api/api';
 import {PoolData} from './pooldata';
 export const numberFormat = (value) =>
   new Intl.NumberFormat('en-IN', {
@@ -147,8 +147,8 @@ const PoolList = (props: RouteComponentProps) => {
 			setFilter("UserGenerated");
 			localStorage.removeItem("fromFollow");
 		}
-      if(filter === 'Radium'){
-         fetch(radiumAPI+'pairs')
+      if(filter === 'Raydium'){
+         fetch(RaydiumAPI+'pairs')
          .then(response => response.json())
          .then(data => {
             if(data !== "undefined"){
@@ -210,7 +210,7 @@ const PoolList = (props: RouteComponentProps) => {
 				   }
 				   //
 				}
-				fetch(radiumAPI+'pairs')
+				fetch(RaydiumAPI+'pairs')
 				 .then(response => response.json())
 				 .then(data => {
 					if(data !== "undefined"){
@@ -218,7 +218,7 @@ const PoolList = (props: RouteComponentProps) => {
 						commonRowsData.push({name:data[i].name,liquidity:data[i].liquidity,fee_24h:data[i].fee_24h,accordionData: <PoolData/>});
 						}
 					}
-					 fetch(radiumAPI+`coin/price`)
+					 fetch(RaydiumAPI+`coin/price`)
             .then(response => response.json())
             .then(data => {
 				let priceArray : any = [];
@@ -267,7 +267,7 @@ const PoolList = (props: RouteComponentProps) => {
 			 
          }else if(filter === 'Orca'){
             
-            fetch(radiumAPI+`coin/price`)
+            fetch(RaydiumAPI+`coin/price`)
             .then(response => response.json())
             .then(data => {
 				let priceArray : any = [];
@@ -541,9 +541,9 @@ const PoolList = (props: RouteComponentProps) => {
                <FormControlLabel
                   control={
                   <Checkbox
-                  checked={ filter === "Radium" ? true : false}
+                  checked={ filter === "Raydium" ? true : false}
 				   disabled={filterType === "LiquidityPool" ? false : true}
-                  onChange={()=>{setFilter('Radium');}}
+                  onChange={()=>{setFilter('Raydium');}}
                   name="checkedC"
                   />
                   }
