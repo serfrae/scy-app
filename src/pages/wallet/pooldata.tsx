@@ -72,7 +72,7 @@ export const Secondstep= ({
       <form noValidate autoComplete="off">
         <TextField  label="Portfolio Name" placeholder="Portfolio name" fullWidth  InputLabelProps={{shrink: true, }} />
         <TextField  label="Amount to Invest" placeholder="Amount to invest" fullWidth  InputLabelProps={{shrink: true, }} />
-        <TextField  label="Risk tolerance (a percentage of daiyly buy to protect yourself)" placeholder="Risk tolerance" fullWidth  InputLabelProps={{shrink: true, }} />
+        <TextField  label="Risk tolerance (a percentage of daily buy to protect yourself)" placeholder="Risk tolerance" fullWidth  InputLabelProps={{shrink: true, }} />
       </form>
 		:
       <div className={classes.portfolioMain}>
@@ -122,13 +122,7 @@ export const Thirdstep= ({firstStep}) => {
 			</Typography>
 		:
         <Typography>
-          Dynamic stop loss
-          
-          We want to have a stoploss that moves with take profit points
-          E.g. TP(take profit) is at +20% from entry and SL(Stop Loss) is -20%
-          When TP is hit SL is raised to the original buy-in location. 
-          SL can be moved less proportionally e.g. SL is set for -10% from buy-in 
-          instead of at buy in. 
+           by clicking continue you agree to the following terms and conditions - <a href="https://synchrony.fi">Here</a>
         </Typography>
         }
       </div>
@@ -361,7 +355,7 @@ export const PoolData = () => {
                         aria-labelledby="responsive-dialog-title"
                       >
                         <div className={classes.modelhead}>
-                        <DialogTitle id="responsive-dialog-title">Choose one</DialogTitle>
+                        <DialogTitle id="responsive-dialog-title">Customize</DialogTitle>
                         <CloseIcon onClick={handleClose}/>
                         </div>
 

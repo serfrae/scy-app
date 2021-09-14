@@ -155,7 +155,7 @@ export const walletcolumns:any = [
     }
 	];
    export const dataColumn:any = [
-      ['Sol Pulse','id'],
+      ['Ranking','id'],
       ['Name','name'],
       ['Category','category',{
          options:{
