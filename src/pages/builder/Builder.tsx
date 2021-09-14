@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps,useHistory } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Header from '../../components/Header/Header';
@@ -21,14 +21,34 @@ import editIcon from '../../assets/icon/edit-white.svg';
 import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
 import Container from '@material-ui/core/Container';
 const BuilderList = (props: RouteComponentProps) => {
-   const classes = useStyles();
-      const [state] = React.useState({
-      age: '',
-      name: 'age',
-      });
-      const handleChange = (event:any) => {
-   
-  };
+	 const classes = useStyles();
+	 const defaultParam = {
+		Indexname: '',
+		CalculationMethod: '',
+		EvalutaionTimeframe:'',
+		RangeFrom:'',
+		RangeTo:'',
+		RebalanceInterval:'',
+		WhitelistedTokens:'',
+		DeviationThreshold:'',
+		minWeighting:'',
+		maxWeighting:'',
+		Summary:'',
+		MaximumAssets:'',
+		EvaluationRange:'',
+      };
+	  const history = useHistory();
+      const [formData,setFormData] = React.useState(defaultParam);
+      const handleSubmit = (event:any) => {
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData)
+			};
+			fetch('http://122.160.128.251/uploads/synchrony/postdata.php', requestOptions)
+			.then(response => response.json())
+			.then(data =>{ setFormData(defaultParam); localStorage.setItem("fromFollow","Yes"); history.push("/pools");});	
+	  };
    return (
       <div className={classes.root} > 
          <Header {...props}/>
@@ -113,7 +133,7 @@ const BuilderList = (props: RouteComponentProps) => {
                       <div className={classes.btnsBuilders}>
                           <Button className="transparent_buil_btn" variant="contained" color="primary">Save</Button>
                           <Button className="transparent_buil_btn" variant="contained" color="primary"><img src={cartCompareIcon} alt=""/>Compare in basket</Button>
-                          <Button className="buil_btn" variant="contained" color="primary">Publish</Button>
+                          <Button className="buil_btn" variant="contained" color="primary" onClick={handleSubmit}>Publish</Button>
                       </div>
                    </Paper>
                  </Grid>
@@ -123,7 +143,7 @@ const BuilderList = (props: RouteComponentProps) => {
                <form className={classes.root} noValidate autoComplete="off">
                 <Grid container spacing={3}>
                   <Grid item xs={6}>
-                     <TextField  label="Name" placeholder="Index name" fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField value={formData.Indexname}  label="Name" placeholder="Index name" fullWidth  InputLabelProps={{shrink: true, }}   onChange={(e)=>{setFormData({...formData,Indexname:e.target.value})}}/>
                   </Grid>
                   <Grid item xs={6}>
 
@@ -132,8 +152,8 @@ const BuilderList = (props: RouteComponentProps) => {
                      Calculation Method
                      </InputLabel>
                      <NativeSelect
-                     value={state.age}
-                     onChange={handleChange}
+                     value={formData.CalculationMethod}
+                     onChange={(e)=>{setFormData({...formData,CalculationMethod:e.target.value})}}
                      placeholder="Choose calculation method"
                      fullWidth
                      inputProps={{
@@ -154,7 +174,7 @@ const BuilderList = (props: RouteComponentProps) => {
                      <FormControl className={classes.formControl}>
                      <InputLabel shrink htmlFor="age-native-label-placeholder">Evalutaion Timeframe </InputLabel>
                      <NativeSelect
-                     value={state.age} onChange={handleChange} placeholder="Choose Time Period" fullWidth
+                     value={formData.EvalutaionTimeframe} onChange={(e)=>{setFormData({...formData,EvalutaionTimeframe:e.target.value})}} placeholder="Choose Time Period" fullWidth
                      inputProps={{
                      name: 'age',
                      id: 'age-native-label-placeholder',
@@ -170,12 +190,12 @@ const BuilderList = (props: RouteComponentProps) => {
                   </Grid>
 
                   <Grid className={classes.managePercentage} item xs={3}>
-                     <TextField  label="Range" placeholder="6"  fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField  label="Range" placeholder="6"  fullWidth  InputLabelProps={{shrink: true, }} onChange={(e)=>{setFormData({...formData,RangeFrom:e.target.value})}} value={formData.RangeFrom} />
                      <span>%</span>
                   </Grid>
 
                    <Grid className={classes.managePercentage} item xs={3}>
-                     <TextField  label="&nbsp;" placeholder="20"  fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField  label="&nbsp;" placeholder="20"  fullWidth  InputLabelProps={{shrink: true, }} onChange={(e)=>{setFormData({...formData,RangeTo:e.target.value})}} value={formData.RangeTo}/>
                       <span>%</span>
                   </Grid>
 
@@ -184,7 +204,8 @@ const BuilderList = (props: RouteComponentProps) => {
                    <FormControl className={classes.formControl}>
                      <InputLabel shrink htmlFor="age-native-label-placeholder">Rebalance Interval </InputLabel>
                      <NativeSelect
-                     value={state.age} onChange={handleChange} placeholder="Choose Rebalance Period" fullWidth
+					 onChange={(e)=>{setFormData({...formData,RebalanceInterval:e.target.value})}}
+                     value={formData.RebalanceInterval}  placeholder="Choose Rebalance Period" fullWidth
                      inputProps={{
                      name: 'age',
                      id: 'age-native-label-placeholder',
@@ -199,23 +220,31 @@ const BuilderList = (props: RouteComponentProps) => {
                   </Grid>
 
                   <Grid item xs={6}>
-                     <TextField  label="Whitelisted Tokens" placeholder="Whitelisted Tokens" fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField onChange={(e)=>{setFormData({...formData,WhitelistedTokens:e.target.value})}}  label="Whitelisted Tokens" placeholder="Whitelisted Tokens" fullWidth  InputLabelProps={{shrink: true, }} value={formData.WhitelistedTokens} />
                   </Grid>
 
                   <Grid item xs={6}>
-                     <TextField  label="Deviation Threshold" placeholder="Deviation Threshold" fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField  onChange={(e)=>{setFormData({...formData,DeviationThreshold:e.target.value})}} label="Deviation Threshold" placeholder="Deviation Threshold" fullWidth  InputLabelProps={{shrink: true, }} value={formData.DeviationThreshold}/>
+                  </Grid>
+
+                  
+
+                  <Grid className={classes.managePercentage} item xs={3}>
+                     <TextField  label="Min/Max Weighting" placeholder="Min"  fullWidth  InputLabelProps={{shrink: true, }} onChange={(e)=>{setFormData({...formData,minWeighting:e.target.value})}} value={formData.minWeighting} />
+                     
+                  </Grid>
+
+                   <Grid className={classes.managePercentage} item xs={3}>
+                     <TextField  label="&nbsp;" placeholder="Max"  fullWidth  InputLabelProps={{shrink: true, }} onChange={(e)=>{setFormData({...formData,maxWeighting:e.target.value})}} value={formData.maxWeighting}/>
+                      
                   </Grid>
 
                   <Grid item xs={6}>
-                     <TextField  label="Min/Max Weighting" placeholder="Min/Max Weighting" fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField  onChange={(e)=>{setFormData({...formData,EvaluationRange:e.target.value})}} label="Evaluation Range" placeholder="Evaluation Range" fullWidth  InputLabelProps={{shrink: true, }} value={formData.EvaluationRange} />
                   </Grid>
 
                   <Grid item xs={6}>
-                     <TextField  label="Evaluation Range" placeholder="Evaluation Range" fullWidth  InputLabelProps={{shrink: true, }} />
-                  </Grid>
-
-                  <Grid item xs={6}>
-                     <TextField  label="Maximum Number of Assets" placeholder="Index name" fullWidth  InputLabelProps={{shrink: true, }} />
+                     <TextField  onChange={(e)=>{setFormData({...formData,MaximumAssets:e.target.value})}} label="Maximum Number of Assets" placeholder="Index name" fullWidth  InputLabelProps={{shrink: true, }} value={formData.MaximumAssets} />
                   </Grid>
                  
                   
@@ -223,7 +252,7 @@ const BuilderList = (props: RouteComponentProps) => {
                   <FormControl className={classes.formControl}>
                      <InputLabel shrink htmlFor="age-native-label-placeholder">Set Maximum fees </InputLabel>
                      <NativeSelect
-                     value={state.age} onChange={handleChange} placeholder="Choose maximum fees" fullWidth
+                     value={formData.age} onChange={handleChange} placeholder="Choose maximum fees" fullWidth
                      inputProps={{
                      name: 'age',
                      id: 'age-native-label-placeholder',
@@ -240,9 +269,9 @@ const BuilderList = (props: RouteComponentProps) => {
                   
                   <Grid item xs={12}> 
                   <InputLabel>Summary</InputLabel>
-                  <TextareaAutosize  aria-label="empty textarea" placeholder="Enter Index Summary"  />
+                  <TextareaAutosize onChange={(e)=>{setFormData({...formData,Summary:e.target.value})}}  aria-label="empty textarea" placeholder="Enter Index Summary"  value={formData.Summary}/>
                   </Grid>
-                 
+                  {/*<Button className="buil_btn" variant="contained" color="primary" onClick={handleSubmit}>Add Index</Button>*/}
                   </Grid>
                </form>
           
@@ -257,7 +286,7 @@ const BuilderList = (props: RouteComponentProps) => {
                  <Typography variant="h3">
                     You don’t have any index yet.
                  </Typography>
-                  <Button className="buil_btn" variant="contained" color="primary">Build Index</Button>
+                  <Button className="buil_btn" variant="contained" color="primary" >Build Index</Button>
               </div>
             </div>
          </div>

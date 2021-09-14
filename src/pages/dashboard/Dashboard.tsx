@@ -63,6 +63,15 @@ const Dashboard = (props: RouteComponentProps) => {
 		console.log(item);
 		
 	}
+	React.useEffect(() => {
+		if(localStorage.getItem("fromFollow") === "Yes"){
+			setCurrentTab("Discovery");
+			localStorage.removeItem("fromFollow");
+		}
+		
+	}, [])
+	
+	
    return (  
       <div className={classes.root} > {/* ok */}
          <Header {...props}/>

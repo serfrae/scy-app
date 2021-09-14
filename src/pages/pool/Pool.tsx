@@ -1,5 +1,15 @@
 import React, { useState,useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps,useHistory } from "react-router-dom";
+import chartIcon from '../../assets/icon/Chart.svg';
+import chartredIcon from '../../assets/icon/Vector.svg';
+import ethereumIcon from '../../assets/icon/ethereum.svg';
+import zcashIcon from '../../assets/icon/zcash.svg';
+import dashDashIcon from '../../assets/icon/dash-dash.svg';
+import vertcoinIcon from '../../assets/icon/vertcoin.svg';
+import digibyteIcon from '../../assets/icon/digibyte.svg';
+import litecoinIcon from '../../assets/icon/litecoin.svg';
+import ethereumClassicIcon from '../../assets/icon/ethereum-classic.svg';
+import bitcoinIcon from '../../assets/icon/bitcoin.svg';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Header from '../../components/Header/Header';
@@ -31,6 +41,8 @@ const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
    const[apiStep,setApiStep] = useState(0);
   const [filterType,setFilterType] = useState('SynchronyIndex');
+  let defaultType = !localStorage.getItem("fromFollow") ? 'Orca' : 'UserGenerated';
+   const [filter,setFilter] = useState(defaultType);
   const top100Films = [
   { title: 'Suggestions', },
   { title: 'Raydium', },
@@ -41,6 +53,9 @@ const PoolList = (props: RouteComponentProps) => {
    ];
   const handleChange = (filterName) => {
 		setFilterType(filterName);
+		if(filterName === "UserGenerated"){
+			setFilter(filterName);
+		}else{setFilter('Orca'); }
   };
   const [state2, setState2] = React.useState<{ age: string | number; name: string }>({
     age: '',
@@ -54,10 +69,10 @@ const PoolList = (props: RouteComponentProps) => {
     });
   };
 
-   //const history = useHistory()
+   const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
-   const [filter,setFilter] = useState('Orca');
+  
    const columnData:any = [
       ['Name','name',{
          options:{
@@ -127,6 +142,11 @@ const PoolList = (props: RouteComponentProps) => {
                ];
    const [tableColumn,setTableColumn] = useState(columnData);
    useEffect(() => {
+	   if(localStorage.getItem("fromFollow") === "Yes"){
+			setFilterType("UserGenerated");
+			setFilter("UserGenerated");
+			localStorage.removeItem("fromFollow");
+		}
       if(filter === 'Radium'){
          fetch(radiumAPI+'pairs')
          .then(response => response.json())
@@ -134,6 +154,36 @@ const PoolList = (props: RouteComponentProps) => {
             if(data !== "undefined"){
                setRowList(data);
                setTableColumn(columnData);
+            }});
+         }else  if(filter === 'UserGenerated'){
+         fetch('http://122.160.128.251/uploads/synchrony/poolapi.php?pool_type=synchrony')
+         .then(response => response.json())
+         .then(data => {
+            if(data !== "undefined"){
+				let commonRowsData:any = [];
+				 for(var i = 0; i < data.length; i++ ){
+					 commonRowsData.push({name:data[i].pool_name,
+					 "volume":'$5,425,960.21',
+					  "topassets":
+						<>
+						   <img src={ethereumIcon} className="coinIcons" alt=""/>
+						   <img src={zcashIcon} className="coinIcons" alt=""/>
+						   <img src={dashDashIcon} className="coinIcons" alt=""/>
+						   <img src={vertcoinIcon} className="coinIcons" alt=""/>
+						   <img src={digibyteIcon} className="coinIcons" alt=""/>
+						   <img src={litecoinIcon} className="coinIcons" alt=""/>
+						   <img src={ethereumClassicIcon} className="coinIcons" alt=""/>
+						   <img src={bitcoinIcon} className="coinIcons" alt=""/>
+						   <span className="moreValue">+3</span>
+						</>,
+						  "alltime":'12.27',
+						  "hours":2.65,
+						  "lastdays":<img src={chartIcon} alt=""/>,
+						   "accordionData":<PoolData />
+								 });
+				   }
+               setRowList(commonRowsData);
+               //setTableColumn(syncColumnData);
             }});
          }else  if(filter === 'Synchrony'){
          fetch('http://122.160.128.251/uploads/synchrony/poolapi.php')
@@ -343,7 +393,7 @@ const PoolList = (props: RouteComponentProps) => {
                   }
                   label="Liquidity Pool"
                />
-
+			
                <FormControlLabel
                   control={
                   <Checkbox
@@ -354,7 +404,16 @@ const PoolList = (props: RouteComponentProps) => {
                   }
                   label="Wallet"
                />
-               
+                 <FormControlLabel
+                  control={
+                  <Checkbox
+                  checked={filterType === "UserGenerated" ? true: false}
+                  onChange={(e)=>{handleChange('UserGenerated')}}
+                  name="checkedH"
+                  />
+                  }
+                  label="User Generated"
+               />
                <FormControlLabel
                   control={
                   <Checkbox
@@ -381,18 +440,7 @@ const PoolList = (props: RouteComponentProps) => {
                   label="Tokens"
                />
 
-               <FormControlLabel
-                  control={
-                  <Checkbox
-                  checked={filterType === "UserGenerated" ? true: false}
-                  onChange={(e)=>{handleChange('UserGenerated')}}
-				  className={'disabled'}
-				  disabled={true}
-                  name="checkedH"
-                  />
-                  }
-                  label="User Generated"
-               />
+             
 
                 <FormControlLabel
                   control={
@@ -564,7 +612,7 @@ const PoolList = (props: RouteComponentProps) => {
        </Paper>
        </Grid>
        <Grid item xs={9} className={classes.PoolsSec}>
-		{filterType === "Wallet" ?  <Typography component="h1" className="synHead">Wallet Profile</Typography> : <>{filterType === "SynchronyIndex" ? <Typography component="h1" className="synHead">Synchrony Index</Typography> : <Typography component="h1" className="synHead">{filter} Pools</Typography> }</> }
+		{filterType === "Wallet" ?  <Typography component="h1" className="synHead">Wallet Profile</Typography> : <>{(filterType === "SynchronyIndex" || filterType === "UserGenerated") ? <Typography component="h1" className="synHead">Synchrony Index</Typography> : <Typography component="h1" className="synHead">{filter} Pools</Typography> }</> }
        <div className={classes.searchPools}>
 	    
         <Autocomplete
@@ -649,11 +697,11 @@ const PoolList = (props: RouteComponentProps) => {
 		
 		:
 		
-		<>{filterType === "SynchronyIndex" ?
+		<>{(filterType === "SynchronyIndex" || filterType === "UserGenerated") ?
 		
           <TableGrid 
           columns ={toppoolscolumns}
-          rows = {toppoolsrows}
+          rows = {filterType === "SynchronyIndex" ? toppoolsrows : rows}
           tablePagination={false}
 		 />
 		:

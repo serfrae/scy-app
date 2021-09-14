@@ -118,8 +118,8 @@ export const columns:any = [
 }
  ];
  export const graphdata:any = {
-    labels: ['SOL', 'SRM', 'USDC',
-             'RAY'],
+    labels: ['A longng fund name...', 'Fund name', 'Fund name',
+             'A longng fund name...'],
     precision:2,
     datasets: [
       {
@@ -142,8 +142,8 @@ export const columns:any = [
     ]
   }
   export const graphFunddata:any = {
-    labels: ['SOL', 'SRM', 'USDC',
-    'RAY'],
+    labels: ['A longng fund name...', 'Fund name', 'Fund name',
+             'A longng fund name...','A longng fund name...','A longng fund name...','A longng fund name...'],
     precision:2,
     datasets: [
       {
