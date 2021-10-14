@@ -39,23 +39,23 @@ const CartGraphData = ({data}) => {
 
           <LineSeries
             name="Solana"
-            valueField="1"
-            argumentField="0a"
+            valueField="tvNews"
+            argumentField="year"
           />
           <LineSeries
             name="Church"
-            valueField="3"
-            argumentField="0a"
+            valueField="church"
+            argumentField="year"
           />
           <LineSeries
             name="Military"
-            valueField="5"
-            argumentField="0a"
+            valueField="military"
+            argumentField="year"
           />
 		  <LineSeries
-            name="Military"
-            valueField="7"
-            argumentField="0a"
+            name="fantasy"
+            valueField="fantasy"
+            argumentField="year"
           />
           
           <Animation />

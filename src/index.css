@@ -130,3 +130,153 @@ input[type=number]::-webkit-inner-spin-button,
 ::-webkit-scrollbar-thumb:hover {
   background: #fff; 
 }
+
+
+body .wallet-adapter-modal-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 120%;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: left;
+    display: block;
+    margin-top: 20px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+body .wallet-adapter-modal-button-close {
+    top: 14px;
+}
+
+body .wallet-adapter-modal-wrapper-no-logo {
+    padding: 0px;
+    background: #1A1A23;
+}
+
+body .wallet-adapter-modal-wrapper .wallet-adapter-button {
+    background: #1A1A23;
+}
+
+body .wallet-adapter-modal-list {
+    margin: 0 0 10px;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    max-height: 370px;
+    overflow: auto;
+    padding: 20px 20px;
+    background: #14151D;
+}
+
+body .wallet-adapter-button:not([disabled]):hover {}
+
+.swapParent .swapTokenFormContainer {
+    box-shadow: none;
+    border: 1px solid #2a2c3a;
+}
+
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm>.MuiDialogTitle-root {
+    padding: 0px;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm {
+    background: #14151D;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm>.MuiDialogTitle-root h6.MuiTypography-root.MuiTypography-h6 {
+    background: #1A1A23;
+    border-radius: 8px 8px 0px 0px;
+    padding: 15px 20px !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm>.MuiDialogTitle-root .MuiFormControl-fullWidth {
+    padding: 0px 20px;
+    margin-bottom: 20px;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm>.MuiDialogTitle-root .MuiFormControl-fullWidth .MuiInputBase-formControl {
+    background: #1A1A23;
+    color: #fff;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm ul.MuiList-root {
+    margin: 20px 0px;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm ul.MuiList-root .MuiListItem-button {
+    background: #1A1A23;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 90%;
+    margin: 0px auto 20px;
+    color: #fff;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm ul.MuiList-root .MuiListItem-button p.MuiTypography-colorTextSecondary {
+    color: #ffffff85;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded p.MuiTypography-root.MuiTypography-body1 {
+    color: #fff;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm .MuiDialogActions-root.MuiDialogActions-spacing .MuiTabs-flexContainer button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit {
+    color: #fff;
+}
+
+.MuiDialog-scrollPaper .MuiDialog-paperWidthSm .MuiDialogActions-root.MuiDialogActions-spacing .MuiTabs-flexContainer button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit.Mui-selected {
+    background-color: #4A4DE6;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+      background-color: #202232;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded .MuiFormControl-root {
+    color: #fff;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded .MuiFormControl-root input.MuiInputBase-input {
+    color: #fff;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded .MuiFormControl-root p.MuiTypography-colorTextSecondary {
+    color: #fff;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded .MuiTypography-colorTextSecondary {
+    color: #fff;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded  .makeStyles-fairAutoSelected-656 {
+    background-color: #593ceb;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded button.MuiButton-contained.Mui-disabled.MuiButton-fullWidth.Mui-disabled {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    background: #4A4DE6;
+    text-align: center;
+    font-weight: 500;
+    line-height: 140%;
+    border-radius: 4px;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded button.MuiButton-contained.Mui-disabled.MuiButton-fullWidth.Mui-disabled span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded code {
+    color: #fff;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.makeStyles-infoButton-250 {
+    color: rgb(255 255 255 / 54%);
+}

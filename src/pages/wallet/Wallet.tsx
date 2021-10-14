@@ -11,12 +11,8 @@ import Container from '@material-ui/core/Container';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
 import {toppoolscolumns,toppoolsrows,walletcolumns,walletrows,allColumnPool} from '../../models/toppools';
-import Select from '@material-ui/core/Select';
-import StarRateSharpIcon from '@material-ui/icons/StarRateSharp';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import WalletModal from '../dashboard/walletModal';
@@ -29,7 +25,6 @@ export const numberFormat = (value) =>
   }).format(value);
 const Wallet = (props: RouteComponentProps) => {
    const classes = useStyles();
-   const[apiStep,setApiStep] = useState(0);
   const [filterType,setFilterType] = useState('Wallet');
   const top100Films = [
   { title: 'Suggestions', },
@@ -42,22 +37,10 @@ const Wallet = (props: RouteComponentProps) => {
   const handleChange = (filterName) => {
 		setFilterType(filterName);
   };
-  const [state2, setState2] = React.useState<{ age: string | number; name: string }>({
-    age: '',
-    name: 'hai',
-  });
-  const handleChange2 = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    const name = event.target.name as keyof typeof state2;
-    setState2({
-      ...state2,
-      [name]: event.target.value,
-    });
-  };
-
    //const history = useHistory()
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
-   const [filter,setFilter] = useState('Orca');
+   const [filter] = useState('Orca');
    const columnData:any = [
       ['Name','name',{
          options:{
@@ -173,7 +156,6 @@ const Wallet = (props: RouteComponentProps) => {
             .then(response => response.json())
             .then(data => {
                if(data !== "undefined"){
-                let dataArray:any = [];
                 let liquidValue:any = "";
                 let currencyPrice : any  = "";
                 let calCoinPrice : any = "";
@@ -296,7 +278,7 @@ const Wallet = (props: RouteComponentProps) => {
             })
          }
 
-    }, [filter]);
+    }, [filter,columnData,syncColumnData]);
 
    return (
       <div className={classes.root} > 

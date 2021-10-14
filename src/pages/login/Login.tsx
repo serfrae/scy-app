@@ -127,7 +127,7 @@ if(selectedWallet !== undefined){
                     variant="contained"
                     color="primary"
                     size="large"
-                    onClick={() => selectedWallet.disconnect()}
+                    onClick={() => alert(1)}
                     // onClick={()=>alert("hello")}
                   >
                     Disconnect

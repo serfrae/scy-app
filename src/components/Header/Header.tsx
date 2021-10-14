@@ -12,22 +12,14 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { withRouter, RouteComponentProps, NavLink } from "react-router-dom";
 import useStyles from "./styles";
-import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
-import StoreMallDirectoryOutlinedIcon from '@material-ui/icons/StoreMallDirectoryOutlined';
 import logoIcon from '../../assets/icon/logo.svg';
 import cartCompareIcon from '../../assets/icon/cartCompareIcon.svg';
 import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 import SwapVertIcon from '@material-ui/icons/SwapVert';
 import AddIcon  from '@material-ui/icons/Add';
-import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import WalletModal from '../../pages/dashboard/walletModal';
-import PersonIcon from '@material-ui/icons/Person';
-import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import ActivitiesList from '../Grid/activities';
-import {  Popper } from '@material-ui/core';
-import {walletStatus,disConnectWallet} from './walletStatus';
-import {activitiesData} from '../../models/activities';
+import {disConnectWallet} from './walletStatus';
 import WtcIcon from '../../assets/icon/WTCWTCWTC.svg';
 import BLTIcon from '../../assets/icon/BLT.svg';
 import cryIcon from '../../assets/icon/cry.svg';
@@ -35,7 +27,22 @@ import trashIcon from '../../assets/icon/trash.svg';
 import cry2Icon from '../../assets/icon/cry2.svg';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { currrent_wallet_token,update } from '../../reducers/walletReducer';
+import LoginButton from './WalletDialog';
+
+
+
 const Header = ({ history } : RouteComponentProps) => {
+
+
+  const wallet_token = useSelector(currrent_wallet_token);
+ 
+  console.log('wallet_token',wallet_token);
+
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -44,21 +51,17 @@ const Header = ({ history } : RouteComponentProps) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isCartMenuOpen = Boolean(cartMoreAnchorEl);
-  const [anchorElPopper, setAnchorElPopper] = React.useState(null);
+  const [, setAnchorElPopper] = React.useState(null);
   const[connectedWalletType,setConnectedWalletType] = useState({provider:'',providerObject:null})
-  const[walletConnect,setWalletConnected] = useState(walletStatus);
+  //const[walletConnect,setWalletConnected] = useState(walletStatus);
+  const[,setWalletConnected] = useState(wallet_token);
   const [walletTrigger, setWalletTrigger] = useState(false);
-  const open = Boolean(anchorElPopper);
-  const id = open ? 'simple-popper' : undefined;
-  
+  //const open = Boolean(anchorElPopper);
+
  // const [, setOpenNot] = React.useState(false);
   //const anchorRef:any = React.useRef(null);
   //const anchorRefNot:any = React.useRef(null);
- 
- 
-  const handleClick = (event:any) => {
-    setAnchorElPopper(anchorElPopper ? null : event.currentTarget);
-  };
+
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -79,6 +82,10 @@ const Header = ({ history } : RouteComponentProps) => {
       setAnchorEl(null);
       handleMobileMenuClose();
       setWalletConnected(false);
+	 //window.location.reload();
+
+   dispatch(update(false));
+
   }
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -104,7 +111,7 @@ const Header = ({ history } : RouteComponentProps) => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-	  {walletConnect === false ?  
+	  {wallet_token === false ?  
       <MenuItem onClick={()=>{setOpenModal(true)}}>Connect Wallet</MenuItem>
 	  :
 	<MenuItem onClick={disconectWallet}>Disconnect Wallet</MenuItem>
@@ -239,33 +246,7 @@ const Header = ({ history } : RouteComponentProps) => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-           {walletConnect === false ?  
-           <div className="nologin">
-            <Chip className={classes.chipbtn}
-              icon={<AccountBalanceWalletOutlinedIcon />}
-              label="Connect Wallet"
-              onClick={()=>{setOpenModal(true)}}
-            />
-           </div>
-           :
-           <div className="withlogin">
-            <Chip className={classes.chipbtn}
-              icon={<PersonIcon />}
-              label="My Wallet"
-              
-            />
-            
-             <IconButton className={classes.watchicon}
-           onClick={handleClick}>
-             <QueryBuilderIcon />
-           </IconButton>
-          
-            <Popper id={id} open={open} anchorEl={anchorElPopper} className={classes.activitiemain}>
-              <ActivitiesList activitiesData= {activitiesData}/>
-            </Popper>
-          
-           </div>
-            }
+           <LoginButton />
 
             <div className={classes.rigthIconsHeader}>
               <span className={classes.mianHeaderIcon} onClick={handleCartMenuOpen}>
@@ -273,8 +254,8 @@ const Header = ({ history } : RouteComponentProps) => {
                 <span className={classes.countercartHeader}>4</span>
               </span>
               {cartItemRender}
-			   {walletConnect === false &&
-				<span className={classes.mianHeaderIcon}><ScheduleOutlinedIcon/></span>
+			   {wallet_token === false &&
+			    	<span className={classes.mianHeaderIcon}><ScheduleOutlinedIcon/></span>
 			   }
               <span className={classes.mianHeaderIcon}>
                 <IconButton className={classes.chipwallet}

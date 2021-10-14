@@ -11,6 +11,7 @@ export default makeStyles((theme : any) => createStyles({
               paddingTop:'40px',
         },
       },
+
     },
 
     breadcrumbsBar:{
@@ -2170,4 +2171,115 @@ piaChat:{
   border:'solid 1px #363640',
   bordeaRdius:6,
 },
+swapParent:{
+  marginTop:40,
+  marginBottom:40,
+  margin: '0px auto',
+  width: '613px',
+  background: 'transparent',
+  border: '0px none',
+  borderRadius: '0px',
+  boxShadow: 'none',
+  '& .MuiPaper-root':{
+    backgroundColor: 'transparent',
+    width: '100%',
+     boxShadow: 'none',
+     background: '#1A1A23',
+     border: '1px solid #242636',
+     borderRadius: '8px',
+  },
+ 
+  '& .MuiTypography-body1' :{
+    fontSize: '15px !important',
+    fontWeight: '500 !important',
+    color: '#fff',
+  },
+  
+  '& .MuiInputBase-input':{
+    color: '#fff',
+    fontSize: '16px',
+    fontWeight: '500',
+  },
+  '& .tokenButton':{
+    '& .MuiTypography-body1':{
+      color:'#fff',
+    },
+  },
+
+  '& .MuiButton-root.MuiButton-contained':{
+    background: '#4A4DE6',
+    borderRadius: '4px',
+    fontWeight: 500,
+    fontSize: '16px',
+    lineHeight: '140%',
+    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.9)',
+  },
+
+  "& div[class^='makeStyles-swapTokenFormContainer']" :{
+    border: '1px solid #242636',
+    padding: '6px 10px',
+    boxShadow: 'none',
+    borderRadius: '3px',
+    },
+
+    "& div[class^='makeStyles-tokenButton']" :{
+      color: 'rgba(255, 255, 255, 0.9)',
+    },
+
+    "& div[class^='makeStyles-swapToFromButton']" :{
+          margin: '40px auto 40px auto',
+    },
+
+   
+},
+
+
+
+// swapTokenFormContainer:{
+//     border: '1px solid #242636',
+//     padding: '6px 10px',
+//     boxSshadow: 'none',
+//     borderRadius: '3px',
+// },
+
+card:{
+      background: '#1A1A23',
+      border: '1px solid #242636',
+      borderRadius: '8px',
+      marginTop:100,
+},
+buttonGroup:{
+  position:'relative'
+},
+disconnectBtn:{
+    justifyContent: 'center',
+    background: '#4A4DE6',
+    borderRadius: '50px',
+    height: '32px',
+    fontWeight: 500,
+    fontSize: '14px',
+    color: 'rgba(255, 255, 255, 0.9)',
+    border: '0px none',
+    padding: '0px 14px',
+    lineHeight: '32px',
+},
+connectBtn:{
+    justifyContent: 'center',
+    background: 'linear-gradient(270deg, #6231ED -9.12%, #4A4DE6 24.42%, #3A69DC 67.62%, #7ED6C4 122.3%)',
+    borderRadius: '50px',
+    height: '32px',
+    fontWeight: 500,
+    fontSsize: '14px',
+    color: 'rgba(255, 255, 255, 0.9)',
+    '&:hover': {
+      background:'rgba(74, 77, 230, 0.7)',
+    },
+},
+
+
+swapCBox:{
+
+},
+
 }));

@@ -57,7 +57,7 @@ const BuilderList = (props: RouteComponentProps) => {
      // handle input change
       const handleInputChange = (e, index) => {
          e.preventDefault();
-        const { name, value } = e.target;
+        const {  value } = e.target;
         const list = {...formData};
         list.WhitelistedTokens[index]= value;
         setFormData(list);

@@ -13,6 +13,11 @@ import SolFlare from '../../assets/icon/icon.svg';
 import Mathwallet from '../../assets/icon/image 3.svg';
 import LedgerIcon from '../../assets/icon/ledger.svg';
 import bonfidaIcon from '../../assets/icon/bonfida.svg';
+
+import {  useDispatch } from 'react-redux';
+import { update } from '../../reducers/walletReducer';
+
+
 import {
   Connection,
   PublicKey,
@@ -58,15 +63,20 @@ const getProvider = (): PhantomProvider | undefined => {
 		  return provider;
 		}
 	  }
-	  window.open("https://phantom.app/", "_blank");
+	  //window.open("https://phantom.app/", "_blank");
 	};
 export default function WalletModal(props:any) {
+
+
+  const dispatch = useDispatch();
+
+
   const classes = useStyles();
   const provider = getProvider();
 
   //wallet
  
-  const network = clusterApiUrl('devnet');
+  const network = clusterApiUrl("mainnet-beta"); //devnet
   const [providerUrl ] = useState('https://www.sollet.io');
   const [providerUrlPhantom ] = useState('https://phantom.app/');
     //phantom wallet
@@ -105,11 +115,10 @@ export default function WalletModal(props:any) {
 				  
 				   if(key && key !== null){
 					    object.setWalletConnected(true);
-						localStorage.setItem('loggedInToken', (key).toString());
+              dispatch(update((key).toString()));
 				   }
 					console.log("Connected to wallet " + provider.publicKey?.toBase58());
 				});
-			
 			 return;
 		 }
 	   else{setSelectedWallet(walletObj)}
@@ -125,10 +134,11 @@ export default function WalletModal(props:any) {
               selectedWallet.wallet.on('connect', () => {
 				  
                 //setConnected(true);
-                console.log('connected',selectedWallet.wallet.publicKey.toBase58())
+               // console.log('connected',selectedWallet.wallet.publicKey.toBase58())
                 let  blockhash = connection.getRecentBlockhash();
                 // console.log(blockhash,"Toke connected")
-                localStorage.setItem('loggedInToken', selectedWallet.wallet.publicKey.toBase58());
+                //const datakey =  selectedWallet.wallet !== null ? selectedWallet.wallet.publicKey.toBase58() :"";
+                //localStorage.setItem('loggedInToken', datakey.toString());
               // console.log(selectedWallet.publicKet.toBase58())
                 object.setOpen(false)
                 object.setWalletConnected(true);
@@ -137,15 +147,16 @@ export default function WalletModal(props:any) {
                 //   jsonrpc: '2.0',
                 //    method: 'connected',
                 //    params: {publicKey: selectedWallet.publicKey.toBase58()}}, 'http://localhost:3000/')
-                // addLog('Connected to wallet ' + selectedWallet.publicKey.toBase58());
+                // console.log('Connected to wallet ' + selectedWallet.publicKey.toBase58());
               });
               selectedWallet.wallet.on('disconnect', () => {
-                 console.log('disconnected')
+                 console.log('disconnected 2')
+				        
                  //localStorage.removeItem('loggedInToken');
               });
               selectedWallet.wallet.connect();
               return () => {
-                selectedWallet.wallet.disconnect();
+                //selectedWallet.wallet.disconnect();
               };
             }
           }else{
@@ -154,7 +165,9 @@ export default function WalletModal(props:any) {
           }, [selectedWallet,object,connection]);
 
 
+    
 
+     
 
 
 

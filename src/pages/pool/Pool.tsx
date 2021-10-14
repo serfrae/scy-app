@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
-import { RouteComponentProps,useHistory } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import chartIcon from '../../assets/icon/Chart.svg';
-import chartredIcon from '../../assets/icon/Vector.svg';
 import ethereumIcon from '../../assets/icon/ethereum.svg';
 import zcashIcon from '../../assets/icon/zcash.svg';
 import dashDashIcon from '../../assets/icon/dash-dash.svg';
@@ -39,7 +38,6 @@ export const numberFormat = (value) =>
   }).format(value);
 const PoolList = (props: RouteComponentProps) => {
    const classes = useStyles();
-   const[apiStep,setApiStep] = useState(0);
   const [filterType,setFilterType] = useState('SynchronyIndex');
   let defaultType = !localStorage.getItem("fromFollow") ? 'Orca' : 'UserGenerated';
    const [filter,setFilter] = useState(defaultType);
@@ -69,7 +67,7 @@ const PoolList = (props: RouteComponentProps) => {
     });
   };
 
-   const history = useHistory()
+  
    const [openModal,setOpenModal] = useState(false);
    const [rows,setRowList] = useState([]);
   
@@ -229,7 +227,6 @@ const PoolList = (props: RouteComponentProps) => {
             .then(response => response.json())
             .then(data => {
                if(data !== "undefined"){
-                let dataArray:any = [];
                 let liquidValue:any = "";
                 let currencyPrice : any  = "";
                 let calCoinPrice : any = "";
@@ -355,7 +352,7 @@ const PoolList = (props: RouteComponentProps) => {
             })
          }
 
-    }, [filter]);
+    }, [filter,columnData,syncColumnData]);
 
    return (
       <div className={classes.root} > 

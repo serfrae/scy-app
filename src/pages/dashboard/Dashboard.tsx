@@ -26,10 +26,11 @@ import {walletStatus} from '../../components/Header/walletStatus';
 import {PoolDatas} from '../pool/pooldatas';
 import {PoolName} from '../pool/PoolName';
 import Discovery from '../connected/Discovery';
-import { Breadcrumbs,Link,Select,MenuItem } from "@material-ui/core";
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Breadcrumbs} from "@material-ui/core";
 import {TwitterFollowers} from '../pool/TwitterFollowers';
 import Autocomplete from "@material-ui/lab/Autocomplete";
+//import { currrent_wallet_token } from '../../reducers/walletReducer';
+
 const Dashboard = (props: RouteComponentProps) => {
    const classes = useStyles();
    const [openModal,setOpenModal] = useState(false);
@@ -39,7 +40,12 @@ const Dashboard = (props: RouteComponentProps) => {
    const[searchFilter,setSearchFilter] = useState('');
    const[searchText,setSearchText] = useState('');
    const[dataRows,setDataRows] = useState([]);
-   const[dataSingleRows,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
+   const[,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
+
+
+   //const wallet_token = useSelector(currrent_wallet_token);
+
+
    useEffect(() => {
 		 let dataFiler:any = [];
 		 if(searchFilter !== ''){ dataFiler.push("category="+searchFilter) }
@@ -109,7 +115,7 @@ const Dashboard = (props: RouteComponentProps) => {
         </Grid>}
  {/* Second Section*/}
         <Typography className={classes.subtitle} variant="h2">
-         Market Overview
+         Market Overview 
         </Typography>
         <Grid className={classes.secondBox} container>
             <Grid item xs={4} className={classes.highestvol}>

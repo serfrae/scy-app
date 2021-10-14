@@ -12,7 +12,7 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import EditIcon from '@material-ui/icons/Edit';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {comparecolumns,compoolsrows} from '../../models/compare';
+import {comparecolumns} from '../../models/compare';
 import CartGraphData from './comparedata';
 import {dataColumn} from '../../models/toppools';
 import {API_URL} from '../../api/api';
@@ -22,13 +22,13 @@ import {PoolName} from '../pool/PoolName';
 const CompareList = (props: RouteComponentProps) => {
    const classes = useStyles();
    let oldColumn = comparecolumns;
-   const[columns,setColumns] = useState(comparecolumns);
+   const[,setColumns] = useState(comparecolumns);
    const[editColumn,setEditColumns] = useState(false);
-   const[searchFilter,setSearchFilter] = useState('');
-   const[searchText,setSearchText] = useState('');
+   const[searchFilter] = useState('');
+   const[searchText] = useState('');
    const[dataRows,setDataRows] = useState([]);
    const[chartData,setChartData] = useState([]);
-   const[dataSingleRows,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
+   const[,setDataSingleRows] = useState([{chart:[],chart24:[]}]);
    useEffect(() => {
 		 let dataFiler:any = [];
 		 if(searchFilter !== ''){ dataFiler.push("category="+searchFilter) }
@@ -49,11 +49,7 @@ const CompareList = (props: RouteComponentProps) => {
 
     },[searchFilter,searchText]);
 		
-	const filterSearch = (value,item)=>{
-		setSearchText(item);
-		console.log(item);
-		
-	}
+	
    const setEditColumn = (status) =>{
 	   if(status === true){
 	   let newColumn = ['','blank'];

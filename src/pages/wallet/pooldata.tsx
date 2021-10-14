@@ -31,7 +31,6 @@ import swipeimgIcon from '../../assets/icon/swipeP.svg';
 import WhiteInformationIcon from '../../assets/icon/whiteInformationIcon.png';
 
 import Tooltip from '@material-ui/core/Tooltip';
-import Fade from '@material-ui/core/Fade';
 import Zoom from '@material-ui/core/Zoom';
 
 
@@ -45,15 +44,15 @@ export const Firststep = ({setFirstStep}) => {
           <RadioGroup aria-label="gender" name="gender1">
             <div className={classes.informationTooltip}>
              <FormControlLabel value="1" onChange={()=>{setFirstStep(1)}} control={<Radio />} label="Safe follow (recommended)" />
-             <Tooltip TransitionComponent={Zoom} title="This follows wallet movements as long as the wallet movement is in the top 30 SOL tokens by marketcap"><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} /> </Button></Tooltip>
+             <Tooltip TransitionComponent={Zoom} title="This follows wallet movements as long as the wallet movement is in the top 30 SOL tokens by marketcap"><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} alt=""/> </Button></Tooltip>
             </div> 
             <div className={classes.informationTooltip}>
               <FormControlLabel value="2" onChange={()=>{setFirstStep(2)}}  control={<Radio />} label="Auto follow" />
-              <Tooltip TransitionComponent={Zoom} title="This is not recommended you will follow every move this wallet makes. Only use if you ABSOUTELY trust the wallet you are following"><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} /> </Button></Tooltip>
+              <Tooltip TransitionComponent={Zoom} title="This is not recommended you will follow every move this wallet makes. Only use if you ABSOUTELY trust the wallet you are following"><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} alt="" /> </Button></Tooltip>
             </div>
             <div className={classes.informationTooltip}>
               <FormControlLabel value="3" onChange={()=>{setFirstStep(3)}} control={<Radio />} label="Custom follow" />
-              <Tooltip TransitionComponent={Zoom} title="customize your copy wallet by using indexes we have pre-made or even make your own."><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} /> </Button></Tooltip>
+              <Tooltip TransitionComponent={Zoom} title="customize your copy wallet by using indexes we have pre-made or even make your own."><Button> <img src={WhiteInformationIcon} style={{width: '20px',}} alt=""/> </Button></Tooltip>
             </div>
           </RadioGroup>
         </FormControl>
